@@ -19,10 +19,13 @@ class Sorting : public QObject {
         Sorting() : insertstr(""){}
 
     public slots:
-        void insertSort() {
-            int arr[] = {5,6,2,3,1};
-            int size = sizeof(arr) / sizeof(arr[0]);
+        void insertSort(int data1,int data2,int data3) {
 
+            arr[0]=data1;
+            arr[1]=data2;
+            arr[2]=data3;
+
+            int size = sizeof(arr) / sizeof(arr[0]);
 
             for (int i = 1; i < size; i++) {
 
@@ -42,17 +45,21 @@ class Sorting : public QObject {
 
             }
 
-
             insertstr = arrtoqs(arr,size);
             emit numChanged(insertstr);
 
         }
-
+        void getnum(int data1,int data2,int data3) {
+            arr[0]=data1;
+            arr[1]=data2;
+            arr[2]=data3;
+        }
 
     signals:
         void numChanged(QString str);
 
     private:
         QString insertstr;
+        int arr[3];
 
 };

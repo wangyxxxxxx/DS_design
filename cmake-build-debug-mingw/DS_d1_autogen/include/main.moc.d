@@ -162,6 +162,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/include/
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QHBoxLayout \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QLabel \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QLineEdit \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QMainWindow \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QMessageBox \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QPushButton \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QVBoxLayout \
@@ -176,9 +177,11 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/include/
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qlayout.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qlayoutitem.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qlineedit.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qmainwindow.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qmessagebox.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qpushbutton.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qsizepolicy.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtabwidget.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtwidgets-config.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtwidgetsexports.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \

@@ -1,4 +1,5 @@
 #include <QWidget>
+#include <QMainWindow>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -13,6 +14,7 @@
 #include "Sort.h"
 #include "Tool.h"
 using namespace std;
+
 
 
 class Calculator : public QWidget {
@@ -74,11 +76,19 @@ public:
         resize(300, 200);
 
 
-        Sorting* sss = new Sorting();
+
         // 连接按钮点击信号到槽函数
-        connect(calculateButton, &QPushButton::clicked, sss, &Sorting::insertSort);
+        Sorting* sss = new Sorting();
+        connect(calculateButton, QPushButton::clicked, this, &Calculator::submitData);
         connect(sss, &Sorting::numChanged, this, &Calculator::Display);
+        connect(this, &Calculator::sendData, sss, &Sorting::insertSort);
+
     }
+
+signals:
+    // 信号：定义数据传输信号（参数对应三个输入框）
+    void sendData(int, int, int);
+
 
 private slots:
     void Display(QString insertstr) {
@@ -96,6 +106,23 @@ private slots:
 
         resultEdit->setText(insertstr);
     }
+    void submitData() {
+
+        bool ok1, ok2, ok3;
+        int num1 = num1Edit->text().toInt(&ok1);
+        int num2 = num2Edit->text().toInt(&ok2);
+        int num3 = num3Edit->text().toInt(&ok3);
+
+        if (ok1 && ok2 && ok3) {
+        // 发射信号，传递三个整数值
+            emit sendData(num1, num2, num3);
+        } else {
+        // 转换失败的处理
+            qDebug() << "输入无效，请确保输入的是整数！";
+        }
+        // 发射信号，将三个输入框的文本作为参数传递
+
+    }
 
 
 private:
@@ -107,18 +134,16 @@ private:
 
 
 
-#include "main.moc"  // 如果单独保存为.cpp文件需要这一行
-
-
-
 int main(int argc, char *argv[]) {
 
     QApplication a(argc, argv);
-
-
     Calculator calculator;
+    Sorting sorting;
+
     calculator.show();
 
 
-    return QApplication::exec();
+    return a.exec();
 }
+
+#include "main.moc"  // 如果单独保存为.cpp文件需要这一行
