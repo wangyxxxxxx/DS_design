@@ -627,6 +627,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/SortWidget.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QString
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/q20memory.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/q20type_traits.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qabstractitemmodel.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qalgorithms.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qanystringview.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qarraydata.h
@@ -758,6 +759,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/SortWidget.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qinputmethod.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qkeysequence.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpaintdevice.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpainter.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpalette.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpen.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpicture.h
@@ -779,6 +781,10 @@ D:/Clion_SaveFile/DS_design/DS_d1/SortWidget.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qwindowdefs.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qwindowdefs_win.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QApplication
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QComboBox
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsScene
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsView
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGroupBox
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QHBoxLayout
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QLabel
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QLineEdit
@@ -789,12 +795,19 @@ D:/Clion_SaveFile/DS_design/DS_d1/SortWidget.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QVBoxLayout
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QWidget
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractbutton.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractitemdelegate.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractscrollarea.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractslider.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractspinbox.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qapplication.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qboxlayout.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qcombobox.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qdialog.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qframe.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgraphicsscene.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgraphicsview.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgridlayout.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgroupbox.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qlabel.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qlayout.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qlayoutitem.h
@@ -802,7 +815,13 @@ D:/Clion_SaveFile/DS_design/DS_d1/SortWidget.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qmainwindow.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qmessagebox.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qpushbutton.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qrubberband.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qscrollarea.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qsizepolicy.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qslider.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qstyle.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qstyleoption.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtabbar.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtabwidget.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtextedit.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtwidgets-config.h

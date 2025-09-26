@@ -21,29 +21,38 @@ class Sort : public QObject {
         Sort() : insertstr(""){}
 
     public slots:
-        void insertSort(QString datastr) {
-
+        void getData(QString datastr) {
             //将字符串转为数组
+            int isnum1=0;
             int count=0;
             for (int i = 0; i < datastr.length(); i++) {
                 QChar ch = datastr.at(i);
-
-                if (ch.isDigit()) {
+                if (ch.isDigit() && isnum1 == 0) {
                     count++;
-                }
+                    isnum1=1;
+                }else if (!ch.isDigit()){isnum1=0;}
             }
 
+            int isnum2=0;
             int arr[count];
             for (int i = 0,j=0; i < datastr.length(); i++) {
                 QChar ch2 = datastr.at(i);
-                if (ch2.isDigit()) {
+                if (ch2.isDigit() && isnum2 == 0) {
                     arr[j]=ch2.digitValue();
-                    j++;
+                    isnum2=1;
                 }
+                else if (ch2.isDigit() && isnum2 == 1){
+                    arr[j]=arr[j]*10+ch2.digitValue();
+                }
+                else if(!ch2.isDigit()){isnum2=0;j++;;}
             }
 
+            selectionSort(arr,count);
+        }
+
+        void insertSort(int arr[],int size) {
+
             //插入排序
-            int size = sizeof(arr) / sizeof(arr[0]);
 
             for (int i = 1; i < size; i++) {
 
@@ -65,13 +74,37 @@ class Sort : public QObject {
 
         }
 
+        void selectionSort(int arr[], int size) {
+
+            for (int i = 0; i < size - 1; i++) {
+                // 假设当前索引i处的元素是最小的
+                int minIndex = i;
+
+                // 在剩余未排序部分中寻找最小元素的索引
+                for (int j = i + 1; j < size; j++) {
+                    if (arr[j] < arr[minIndex]) {
+                        minIndex = j;
+                    }
+                }
+
+                // 将找到的最小元素与当前位置的元素交换
+                if (minIndex != i) {
+                    int temp = arr[i];
+                    arr[i] = arr[minIndex];
+                    arr[minIndex] = temp;
+                }
+            }
+
+            insertstr = arrtoqs(arr,size);
+            emit numChanged(insertstr);
+        }
+
 
     signals:
         void numChanged(QString str);
 
     private:
         QString insertstr;
-        //int arr[3];
 
 };
 
