@@ -51,13 +51,17 @@ public:
         QHBoxLayout *numInputLayout = new QHBoxLayout();
         QHBoxLayout *chooseLayout = new QHBoxLayout();
         QVBoxLayout *controlLayout = new QVBoxLayout();
+        controlLayout->setSpacing(20);//设置layout中元素间距
         QGroupBox *controlGroup = new QGroupBox("控制区");
+
         numInputLayout->addWidget(numLabel);
         numInputLayout->addWidget(numstrEdit);
+
         controlLayout->addLayout(numInputLayout);
 
         chooseLayout->addWidget(chooseLabel);
         chooseLayout->addWidget(chooseBox);
+
         controlLayout->addLayout(chooseLayout);
 
         controlLayout->addWidget(sortButton);
@@ -77,13 +81,24 @@ public:
         graphView->setRenderHint(QPainter::Antialiasing);
 
         //序列输出框
-        QVBoxLayout *resultLayout = new QVBoxLayout();
+        QHBoxLayout *resultLayout = new QHBoxLayout();
         QLabel *resultLabel = new QLabel("结果:");
         resultEdit = new QTextEdit();
         resultEdit->setFixedHeight(30);
         resultEdit->setReadOnly(true); // 结果框设为只读
+
+        //用时输出框
+        QLabel *timetLabel = new QLabel("用时:");
+        QLabel *nsLabel = new QLabel("ns");
+        timeEdit = new QTextEdit();
+        timeEdit->setFixedHeight(30);
+        timeEdit->setReadOnly(true);
+
         resultLayout->addWidget(resultLabel);
         resultLayout->addWidget(resultEdit);
+        resultLayout->addWidget(timetLabel);
+        resultLayout->addWidget(timeEdit);
+        resultLayout->addWidget(nsLabel);
 
         viewLayout->addWidget(graphLabel);
         viewLayout->addWidget(graphView);
@@ -95,8 +110,10 @@ public:
         QVBoxLayout *mainLayout = new QVBoxLayout(this);
         QLabel *titleLabel = new QLabel("排序程序");
         titleLabel->setAlignment(Qt::AlignCenter);
-        Layout->addWidget(controlGroup);
-        Layout->addLayout(viewLayout);
+
+        Layout->addWidget(controlGroup,1);//拉伸因子
+        Layout->addLayout(viewLayout,3);//拉伸因子
+
         mainLayout->addWidget(titleLabel);
         mainLayout->addLayout(Layout);
 
@@ -107,24 +124,39 @@ public:
         //////////////////////////////////////////////////////////// 连接按钮点击信号到槽函数
         Sort* sort = new Sort();
         connect(sortButton, QPushButton::clicked, this, &SortWidget::submitData);
-        connect(sort, &Sort::numChanged, this, &SortWidget::Display);
+        connect(sort, &Sort::numChanged, this, &SortWidget::Displayresult);
+        connect(sort, &Sort::usingTime, this, &SortWidget::DisplayTime);
         connect(this, &SortWidget::sendData, sort, &Sort::getData);
 
     }
 
 
 signals:
-    void sendData(QString);
+    void sendData(QString,int);
 
 
 private slots:
-    void Display(QString insertstr) {
+    void Displayresult(QString insertstr) {
         resultEdit->setText(insertstr);
+    }
+    void DisplayTime(QString usingtime) {
+        timeEdit->setText(usingtime);
     }
     void submitData() {
 
         QString numstring = numstrEdit->toPlainText();
-        emit sendData(numstring);
+        QString chooseType = chooseBox->currentText();
+        int sortType=0;
+        if (chooseType == "请选择算法") {
+            sortType = 0;
+        }else if (chooseType == "直接插入排序") {
+            sortType = 1;
+        }else if (chooseType == "简单选择排序") {
+            sortType = 2;
+        }else if (chooseType == "快速排序") {
+            sortType = 3;
+        }
+        emit sendData(numstring,sortType);
 
 
     }
@@ -136,6 +168,7 @@ private:
     QGraphicsView *graphView;
     QGraphicsScene *scene;
     QComboBox *chooseBox;
+    QTextEdit *timeEdit;
 };
 
 #include "main.moc"
