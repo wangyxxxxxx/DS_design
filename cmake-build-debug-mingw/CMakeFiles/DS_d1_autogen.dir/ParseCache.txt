@@ -616,13 +616,13 @@ D:/Clion_SaveFile/DS_design/DS_d1/Sort.h
  mdp:D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wtypes.h
  mdp:D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wtypesbase.h
 D:/Clion_SaveFile/DS_design/DS_d1/main.cpp
+D:/Clion_SaveFile/DS_design/DS_d1/SortWidget.h
  mmc:Q_OBJECT
- mid:main.moc
  mdp:D:/Clion_SaveFile/DS_design/DS_d1/Graph.h
  mdp:D:/Clion_SaveFile/DS_design/DS_d1/Sort.h
+ mdp:D:/Clion_SaveFile/DS_design/DS_d1/SortWidget.h
  mdp:D:/Clion_SaveFile/DS_design/DS_d1/Tool.h
  mdp:D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/moc_predefs.h
- mdp:D:/Clion_SaveFile/DS_design/DS_d1/main.cpp
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QObject
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QString
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/q20memory.h
@@ -785,9 +785,11 @@ D:/Clion_SaveFile/DS_design/DS_d1/main.cpp
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QMainWindow
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QMessageBox
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QPushButton
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QTextEdit
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QVBoxLayout
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QWidget
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractbutton.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractscrollarea.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qapplication.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qboxlayout.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qdialog.h
@@ -802,6 +804,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/main.cpp
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qpushbutton.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qsizepolicy.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtabwidget.h
+ mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtextedit.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtwidgets-config.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtwidgetsexports.h
  mdp:D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h

@@ -2,6 +2,7 @@ DS_d1_autogen/timestamp: \
 	D:/Clion_SaveFile/DS_design/DS_d1/CMakeLists.txt \
 	D:/Clion_SaveFile/DS_design/DS_d1/Graph.h \
 	D:/Clion_SaveFile/DS_design/DS_d1/Sort.h \
+	D:/Clion_SaveFile/DS_design/DS_d1/SortWidget.h \
 	D:/Clion_SaveFile/DS_design/DS_d1/Tool.cpp \
 	D:/Clion_SaveFile/DS_design/DS_d1/Tool.h \
 	D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/CMakeFiles/3.30.5/CMakeCCompiler.cmake \
@@ -209,9 +210,11 @@ DS_d1_autogen/timestamp: \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QMainWindow \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QMessageBox \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QPushButton \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QTextEdit \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QVBoxLayout \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QWidget \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractbutton.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractscrollarea.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qapplication.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qboxlayout.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qdialog.h \
@@ -226,6 +229,7 @@ DS_d1_autogen/timestamp: \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qpushbutton.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qsizepolicy.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtabwidget.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtextedit.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtwidgets-config.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtwidgetsexports.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \

@@ -1,3 +1,5 @@
+#ifndef SORT_H
+#define SORT_H
 #include <iostream>
 #include <QApplication>      // 用于创建Qt应用程序对象
 #include <QWidget>           // 窗口基类
@@ -11,26 +13,39 @@
 #include "Tool.h"
 using namespace std;
 
-class Sorting : public QObject {
+class Sort : public QObject {
 
     Q_OBJECT
 
     public:
-        Sorting() : insertstr(""){}
+        Sort() : insertstr(""){}
 
     public slots:
-        void insertSort(int data1,int data2,int data3) {
+        void insertSort(QString datastr) {
 
-            arr[0]=data1;
-            arr[1]=data2;
-            arr[2]=data3;
+            //将字符串转为数组
+            int count=0;
+            for (int i = 0; i < datastr.length(); i++) {
+                QChar ch = datastr.at(i);
 
+                if (ch.isDigit()) {
+                    count++;
+                }
+            }
+
+            int arr[count];
+            for (int i = 0,j=0; i < datastr.length(); i++) {
+                QChar ch2 = datastr.at(i);
+                if (ch2.isDigit()) {
+                    arr[j]=ch2.digitValue();
+                    j++;
+                }
+            }
+
+            //插入排序
             int size = sizeof(arr) / sizeof(arr[0]);
 
             for (int i = 1; i < size; i++) {
-
-
-
 
                 int key = arr[i];
                 int j = i - 1;
@@ -44,22 +59,20 @@ class Sorting : public QObject {
                 arr[j + 1] = key;
 
             }
-
+            //数组转为字符串并发送信号
             insertstr = arrtoqs(arr,size);
             emit numChanged(insertstr);
 
         }
-        void getnum(int data1,int data2,int data3) {
-            arr[0]=data1;
-            arr[1]=data2;
-            arr[2]=data3;
-        }
+
 
     signals:
         void numChanged(QString str);
 
     private:
         QString insertstr;
-        int arr[3];
+        //int arr[3];
 
 };
+
+#endif //SORT_H
