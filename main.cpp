@@ -10,16 +10,15 @@
 #include <QPushButton>
 #include <QString>
 #include <iostream>
-#include "Graph.h"
-#include "SortWidget.h"
+#include "MainWindow.h"
 using namespace std;
 int main(int argc, char *argv[]) {
 
     QApplication a(argc, argv);
-    SortWidget sortwidget;
+    MainWindow window;
 
 
-    sortwidget.show();
+    window.show();
 
 
     return a.exec();

@@ -18,9 +18,7 @@
 #include <QPushButton>
 #include <QString>
 #include <iostream>
-#include "Graph.h"
 #include "Sort.h"
-#include "Tool.h"
 using namespace std;
 
 
@@ -108,7 +106,7 @@ public:
         ////////////////////////////////////////////////////////////（总）排序算法演示区
         QHBoxLayout *Layout = new QHBoxLayout();
         QVBoxLayout *mainLayout = new QVBoxLayout(this);
-        QLabel *titleLabel = new QLabel("排序程序");
+        QLabel *titleLabel = new QLabel("排序算法演示");
         titleLabel->setAlignment(Qt::AlignCenter);
 
         Layout->addWidget(controlGroup,1);//拉伸因子
