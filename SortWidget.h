@@ -6,6 +6,7 @@
 #include <QGraphicsScene>
 #include <QGroupBox>
 #include <QComboBox>
+#include <QTimer>
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -36,6 +37,8 @@ public:
         QLabel *numLabel = new QLabel("输入序列:");
         numstrEdit = new QTextEdit();
         numstrEdit->setFixedHeight(30);
+
+
         //按钮
         QPushButton *sortButton = new QPushButton("排序");
         //选择
@@ -52,15 +55,19 @@ public:
         controlLayout->setSpacing(20);//设置layout中元素间距
         QGroupBox *controlGroup = new QGroupBox("控制区");
 
+        //序列输入区
         numInputLayout->addWidget(numLabel);
         numInputLayout->addWidget(numstrEdit);
+        QGroupBox *numInputGroup = new QGroupBox("序列输入区");
+        numInputGroup->setLayout(numInputLayout);
+        controlLayout->addWidget(numInputGroup);
 
-        controlLayout->addLayout(numInputLayout);
-
+        //算法选择区
         chooseLayout->addWidget(chooseLabel);
         chooseLayout->addWidget(chooseBox);
-
-        controlLayout->addLayout(chooseLayout);
+        QGroupBox *chooseGroup = new QGroupBox("算法选择区");
+        chooseGroup->setLayout(chooseLayout);
+        controlLayout->addWidget(chooseGroup);
 
         controlLayout->addWidget(sortButton);
         controlLayout->addStretch(1);
@@ -87,7 +94,7 @@ public:
 
         //用时输出框
         QLabel *timetLabel = new QLabel("用时:");
-        QLabel *nsLabel = new QLabel("ns");
+        QLabel *nsLabel = new QLabel("ms");
         timeEdit = new QTextEdit();
         timeEdit->setFixedHeight(30);
         timeEdit->setReadOnly(true);

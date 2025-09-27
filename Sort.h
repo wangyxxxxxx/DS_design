@@ -1,6 +1,7 @@
 #ifndef SORT_H
 #define SORT_H
 #include <iostream>
+#include <QTimer>
 #include <QApplication>      // 用于创建Qt应用程序对象
 #include <QWidget>           // 窗口基类
 #include <QPushButton>       // 按钮控件
@@ -35,7 +36,6 @@ class Sort : public QObject {
             }
 
             int isnum2=0;
-            int arr[count];
             for (int i = 0,j=0; i < datastr.length(); i++) {
                 QChar ch2 = datastr.at(i);
                 if (ch2.isDigit() && isnum2 == 0) {
@@ -48,38 +48,50 @@ class Sort : public QObject {
                 else if(!ch2.isDigit()){isnum2=0;j++;;}
             }
 
-            if (sortType == 1) {insertSort(arr,count);}
+            size=count;
+
+            if (sortType == 1) {
+                QTimer::singleShot(100, this, &Sort::insertSort);
+                iLoop=1;
+                start = std::chrono::high_resolution_clock::now();
+            }
             else if (sortType == 2) {selectionSort(arr,count);}
             else if (sortType == 3) {quickSort(arr,count);}
 
         }
 
-        void insertSort(int arr[],int size) {
+        void insertSort() {
             cout<<"insertSort"<<endl;
             //插入排序
-            auto start = std::chrono::high_resolution_clock::now();
-            for (int i = 1; i < size; i++) {
+            //if (iLoop==1){auto start = std::chrono::high_resolution_clock::now();}
 
-                int key = arr[i];
-                int j = i - 1;
-
-                while (j >= 0 && arr[j] > key) {
-                    arr[j + 1] = arr[j];
-                    j--;
-
-                }
-
-                arr[j + 1] = key;
-
+            if (iLoop>=size) {
+                //数组转为字符串并发送信号
+                insertstr = arrtoqs(arr,size);
+                emit numChanged(insertstr);
+                auto end = std::chrono::high_resolution_clock::now();
+                auto duration_ns = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+                emit usingTime(QString::number(duration_ns.count()));
+                return;
             }
-            auto end = std::chrono::high_resolution_clock::now();
-            auto duration_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+
+            int key = arr[iLoop];
+            int j = iLoop - 1;
+
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+
+            arr[j + 1] = key;
+
+            iLoop++;
 
 
-            //数组转为字符串并发送信号
             insertstr = arrtoqs(arr,size);
             emit numChanged(insertstr);
-            emit usingTime(QString::number(duration_ns.count()));
+            QTimer::singleShot(500, this, &Sort::insertSort);  //循环
+
 
         }
 
@@ -171,6 +183,10 @@ class Sort : public QObject {
 
     private:
         QString insertstr;
+        int size;
+        int arr[100];
+        int iLoop;
+        std::chrono::time_point<std::chrono::high_resolution_clock> start;
 
 };
 

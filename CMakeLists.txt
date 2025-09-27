@@ -20,6 +20,7 @@ add_executable(DS_d1 main.cpp
         Tool.cpp
         Tool.h
         SortWidget.h
+        MainWindow.h
 )
 target_link_libraries(DS_d1
   Qt::Core
