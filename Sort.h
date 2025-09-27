@@ -1,6 +1,7 @@
 #ifndef SORT_H
 #define SORT_H
 #include <iostream>
+#include <stack>
 #include <QTimer>
 #include <QApplication>      // 用于创建Qt应用程序对象
 #include <QWidget>           // 窗口基类
@@ -51,27 +52,38 @@ class Sort : public QObject {
             size=count;
 
             if (sortType == 1) {
-                QTimer::singleShot(100, this, &Sort::insertSort);
+                QTimer::singleShot(500, this, &Sort::insertSort);
                 iLoop=1;
                 start = std::chrono::high_resolution_clock::now();
+                insertstr = arrtoqs(arr,size);
+                emit numChanged(insertstr);
             }
-            else if (sortType == 2) {selectionSort(arr,count);}
-            else if (sortType == 3) {quickSort(arr,count);}
+            else if (sortType == 2) {
+                QTimer::singleShot(500, this, &Sort::selectionSort);
+                iLoop=0;
+                start = std::chrono::high_resolution_clock::now();
+                insertstr = arrtoqs(arr,size);
+                emit numChanged(insertstr);
+            }
+            else if (sortType == 3) {
+                quickSort();
+                insertstr = arrtoqs(arr,size);
+                emit numChanged(insertstr);
+            }
 
         }
 
         void insertSort() {
             cout<<"insertSort"<<endl;
             //插入排序
-            //if (iLoop==1){auto start = std::chrono::high_resolution_clock::now();}
 
             if (iLoop>=size) {
                 //数组转为字符串并发送信号
                 insertstr = arrtoqs(arr,size);
                 emit numChanged(insertstr);
                 auto end = std::chrono::high_resolution_clock::now();
-                auto duration_ns = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-                emit usingTime(QString::number(duration_ns.count()));
+                auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+                emit usingTime(QString::number(duration.count()));
                 return;
             }
 
@@ -95,86 +107,119 @@ class Sort : public QObject {
 
         }
 
-        void selectionSort(int arr[], int size) {
+        void selectionSort() {
             cout<<"selectionSort"<<endl;
-            auto start = std::chrono::high_resolution_clock::now();
 
-            for (int i = 0; i < size - 1; i++) {
-                // 假设当前索引i处的元素是最小的
-                int minIndex = i;
-
-                // 在剩余未排序部分中寻找最小元素的索引
-                for (int j = i + 1; j < size; j++) {
-                    if (arr[j] < arr[minIndex]) {
-                        minIndex = j;
-                    }
-                }
-
-                // 将找到的最小元素与当前位置的元素交换
-                if (minIndex != i) {
-                    int temp = arr[i];
-                    arr[i] = arr[minIndex];
-                    arr[minIndex] = temp;
-                }
-            }
-
-            auto end = std::chrono::high_resolution_clock::now();
-            auto duration_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-            insertstr = arrtoqs(arr,size);
-            emit numChanged(insertstr);
-            emit usingTime(QString::number(duration_ns.count()));
-        }
-
-        void quickSort(int arr[], int size) {
-            cout<<"quickSort"<<endl;
-            auto start = std::chrono::high_resolution_clock::now();
-
-            if (size >= 1) quickSortFunction(arr, 0, size - 1);;
-
-            auto end = std::chrono::high_resolution_clock::now();
-            auto duration_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-            insertstr = arrtoqs(arr,size);
-            emit numChanged(insertstr);
-            emit usingTime(QString::number(duration_ns.count()));
-        }
-
-    private:
-        void quickSortFunction(int arr[], int left, int right) {
-            // 递归终止条件
-            if (left >= right) {
+            if (iLoop>=size-1) {
+                insertstr = arrtoqs(arr,size);
+                emit numChanged(insertstr);
+                auto end = std::chrono::high_resolution_clock::now();
+                auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+                emit usingTime(QString::number(duration.count()));
                 return;
             }
+            // 假设当前索引i处的元素是最小的
+            int minIndex = iLoop;
 
-            // 选择基准元素（这里选择中间元素）
-            int pivot = arr[(left + right) / 2];
-            int i = left;
-            int j = right;
+            // 在剩余未排序部分中寻找最小元素的索引
+            for (int j = iLoop + 1; j < size; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+
+            // 将找到的最小元素与当前位置的元素交换
+            if (minIndex != iLoop) {
+                int temp = arr[iLoop];
+                arr[iLoop] = arr[minIndex];
+                arr[minIndex] = temp;
+            }
+
+            iLoop++;
+
+            insertstr = arrtoqs(arr,size);
+            emit numChanged(insertstr);
+            QTimer::singleShot(500, this, &Sort::selectionSort);
+        }
+
+        void quickSort() {
+            cout<<"quickSort"<<endl;
+            start = std::chrono::high_resolution_clock::now();
+
+            if (size >= 1) {
+                l.push(0);
+                h.push(size-1);
+                QTimer::singleShot(500, this, &Sort::quickSortFunction);
+            }
+
+        }
+
+
+    private:
+    void quickSortFunction() {
+
+        // 取出当前要处理的区间
+
+
+        if(l.empty()&&h.empty()) {
+            auto end = std::chrono::high_resolution_clock::now();
+            auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
+            insertstr = arrtoqs(arr,size);
+            emit numChanged(insertstr);
+            emit usingTime(QString::number(duration.count()));
+
+            cout<<"ok";
+
+            return;
+        }
+
+        int low = l.top();
+        int high = h.top();
+        l.pop();
+        h.pop();
+
+            if (low >= high){QTimer::singleShot(500, this, &Sort::quickSortFunction);} // 区间无效，跳过
+
+            // 选择基准元素（这里选择第一个元素）
+            int pivot = arr[low];
+            int i = low;
+            int j = high;
 
             // 分区操作
-            while (i <= j) {
-                // 从左向右找到第一个大于等于基准的元素
-                while (arr[i] < pivot) {
+            while (i < j) {
+                // 从右向左找小于pivot的元素
+                while (i < j && arr[j] >= pivot) j--;
+                if (i < j) {
+                    arr[i] = arr[j];
                     i++;
-                }
-                // 从右向左找到第一个小于等于基准的元素
-                while (arr[j] > pivot) {
-                    j--;
                 }
 
-                // 交换元素
-                if (i <= j) {
-                    std::swap(arr[i], arr[j]);
-                    i++;
+                // 从左向右找大于pivot的元素
+                while (i < j && arr[i] <= pivot) i++;
+                if (i < j) {
+                    arr[j] = arr[i];
                     j--;
                 }
             }
 
-            // 递归排序左右子数组
-            quickSortFunction(arr, left, j);
-            quickSortFunction(arr, i, right);
-        }
+            // 将基准元素放到正确位置
+            arr[i] = pivot;
+
+            // 将子区间压入栈中
+            if (low < i - 1) {
+                l.push(low);
+                h.push(i - 1);
+            }
+            if (i + 1 < high) {
+                l.push(i + 1);
+                h.push(high);
+            }
+
+        insertstr = arrtoqs(arr,size);
+        emit numChanged(insertstr);
+        QTimer::singleShot(500, this, &Sort::quickSortFunction);
+    }
 
 
     signals:
@@ -187,6 +232,9 @@ class Sort : public QObject {
         int arr[100];
         int iLoop;
         std::chrono::time_point<std::chrono::high_resolution_clock> start;
+        stack<int> l;
+        stack<int> h;
+
 
 };
 
