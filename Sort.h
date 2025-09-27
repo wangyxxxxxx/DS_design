@@ -5,9 +5,6 @@
 #include <QTimer>
 #include <QApplication>      // 用于创建Qt应用程序对象
 #include <QWidget>           // 窗口基类
-#include <QPushButton>       // 按钮控件
-#include <QLabel>            // 文本标签控件
-#include <QVBoxLayout>       // 垂直布局管理器
 #include <QObject>           // Qt对象基类（信号槽的基础）
 #include <QString>
 #include <string>
@@ -21,7 +18,7 @@ class Sort : public QObject {
     Q_OBJECT
 
     public:
-        Sort() : insertstr(""){}
+        Sort() : sortstr(""){}
 
     public slots:
         void getData(QString datastr,int sortType) {
@@ -51,24 +48,20 @@ class Sort : public QObject {
 
             size=count;
 
+
+
             if (sortType == 1) {
                 QTimer::singleShot(500, this, &Sort::insertSort);
                 iLoop=1;
                 start = std::chrono::high_resolution_clock::now();
-                insertstr = arrtoqs(arr,size);
-                emit numChanged(insertstr);
             }
             else if (sortType == 2) {
                 QTimer::singleShot(500, this, &Sort::selectionSort);
                 iLoop=0;
                 start = std::chrono::high_resolution_clock::now();
-                insertstr = arrtoqs(arr,size);
-                emit numChanged(insertstr);
             }
             else if (sortType == 3) {
                 quickSort();
-                insertstr = arrtoqs(arr,size);
-                emit numChanged(insertstr);
             }
 
         }
@@ -78,31 +71,36 @@ class Sort : public QObject {
             //插入排序
 
             if (iLoop>=size) {
-                //数组转为字符串并发送信号
-                insertstr = arrtoqs(arr,size);
-                emit numChanged(insertstr);
                 auto end = std::chrono::high_resolution_clock::now();
                 auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
                 emit usingTime(QString::number(duration.count()));
+                qDebug()<<"后端直接插入序结果："<<arrtoqs(arr,size);
                 return;
             }
 
             int key = arr[iLoop];
             int j = iLoop - 1;
 
+
             while (j >= 0 && arr[j] > key) {
+
                 arr[j + 1] = arr[j];
+                emit numSwap(j,j+1,1);
                 j--;
+
+                // 非阻塞延时
+                QEventLoop loop;
+                QTimer::singleShot(1000, &loop, &QEventLoop::quit);
+                loop.exec();
+                // 处理事件，保持UI响应
+                QCoreApplication::processEvents();
             }
 
             arr[j + 1] = key;
+            emit numSwap(key,j+1,0);
 
             iLoop++;
-
-
-            insertstr = arrtoqs(arr,size);
-            emit numChanged(insertstr);
-            QTimer::singleShot(500, this, &Sort::insertSort);  //循环
+            QTimer::singleShot(1000, this, &Sort::insertSort);  //循环
 
 
         }
@@ -111,11 +109,10 @@ class Sort : public QObject {
             cout<<"selectionSort"<<endl;
 
             if (iLoop>=size-1) {
-                insertstr = arrtoqs(arr,size);
-                emit numChanged(insertstr);
                 auto end = std::chrono::high_resolution_clock::now();
                 auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
                 emit usingTime(QString::number(duration.count()));
+                qDebug()<<"后端简单选择排序结果："<<arrtoqs(arr,size);
                 return;
             }
             // 假设当前索引i处的元素是最小的
@@ -126,20 +123,22 @@ class Sort : public QObject {
                 if (arr[j] < arr[minIndex]) {
                     minIndex = j;
                 }
+
             }
 
             // 将找到的最小元素与当前位置的元素交换
             if (minIndex != iLoop) {
                 int temp = arr[iLoop];
                 arr[iLoop] = arr[minIndex];
+                emit numSwap(minIndex,iLoop,1);
                 arr[minIndex] = temp;
+                emit numSwap(temp,minIndex,0);
             }
 
             iLoop++;
 
-            insertstr = arrtoqs(arr,size);
-            emit numChanged(insertstr);
-            QTimer::singleShot(500, this, &Sort::selectionSort);
+
+            QTimer::singleShot(1000, this, &Sort::selectionSort);
         }
 
         void quickSort() {
@@ -152,6 +151,8 @@ class Sort : public QObject {
                 QTimer::singleShot(500, this, &Sort::quickSortFunction);
             }
 
+
+
         }
 
 
@@ -160,16 +161,12 @@ class Sort : public QObject {
 
         // 取出当前要处理的区间
 
-
         if(l.empty()&&h.empty()) {
             auto end = std::chrono::high_resolution_clock::now();
             auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
 
-            insertstr = arrtoqs(arr,size);
-            emit numChanged(insertstr);
             emit usingTime(QString::number(duration.count()));
-
-            cout<<"ok";
+            qDebug()<<"后端快速排序结果："<<arrtoqs(arr,size);
 
             return;
         }
@@ -179,7 +176,7 @@ class Sort : public QObject {
         l.pop();
         h.pop();
 
-            if (low >= high){QTimer::singleShot(500, this, &Sort::quickSortFunction);} // 区间无效，跳过
+            if (low >= high){QTimer::singleShot(0, this, &Sort::quickSortFunction);} // 区间无效，跳过
 
             // 选择基准元素（这里选择第一个元素）
             int pivot = arr[low];
@@ -192,6 +189,7 @@ class Sort : public QObject {
                 while (i < j && arr[j] >= pivot) j--;
                 if (i < j) {
                     arr[i] = arr[j];
+                    emit numSwap(j,i,1);
                     i++;
                 }
 
@@ -199,12 +197,14 @@ class Sort : public QObject {
                 while (i < j && arr[i] <= pivot) i++;
                 if (i < j) {
                     arr[j] = arr[i];
+                    emit numSwap(i,j,1);
                     j--;
                 }
             }
 
             // 将基准元素放到正确位置
             arr[i] = pivot;
+            emit numSwap(pivot,i,0);
 
             // 将子区间压入栈中
             if (low < i - 1) {
@@ -216,18 +216,17 @@ class Sort : public QObject {
                 h.push(high);
             }
 
-        insertstr = arrtoqs(arr,size);
-        emit numChanged(insertstr);
-        QTimer::singleShot(500, this, &Sort::quickSortFunction);
+
+        QTimer::singleShot(1000, this, &Sort::quickSortFunction);
     }
 
 
     signals:
-        void numChanged(QString str);
+        void numSwap(int n, int m,int s);
         void usingTime(QString time);
 
     private:
-        QString insertstr;
+        QString sortstr;
         int size;
         int arr[100];
         int iLoop;

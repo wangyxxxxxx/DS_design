@@ -5,6 +5,9 @@
 #ifndef TOOL_H
 #define TOOL_H
 #include <QString>
+#include <QGraphicsRectItem>
+#include <QEventLoop>
 
 QString arrtoqs(int arr[],int size);
+void ChangeRectAnimation(QGraphicsRectItem* trect,int fh,int th,int tx,int ty);
 #endif //TOOL_H

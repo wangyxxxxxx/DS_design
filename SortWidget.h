@@ -4,6 +4,10 @@
 #include <QWidget>
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QPropertyAnimation>
+#include <QGraphicsWidget>
+#include <QGraphicsTextItem>
+#include <QGraphicsItemGroup>
 #include <QGroupBox>
 #include <QComboBox>
 #include <QTimer>
@@ -20,6 +24,7 @@
 #include <QString>
 #include <iostream>
 #include "Sort.h"
+#include "Tool.h"
 using namespace std;
 
 
@@ -31,6 +36,11 @@ public:
     SortWidget(QWidget *parent = nullptr) : QWidget(parent) {
         // 创建界面组件
 
+        ///////////////初始化
+        ItemX=50;
+        ItemY=50;
+
+
         /////////////////////////////////////////////////////////////左侧控制区
 
         //序列输入框
@@ -41,6 +51,7 @@ public:
 
         //按钮
         QPushButton *sortButton = new QPushButton("排序");
+        QPushButton *clearButton = new QPushButton("清除");
         //选择
         chooseBox = new QComboBox();
         QLabel *chooseLabel = new QLabel("算法:");
@@ -70,6 +81,7 @@ public:
         controlLayout->addWidget(chooseGroup);
 
         controlLayout->addWidget(sortButton);
+        controlLayout->addWidget(clearButton);
         controlLayout->addStretch(1);
 
         controlGroup->setLayout(controlLayout);
@@ -129,9 +141,12 @@ public:
         //////////////////////////////////////////////////////////// 连接按钮点击信号到槽函数
         Sort* sort = new Sort();
         connect(sortButton, QPushButton::clicked, this, &SortWidget::submitData);
-        connect(sort, &Sort::numChanged, this, &SortWidget::Displayresult);
         connect(sort, &Sort::usingTime, this, &SortWidget::DisplayTime);
         connect(this, &SortWidget::sendData, sort, &Sort::getData);
+        connect(sortButton, QPushButton::clicked, this, &SortWidget::creatGraph);
+        connect(clearButton, QPushButton::clicked, this, &SortWidget::ClearAll);
+        connect(sort, &Sort::numSwap, this, &SortWidget::RectSwap);
+
 
     }
 
@@ -141,12 +156,12 @@ signals:
 
 
 private slots:
-    void Displayresult(QString insertstr) {
-        resultEdit->setText(insertstr);
-    }
+
+
     void DisplayTime(QString usingtime) {
         timeEdit->setText(usingtime);
     }
+
     void submitData() {
 
         QString numstring = numstrEdit->toPlainText();
@@ -166,6 +181,127 @@ private slots:
 
     }
 
+    void creatGraph() {
+
+         if (!rectList.isEmpty()) {
+             ClearRectAndResult();
+        }
+
+
+        //字符串转为数组并获取元素个数
+        QString sortstr = numstrEdit->toPlainText();
+        int isnum1=0;
+        int count=0;
+        for (int i = 0; i < sortstr.length(); i++) {
+            QChar ch = sortstr.at(i);
+            if (ch.isDigit() && isnum1 == 0) {
+                count++;
+                isnum1=1;
+            }else if (!ch.isDigit()){isnum1=0;}
+        }
+
+        int isnum2=0;
+        size=count;
+        for (int i = 0,j=0; i < sortstr.length(); i++) {
+            QChar ch2 = sortstr.at(i);
+            if (ch2.isDigit() && isnum2 == 0) {
+                arr[j]=ch2.digitValue();
+                isnum2=1;
+            }
+            else if (ch2.isDigit() && isnum2 == 1){
+                arr[j]=arr[j]*10+ch2.digitValue();
+            }
+            else if(!ch2.isDigit()){isnum2=0;j++;;}
+        }
+
+
+
+         //创建图形
+         for (int i=0; i < count; i++,ItemX=ItemX+50) {
+             // 创建矩形顶点
+             rectItem = new QGraphicsRectItem(ItemX, ItemY, 50, 20*arr[i]);
+             rectItem->setTransform(QTransform::fromScale(1, -1), true);
+             rectList.append(rectItem);
+             rectLocation.append(make_pair(ItemX,ItemY));
+             scene->addItem(rectList.operator[](i));
+
+
+             // 创建文本标签
+             textItem = new QGraphicsTextItem(QString::number(arr[i]));
+             textItem->setPos(ItemX+18,ItemY-90);
+             rectLabelsList.append(textItem);
+             scene->addItem(rectLabelsList.operator[](i));
+
+
+         }
+
+
+
+        ItemX=50;
+        ItemY=50;
+
+
+
+
+
+    }
+
+    void ClearAll() {
+
+            while (!rectList.isEmpty()) {
+                delete rectList.takeAt(0);
+            }
+
+            while (!rectLabelsList.isEmpty()) {
+                delete rectLabelsList.takeAt(0);
+            }
+
+            numstrEdit->clear();
+            timeEdit->clear();
+            resultEdit->clear();
+            rectLocation.clear();
+
+
+    }
+
+    void RectSwap(int n,int m,int s) {
+        int x=rectLocation[m].first,y=rectLocation[m].second;
+
+        if (s==0) {
+            ChangeRectAnimation(rectList.operator[](m),n*20,20*arr[m],x,y);
+            arr[m]=n;
+            rectLabelsList.operator[](m)->setPlainText(QString::number(n));
+        }else if (s==1) {
+            ChangeRectAnimation(rectList.operator[](m),20*arr[n],20*arr[m],x,y);
+            arr[m]=arr[n];
+            rectLabelsList.operator[](m)->setPlainText(QString::number(arr[n]));
+        }
+
+
+        Displayresult();
+    }
+
+
+private:
+    void ClearRectAndResult() {
+        while (!rectList.isEmpty()) {
+            delete rectList.takeAt(0);
+        }
+
+        while (!rectLabelsList.isEmpty()) {
+            delete rectLabelsList.takeAt(0);
+        }
+
+        timeEdit->clear();
+        resultEdit->clear();
+        rectLocation.clear();
+
+    }
+
+    void Displayresult() {
+        resultEdit->setText(arrtoqs(arr,size));
+    }
+
 
 private:
     QTextEdit *numstrEdit;
@@ -174,6 +310,15 @@ private:
     QGraphicsScene *scene;
     QComboBox *chooseBox;
     QTextEdit *timeEdit;
+    QList<QGraphicsRectItem*> rectList;
+    QList<QGraphicsTextItem*> rectLabelsList;
+    QGraphicsRectItem *rectItem;
+    QGraphicsTextItem *textItem;
+    QList<pair<int,int> > rectLocation;
+    int ItemX;
+    int ItemY;
+    int arr[100];
+    int size;
 };
 
 #include "main.moc"

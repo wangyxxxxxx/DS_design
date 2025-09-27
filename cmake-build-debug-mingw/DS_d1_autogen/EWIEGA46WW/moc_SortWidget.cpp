@@ -42,23 +42,31 @@ static constexpr auto qt_meta_stringdata_CLASSSortWidgetENDCLASS = QtMocHelpers:
     "SortWidget",
     "sendData",
     "",
-    "Displayresult",
-    "insertstr",
     "DisplayTime",
     "usingtime",
-    "submitData"
+    "submitData",
+    "creatGraph",
+    "ClearAll",
+    "RectSwap",
+    "n",
+    "m",
+    "s"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSSortWidgetENDCLASS_t {
-    uint offsetsAndSizes[16];
+    uint offsetsAndSizes[24];
     char stringdata0[11];
     char stringdata1[9];
     char stringdata2[1];
-    char stringdata3[14];
+    char stringdata3[12];
     char stringdata4[10];
-    char stringdata5[12];
-    char stringdata6[10];
-    char stringdata7[11];
+    char stringdata5[11];
+    char stringdata6[11];
+    char stringdata7[9];
+    char stringdata8[9];
+    char stringdata9[2];
+    char stringdata10[2];
+    char stringdata11[2];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSSortWidgetENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -67,20 +75,28 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSSortWidgetENDCLASS_t qt_meta_st
         QT_MOC_LITERAL(0, 10),  // "SortWidget"
         QT_MOC_LITERAL(11, 8),  // "sendData"
         QT_MOC_LITERAL(20, 0),  // ""
-        QT_MOC_LITERAL(21, 13),  // "Displayresult"
-        QT_MOC_LITERAL(35, 9),  // "insertstr"
-        QT_MOC_LITERAL(45, 11),  // "DisplayTime"
-        QT_MOC_LITERAL(57, 9),  // "usingtime"
-        QT_MOC_LITERAL(67, 10)   // "submitData"
+        QT_MOC_LITERAL(21, 11),  // "DisplayTime"
+        QT_MOC_LITERAL(33, 9),  // "usingtime"
+        QT_MOC_LITERAL(43, 10),  // "submitData"
+        QT_MOC_LITERAL(54, 10),  // "creatGraph"
+        QT_MOC_LITERAL(65, 8),  // "ClearAll"
+        QT_MOC_LITERAL(74, 8),  // "RectSwap"
+        QT_MOC_LITERAL(83, 1),  // "n"
+        QT_MOC_LITERAL(85, 1),  // "m"
+        QT_MOC_LITERAL(87, 1)   // "s"
     },
     "SortWidget",
     "sendData",
     "",
-    "Displayresult",
-    "insertstr",
     "DisplayTime",
     "usingtime",
-    "submitData"
+    "submitData",
+    "creatGraph",
+    "ClearAll",
+    "RectSwap",
+    "n",
+    "m",
+    "s"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -92,7 +108,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSSortWidgetENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -100,20 +116,24 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSSortWidgetENDCLASS[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    2,   38,    2, 0x06,    1 /* Public */,
+       1,    2,   50,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       3,    1,   43,    2, 0x08,    4 /* Private */,
-       5,    1,   46,    2, 0x08,    6 /* Private */,
-       7,    0,   49,    2, 0x08,    8 /* Private */,
+       3,    1,   55,    2, 0x08,    4 /* Private */,
+       5,    0,   58,    2, 0x08,    6 /* Private */,
+       6,    0,   59,    2, 0x08,    7 /* Private */,
+       7,    0,   60,    2, 0x08,    8 /* Private */,
+       8,    3,   61,    2, 0x08,    9 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString, QMetaType::Int,    2,    2,
 
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    4,
-    QMetaType::Void, QMetaType::QString,    6,
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int,    9,   10,   11,
 
        0        // eod
 };
@@ -131,14 +151,20 @@ Q_CONSTINIT const QMetaObject SortWidget::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
-        // method 'Displayresult'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         // method 'DisplayTime'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         // method 'submitData'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'creatGraph'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'ClearAll'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'RectSwap'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>
     >,
     nullptr
 } };
@@ -150,9 +176,11 @@ void SortWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         (void)_t;
         switch (_id) {
         case 0: _t->sendData((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
-        case 1: _t->Displayresult((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 2: _t->DisplayTime((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 3: _t->submitData(); break;
+        case 1: _t->DisplayTime((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 2: _t->submitData(); break;
+        case 3: _t->creatGraph(); break;
+        case 4: _t->ClearAll(); break;
+        case 5: _t->RectSwap((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -186,13 +214,13 @@ int SortWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 4;
+        _id -= 6;
     }
     return _id;
 }

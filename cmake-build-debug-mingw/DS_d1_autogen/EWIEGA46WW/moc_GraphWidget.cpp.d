@@ -1,19 +1,11 @@
-D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46WW/moc_SortWidget.cpp: D:/Clion_SaveFile/DS_design/DS_d1/SortWidget.h \
+D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46WW/moc_GraphWidget.cpp: D:/Clion_SaveFile/DS_design/DS_d1/GraphWidget.h \
   D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/moc_predefs.h \
   D:/Clion_SaveFile/DS_design/DS_d1/Sort.h \
   D:/Clion_SaveFile/DS_design/DS_d1/Tool.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QEventLoop \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QList \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QObject \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QPropertyAnimation \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QRect \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QSize \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QSizeF \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QString \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QTimer \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/q20memory.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/q20type_traits.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qabstractanimation.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qabstractitemmodel.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qalgorithms.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qanystringview.h \
@@ -24,7 +16,6 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qatomic.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qatomic_cxx11.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbasicatomic.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbasictimer.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbindingstorage.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbytearray.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbytearrayalgorithms.h \
@@ -46,7 +37,6 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qdarwinhelpers.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qdatastream.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qdebug.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qeasingcurve.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qeventloop.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qexceptionhandling.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qflags.h \
@@ -83,9 +73,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qoverload.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qpair.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qpoint.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qpointer.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qprocessordetection.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qpropertyanimation.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qrect.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qrefcount.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qregularexpression.h \
@@ -118,7 +106,6 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtdeprecationmarkers.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtenvironmentvariables.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtextstream.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtimer.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtmetamacros.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtnoop.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtpreprocessorsupport.h \
@@ -132,19 +119,15 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qurl.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qutf8stringview.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qvariant.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qvariantanimation.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qvarlengtharray.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qversiontagging.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qxptype_traits.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QDoubleValidator \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QTransform \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qaction.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qbitmap.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qbrush.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qcolor.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qcursor.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qevent.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qeventpoint.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qfont.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qfontinfo.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qfontmetrics.h \
@@ -152,23 +135,19 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qguiapplication_platform.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qicon.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qimage.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qinputdevice.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qinputmethod.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qkeysequence.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpaintdevice.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpainter.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpainterpath.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpalette.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpen.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpicture.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpixelformat.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpixmap.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpointingdevice.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpolygon.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qregion.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qrgb.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qrgba64.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qscreen.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qtextcursor.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qtextdocument.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qtextformat.h \
@@ -178,18 +157,12 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qtguiglobal.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qtransform.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qvalidator.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qvector2d.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qvectornd.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qwindowdefs.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qwindowdefs_win.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QApplication \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QComboBox \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsItemGroup \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsRectItem \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsScene \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsTextItem \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsView \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsWidget \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGroupBox \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QHBoxLayout \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QLabel \
@@ -210,11 +183,8 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qcombobox.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qdialog.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qframe.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgraphicsitem.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgraphicslayoutitem.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgraphicsscene.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgraphicsview.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgraphicswidget.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgridlayout.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgroupbox.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qlabel.h \
@@ -299,7 +269,6 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/cpp_type_traits.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/cxxabi_forced.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/cxxabi_init_exception.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/deque.tcc \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/enable_special_members.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/erase_if.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/exception.h \
@@ -350,7 +319,6 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_algobase.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_bvector.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_construct.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_deque.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_function.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_heap.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_iterator.h \
@@ -363,7 +331,6 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_pair.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_raw_storage_iter.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_relops.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_stack.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_tempbuf.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_tree.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_uninitialized.h \
@@ -396,7 +363,6 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/cwctype \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/debug/assertions.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/debug/debug.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/deque \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/exception \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ext/aligned_buffer.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ext/alloc_traits.h \
@@ -427,7 +393,6 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/pstl/glue_memory_defs.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/pstl/glue_numeric_defs.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ratio \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/stack \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/stdexcept \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/stdlib.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/streambuf \
