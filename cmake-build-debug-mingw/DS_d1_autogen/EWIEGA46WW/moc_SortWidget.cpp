@@ -50,11 +50,13 @@ static constexpr auto qt_meta_stringdata_CLASSSortWidgetENDCLASS = QtMocHelpers:
     "RectSwap",
     "n",
     "m",
-    "s"
+    "s",
+    "SetRectColor",
+    "num"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSSortWidgetENDCLASS_t {
-    uint offsetsAndSizes[24];
+    uint offsetsAndSizes[28];
     char stringdata0[11];
     char stringdata1[9];
     char stringdata2[1];
@@ -67,6 +69,8 @@ struct qt_meta_stringdata_CLASSSortWidgetENDCLASS_t {
     char stringdata9[2];
     char stringdata10[2];
     char stringdata11[2];
+    char stringdata12[13];
+    char stringdata13[4];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSSortWidgetENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -83,7 +87,9 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSSortWidgetENDCLASS_t qt_meta_st
         QT_MOC_LITERAL(74, 8),  // "RectSwap"
         QT_MOC_LITERAL(83, 1),  // "n"
         QT_MOC_LITERAL(85, 1),  // "m"
-        QT_MOC_LITERAL(87, 1)   // "s"
+        QT_MOC_LITERAL(87, 1),  // "s"
+        QT_MOC_LITERAL(89, 12),  // "SetRectColor"
+        QT_MOC_LITERAL(102, 3)   // "num"
     },
     "SortWidget",
     "sendData",
@@ -96,7 +102,9 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSSortWidgetENDCLASS_t qt_meta_st
     "RectSwap",
     "n",
     "m",
-    "s"
+    "s",
+    "SetRectColor",
+    "num"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -108,7 +116,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSSortWidgetENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -116,14 +124,15 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSSortWidgetENDCLASS[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    2,   50,    2, 0x06,    1 /* Public */,
+       1,    2,   56,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       3,    1,   55,    2, 0x08,    4 /* Private */,
-       5,    0,   58,    2, 0x08,    6 /* Private */,
-       6,    0,   59,    2, 0x08,    7 /* Private */,
-       7,    0,   60,    2, 0x08,    8 /* Private */,
-       8,    3,   61,    2, 0x08,    9 /* Private */,
+       3,    1,   61,    2, 0x08,    4 /* Private */,
+       5,    0,   64,    2, 0x08,    6 /* Private */,
+       6,    0,   65,    2, 0x08,    7 /* Private */,
+       7,    0,   66,    2, 0x08,    8 /* Private */,
+       8,    3,   67,    2, 0x08,    9 /* Private */,
+      12,    2,   74,    2, 0x08,   13 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString, QMetaType::Int,    2,    2,
@@ -134,6 +143,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSSortWidgetENDCLASS[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int,    9,   10,   11,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   13,   11,
 
        0        // eod
 };
@@ -164,6 +174,10 @@ Q_CONSTINIT const QMetaObject SortWidget::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'SetRectColor'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>
     >,
     nullptr
@@ -181,6 +195,7 @@ void SortWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 3: _t->creatGraph(); break;
         case 4: _t->ClearAll(); break;
         case 5: _t->RectSwap((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
+        case 6: _t->SetRectColor((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -214,13 +229,13 @@ int SortWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }
