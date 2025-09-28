@@ -6,7 +6,7 @@
 #include <iostream>
 #include <QString>
 #include <QGraphicsRectItem>
-#include <windows.h>
+#include <QBrush>
 #include <QTimer>
 #include <QEventLoop>
 #include <QCoreApplication>
@@ -28,6 +28,9 @@ QString arrtoqs(int arr[],int size) {
 
 void ChangeRectAnimation(QGraphicsRectItem* trect,int fh,int th,int tx,int ty){
 
+    //trect->setBrush(QBrush(Qt::green));
+    trect->update();
+
     int nowh=th;
 
     for (int i = 0; i < 9; i++) {
@@ -37,13 +40,14 @@ void ChangeRectAnimation(QGraphicsRectItem* trect,int fh,int th,int tx,int ty){
 
         // 非阻塞延时
         QEventLoop loop;
-        QTimer::singleShot(30, &loop, &QEventLoop::quit);
+        QTimer::singleShot(60, &loop, &QEventLoop::quit);
         loop.exec();
         // 处理事件，保持UI响应
         QCoreApplication::processEvents();
 
     }
     trect->setRect(tx, ty, 50, fh);
+    //trect->setBrush(QBrush(Qt::white));
     trect->update();
 
 }

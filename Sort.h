@@ -30,6 +30,7 @@ class Sort : public QObject {
                 if (ch.isDigit() && isnum1 == 0) {
                     count++;
                     isnum1=1;
+
                 }else if (!ch.isDigit()){isnum1=0;}
             }
 
@@ -73,6 +74,7 @@ class Sort : public QObject {
             if (iLoop>=size) {
                 auto end = std::chrono::high_resolution_clock::now();
                 auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+                emit setColor(iLoop-1,1);
                 emit usingTime(QString::number(duration.count()));
                 qDebug()<<"后端直接插入序结果："<<arrtoqs(arr,size);
                 return;
@@ -81,11 +83,16 @@ class Sort : public QObject {
             int key = arr[iLoop];
             int j = iLoop - 1;
 
+            emit setColor(iLoop-1,1);
+            emit setColor(iLoop,2);
+
 
             while (j >= 0 && arr[j] > key) {
 
                 arr[j + 1] = arr[j];
                 emit numSwap(j,j+1,1);
+                emit setColor(j+1,1);
+                emit setColor(j,2);
                 j--;
 
                 // 非阻塞延时
@@ -98,6 +105,8 @@ class Sort : public QObject {
 
             arr[j + 1] = key;
             emit numSwap(key,j+1,0);
+            emit setColor(j+1,1);
+
 
             iLoop++;
             QTimer::singleShot(1000, this, &Sort::insertSort);  //循环
@@ -224,6 +233,7 @@ class Sort : public QObject {
     signals:
         void numSwap(int n, int m,int s);
         void usingTime(QString time);
+        void setColor(int num,int s);
 
     private:
         QString sortstr;

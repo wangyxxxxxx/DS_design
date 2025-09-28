@@ -7,7 +7,6 @@
 *****************************************************************************/
 
 #include "../../../Sort.h"
-#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
 #if __has_include(<QtCore/qtmochelpers.h>)
@@ -47,6 +46,8 @@ static constexpr auto qt_meta_stringdata_CLASSSortENDCLASS = QtMocHelpers::strin
     "s",
     "usingTime",
     "time",
+    "setColor",
+    "num",
     "getData",
     "datastr",
     "sortType",
@@ -56,7 +57,7 @@ static constexpr auto qt_meta_stringdata_CLASSSortENDCLASS = QtMocHelpers::strin
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSSortENDCLASS_t {
-    uint offsetsAndSizes[28];
+    uint offsetsAndSizes[32];
     char stringdata0[5];
     char stringdata1[8];
     char stringdata2[1];
@@ -65,12 +66,14 @@ struct qt_meta_stringdata_CLASSSortENDCLASS_t {
     char stringdata5[2];
     char stringdata6[10];
     char stringdata7[5];
-    char stringdata8[8];
-    char stringdata9[8];
-    char stringdata10[9];
-    char stringdata11[11];
-    char stringdata12[14];
-    char stringdata13[10];
+    char stringdata8[9];
+    char stringdata9[4];
+    char stringdata10[8];
+    char stringdata11[8];
+    char stringdata12[9];
+    char stringdata13[11];
+    char stringdata14[14];
+    char stringdata15[10];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSSortENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -84,12 +87,14 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSSortENDCLASS_t qt_meta_stringda
         QT_MOC_LITERAL(18, 1),  // "s"
         QT_MOC_LITERAL(20, 9),  // "usingTime"
         QT_MOC_LITERAL(30, 4),  // "time"
-        QT_MOC_LITERAL(35, 7),  // "getData"
-        QT_MOC_LITERAL(43, 7),  // "datastr"
-        QT_MOC_LITERAL(51, 8),  // "sortType"
-        QT_MOC_LITERAL(60, 10),  // "insertSort"
-        QT_MOC_LITERAL(71, 13),  // "selectionSort"
-        QT_MOC_LITERAL(85, 9)   // "quickSort"
+        QT_MOC_LITERAL(35, 8),  // "setColor"
+        QT_MOC_LITERAL(44, 3),  // "num"
+        QT_MOC_LITERAL(48, 7),  // "getData"
+        QT_MOC_LITERAL(56, 7),  // "datastr"
+        QT_MOC_LITERAL(64, 8),  // "sortType"
+        QT_MOC_LITERAL(73, 10),  // "insertSort"
+        QT_MOC_LITERAL(84, 13),  // "selectionSort"
+        QT_MOC_LITERAL(98, 9)   // "quickSort"
     },
     "Sort",
     "numSwap",
@@ -99,6 +104,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSSortENDCLASS_t qt_meta_stringda
     "s",
     "usingTime",
     "time",
+    "setColor",
+    "num",
     "getData",
     "datastr",
     "sortType",
@@ -116,29 +123,31 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSSortENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    3,   50,    2, 0x06,    1 /* Public */,
-       6,    1,   57,    2, 0x06,    5 /* Public */,
+       1,    3,   56,    2, 0x06,    1 /* Public */,
+       6,    1,   63,    2, 0x06,    5 /* Public */,
+       8,    2,   66,    2, 0x06,    7 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       8,    2,   60,    2, 0x0a,    7 /* Public */,
-      11,    0,   65,    2, 0x0a,   10 /* Public */,
-      12,    0,   66,    2, 0x0a,   11 /* Public */,
-      13,    0,   67,    2, 0x0a,   12 /* Public */,
+      10,    2,   71,    2, 0x0a,   10 /* Public */,
+      13,    0,   76,    2, 0x0a,   13 /* Public */,
+      14,    0,   77,    2, 0x0a,   14 /* Public */,
+      15,    0,   78,    2, 0x0a,   15 /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int,    3,    4,    5,
     QMetaType::Void, QMetaType::QString,    7,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    9,    5,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString, QMetaType::Int,    9,   10,
+    QMetaType::Void, QMetaType::QString, QMetaType::Int,   11,   12,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -163,6 +172,10 @@ Q_CONSTINIT const QMetaObject Sort::staticMetaObject = { {
         // method 'usingTime'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        // method 'setColor'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'getData'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
@@ -185,10 +198,11 @@ void Sort::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         switch (_id) {
         case 0: _t->numSwap((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
         case 1: _t->usingTime((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 2: _t->getData((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
-        case 3: _t->insertSort(); break;
-        case 4: _t->selectionSort(); break;
-        case 5: _t->quickSort(); break;
+        case 2: _t->setColor((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
+        case 3: _t->getData((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
+        case 4: _t->insertSort(); break;
+        case 5: _t->selectionSort(); break;
+        case 6: _t->quickSort(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -204,6 +218,13 @@ void Sort::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
             using _t = void (Sort::*)(QString );
             if (_t _q_method = &Sort::usingTime; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 1;
+                return;
+            }
+        }
+        {
+            using _t = void (Sort::*)(int , int );
+            if (_t _q_method = &Sort::setColor; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+                *result = 2;
                 return;
             }
         }
@@ -229,13 +250,13 @@ int Sort::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }
@@ -252,5 +273,12 @@ void Sort::usingTime(QString _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
+}
+
+// SIGNAL 2
+void Sort::setColor(int _t1, int _t2)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 QT_WARNING_POP

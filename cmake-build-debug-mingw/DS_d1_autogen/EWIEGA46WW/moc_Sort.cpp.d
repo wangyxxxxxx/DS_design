@@ -49,7 +49,6 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qglobalstatic.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qhash.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qhashfunctions.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qiodevice.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qiodevicebase.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qiterable.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qiterator.h \
@@ -117,7 +116,6 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtversionchecks.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtypeinfo.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtypes.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qurl.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qutf8stringview.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qvariant.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qvarlengtharray.h \
@@ -140,14 +138,12 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpaintdevice.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpainterpath.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpalette.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpicture.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpixelformat.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpixmap.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qpolygon.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qregion.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qrgb.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qrgba64.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qtextdocument.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qtgui-config.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qtguiexports.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qtguiglobal.h \
@@ -156,20 +152,9 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qwindowdefs_win.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QApplication \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsRectItem \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QLabel \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QPushButton \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QVBoxLayout \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QWidget \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractbutton.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qapplication.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qboxlayout.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qframe.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgraphicsitem.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgridlayout.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qlabel.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qlayout.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qlayoutitem.h \
-  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qpushbutton.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qsizepolicy.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtwidgets-config.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtwidgetsexports.h \

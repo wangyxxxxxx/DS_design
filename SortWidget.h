@@ -44,7 +44,7 @@ public:
         /////////////////////////////////////////////////////////////左侧控制区
 
         //序列输入框
-        QLabel *numLabel = new QLabel("输入序列:");
+        QLabel *numLabel = new QLabel("序列:");
         numstrEdit = new QTextEdit();
         numstrEdit->setFixedHeight(30);
 
@@ -146,6 +146,7 @@ public:
         connect(sortButton, QPushButton::clicked, this, &SortWidget::creatGraph);
         connect(clearButton, QPushButton::clicked, this, &SortWidget::ClearAll);
         connect(sort, &Sort::numSwap, this, &SortWidget::RectSwap);
+        connect(sort, &Sort::setColor, this, &SortWidget::SetRectColor);
 
 
     }
@@ -235,13 +236,8 @@ private slots:
 
          }
 
-
-
         ItemX=50;
         ItemY=50;
-
-
-
 
 
     }
@@ -279,6 +275,17 @@ private slots:
 
 
         Displayresult();
+    }
+
+    void SetRectColor(int num,int s) {
+        if (s==0) {
+            rectList.operator[](num)->setBrush(QBrush(Qt::white));
+        }else if (s==1) {
+            rectList.operator[](num)->setBrush(QBrush(Qt::green));
+        }else if (s==2) {
+            rectList.operator[](num)->setBrush(QBrush(Qt::red));
+        }
+
     }
 
 
