@@ -47,7 +47,10 @@ public:
         QLabel *numLabel = new QLabel("序列:");
         numstrEdit = new QTextEdit();
         numstrEdit->setFixedHeight(30);
-
+        //延时输入框
+        QLabel *delayLabel = new QLabel("延时:");
+        delayEdit = new QLineEdit("1000");
+        delayEdit->setFixedHeight(30);
 
         //按钮
         QPushButton *sortButton = new QPushButton("排序");
@@ -79,6 +82,14 @@ public:
         QGroupBox *chooseGroup = new QGroupBox("算法选择区");
         chooseGroup->setLayout(chooseLayout);
         controlLayout->addWidget(chooseGroup);
+
+        //速度设置区
+        QHBoxLayout *delayLayout = new QHBoxLayout();
+        delayLayout->addWidget(delayLabel);
+        delayLayout->addWidget(delayEdit);
+        QGroupBox *delayGroup = new QGroupBox("设置延时区");
+        delayGroup->setLayout(delayLayout);
+        controlLayout->addWidget(delayGroup);
 
         controlLayout->addWidget(sortButton);
         controlLayout->addWidget(clearButton);
@@ -153,7 +164,7 @@ public:
 
 
 signals:
-    void sendData(QString,int);
+    void sendData(QString,int,int);
 
 
 private slots:
@@ -167,6 +178,7 @@ private slots:
 
         QString numstring = numstrEdit->toPlainText();
         QString chooseType = chooseBox->currentText();
+        int delay =delayEdit->text().toInt();
         int sortType=0;
         if (chooseType == "请选择算法") {
             sortType = 0;
@@ -177,7 +189,7 @@ private slots:
         }else if (chooseType == "快速排序") {
             sortType = 3;
         }
-        emit sendData(numstring,sortType);
+        emit sendData(numstring,sortType,delay);
 
 
     }
@@ -260,15 +272,15 @@ private slots:
 
     }
 
-    void RectSwap(int n,int m,int s) {
+    void RectSwap(int n,int m,int s,int type) {
         int x=rectLocation[m].first,y=rectLocation[m].second;
 
         if (s==0) {
-            ChangeRectAnimation(rectList.operator[](m),n*20,20*arr[m],x,y);
+            ChangeRectAnimation(rectList.operator[](m),type,n*20,20*arr[m],x,y,delayEdit->text().toInt()/10);
             arr[m]=n;
             rectLabelsList.operator[](m)->setPlainText(QString::number(n));
         }else if (s==1) {
-            ChangeRectAnimation(rectList.operator[](m),20*arr[n],20*arr[m],x,y);
+            ChangeRectAnimation(rectList.operator[](m),type,20*arr[n],20*arr[m],x,y,delayEdit->text().toInt()/10);
             arr[m]=arr[n];
             rectLabelsList.operator[](m)->setPlainText(QString::number(arr[n]));
         }
@@ -287,6 +299,7 @@ private slots:
         }
 
     }
+
 
 
 private:
@@ -313,6 +326,7 @@ private:
 private:
     QTextEdit *numstrEdit;
     QTextEdit *resultEdit;
+    QLineEdit *delayEdit;
     QGraphicsView *graphView;
     QGraphicsScene *scene;
     QComboBox *chooseBox;

@@ -9,5 +9,5 @@
 #include <QEventLoop>
 
 QString arrtoqs(int arr[],int size);
-void ChangeRectAnimation(QGraphicsRectItem* trect,int fh,int th,int tx,int ty);
+void ChangeRectAnimation(QGraphicsRectItem* trect,int type,int fh,int th,int tx,int ty,int delay);
 #endif //TOOL_H

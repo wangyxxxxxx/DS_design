@@ -18,10 +18,11 @@ class Sort : public QObject {
     Q_OBJECT
 
     public:
-        Sort() : sortstr(""){}
+        Sort() : delay(1000){}
 
     public slots:
-        void getData(QString datastr,int sortType) {
+        void getData(QString datastr,int sortType,int d) {
+            delay = d;
             //将字符串转为数组
             int isnum1=0;
             int count=0;
@@ -68,51 +69,60 @@ class Sort : public QObject {
         }
 
         void insertSort() {
-            cout<<"insertSort"<<endl;
-            //插入排序
+                cout<<"insertSort"<<endl;
+                //插入排序
 
-            if (iLoop>=size) {
-                auto end = std::chrono::high_resolution_clock::now();
-                auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+                if (iLoop>=size) {
+                    auto end = std::chrono::high_resolution_clock::now();
+                    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+                    emit setColor(iLoop-1,1);
+                    emit usingTime(QString::number(duration.count()));
+                    qDebug()<<"后端直接插入序结果："<<arrtoqs(arr,size);
+                    return;
+                }
+
                 emit setColor(iLoop-1,1);
-                emit usingTime(QString::number(duration.count()));
-                qDebug()<<"后端直接插入序结果："<<arrtoqs(arr,size);
-                return;
+                emit setColor(iLoop,2);
+
+                int i;
+
+                for (i = iLoop-1; i >=0; i--) {
+                    if (arr[iLoop] >= arr[i]) {
+                        break;
+                    }
+                }
+
+                i++;
+
+                if (i!=iLoop){
+                    int temp = arr[i];
+                    arr[i]=arr[iLoop];
+                    emit setColor(i,2);
+                    emit numSwap(iLoop,i,1,1);
+
+                    emit setColor(iLoop,1);
+
+                    int j;
+                    for (j = iLoop; j > i+1; j--) {
+
+                        arr[j]=arr[j-1];
+                        emit numSwap(j-1,j,1,1);
+
+                    }
+
+
+                    arr[i+1]=temp;
+                    emit numSwap(temp,i+1,0,1);
+
+                    emit setColor(i,1);
+
+                }
+
+
+                iLoop++;
+                QTimer::singleShot(delay, this, &Sort::insertSort);
+
             }
-
-            int key = arr[iLoop];
-            int j = iLoop - 1;
-
-            emit setColor(iLoop-1,1);
-            emit setColor(iLoop,2);
-
-
-            while (j >= 0 && arr[j] > key) {
-
-                arr[j + 1] = arr[j];
-                emit numSwap(j,j+1,1);
-                emit setColor(j+1,1);
-                emit setColor(j,2);
-                j--;
-
-                // 非阻塞延时
-                QEventLoop loop;
-                QTimer::singleShot(1000, &loop, &QEventLoop::quit);
-                loop.exec();
-                // 处理事件，保持UI响应
-                QCoreApplication::processEvents();
-            }
-
-            arr[j + 1] = key;
-            emit numSwap(key,j+1,0);
-            emit setColor(j+1,1);
-
-
-            iLoop++;
-            QTimer::singleShot(1000, this, &Sort::insertSort);  //循环
-
-
-        }
 
         void selectionSort() {
             cout<<"selectionSort"<<endl;
@@ -139,15 +149,15 @@ class Sort : public QObject {
             if (minIndex != iLoop) {
                 int temp = arr[iLoop];
                 arr[iLoop] = arr[minIndex];
-                emit numSwap(minIndex,iLoop,1);
+                emit numSwap(minIndex,iLoop,1,1);
                 arr[minIndex] = temp;
-                emit numSwap(temp,minIndex,0);
+                emit numSwap(temp,minIndex,0,1);
             }
 
             iLoop++;
 
 
-            QTimer::singleShot(1000, this, &Sort::selectionSort);
+            QTimer::singleShot(delay, this, &Sort::selectionSort);
         }
 
         void quickSort() {
@@ -163,6 +173,11 @@ class Sort : public QObject {
 
 
         }
+
+        void SetDelay(int d) {
+            delay=d;
+        }
+
 
 
     private:
@@ -198,7 +213,7 @@ class Sort : public QObject {
                 while (i < j && arr[j] >= pivot) j--;
                 if (i < j) {
                     arr[i] = arr[j];
-                    emit numSwap(j,i,1);
+                    emit numSwap(j,i,1,1);
                     i++;
                 }
 
@@ -206,14 +221,14 @@ class Sort : public QObject {
                 while (i < j && arr[i] <= pivot) i++;
                 if (i < j) {
                     arr[j] = arr[i];
-                    emit numSwap(i,j,1);
+                    emit numSwap(i,j,1,1);
                     j--;
                 }
             }
 
             // 将基准元素放到正确位置
             arr[i] = pivot;
-            emit numSwap(pivot,i,0);
+            emit numSwap(pivot,i,0,1);
 
             // 将子区间压入栈中
             if (low < i - 1) {
@@ -226,23 +241,23 @@ class Sort : public QObject {
             }
 
 
-        QTimer::singleShot(1000, this, &Sort::quickSortFunction);
+        QTimer::singleShot(delay, this, &Sort::quickSortFunction);
     }
 
 
     signals:
-        void numSwap(int n, int m,int s);
+        void numSwap(int n, int m,int s,int type);
         void usingTime(QString time);
         void setColor(int num,int s);
 
     private:
-        QString sortstr;
         int size;
         int arr[100];
         int iLoop;
         std::chrono::time_point<std::chrono::high_resolution_clock> start;
         stack<int> l;
         stack<int> h;
+        int delay;
 
 
 };

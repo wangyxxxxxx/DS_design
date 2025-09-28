@@ -26,29 +26,35 @@ QString arrtoqs(int arr[],int size) {
     return result;
 }
 
-void ChangeRectAnimation(QGraphicsRectItem* trect,int fh,int th,int tx,int ty){
+void ChangeRectAnimation(QGraphicsRectItem* trect,int type,int fh,int th,int tx,int ty,int delay){
 
     //trect->setBrush(QBrush(Qt::green));
     trect->update();
 
     int nowh=th;
 
-    for (int i = 0; i < 9; i++) {
-        nowh=nowh+(fh-th)/10;
-        trect->setRect(tx, ty, 50, nowh);
+    if (type==1) {
+        for (int i = 0; i < 9; i++) {
+            nowh=nowh+(fh-th)/10;
+            trect->setRect(tx, ty, 50, nowh);
+            trect->update();
+
+            // 非阻塞延时
+            QEventLoop loop;
+            QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+            loop.exec();
+            // 处理事件，保持UI响应
+            QCoreApplication::processEvents();
+
+        }
+        trect->setRect(tx, ty, 50, fh);
         trect->update();
-
-        // 非阻塞延时
-        QEventLoop loop;
-        QTimer::singleShot(60, &loop, &QEventLoop::quit);
-        loop.exec();
-        // 处理事件，保持UI响应
-        QCoreApplication::processEvents();
-
+    }else if (type==2) {
+        trect->setRect(tx, ty, 50, fh);
+        trect->update();
     }
-    trect->setRect(tx, ty, 50, fh);
-    //trect->setBrush(QBrush(Qt::white));
-    trect->update();
+
+
 
 }
 
