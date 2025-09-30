@@ -1,5 +1,6 @@
 D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46WW/moc_MainWindow.cpp: D:/Clion_SaveFile/DS_design/DS_d1/MainWindow.h \
   D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/moc_predefs.h \
+  D:/Clion_SaveFile/DS_design/DS_d1/GraphWidget.h \
   D:/Clion_SaveFile/DS_design/DS_d1/Sort.h \
   D:/Clion_SaveFile/DS_design/DS_d1/SortWidget.h \
   D:/Clion_SaveFile/DS_design/DS_d1/Tool.h \

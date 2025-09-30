@@ -97,7 +97,7 @@ class Sort : public QObject {
                 if (i!=iLoop){
                     int temp = arr[i];
                     arr[i]=arr[iLoop];
-                    emit setColor(i,2);
+                    emit setColor(i,3);
                     emit numSwap(iLoop,i,1,1);
 
                     emit setColor(iLoop,1);
@@ -128,6 +128,7 @@ class Sort : public QObject {
             cout<<"selectionSort"<<endl;
 
             if (iLoop>=size-1) {
+                emit setColor(size-1,1);
                 auto end = std::chrono::high_resolution_clock::now();
                 auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
                 emit usingTime(QString::number(duration.count()));
@@ -136,14 +137,32 @@ class Sort : public QObject {
             }
             // 假设当前索引i处的元素是最小的
             int minIndex = iLoop;
+            int lminIndex = minIndex;
 
             // 在剩余未排序部分中寻找最小元素的索引
-            for (int j = iLoop + 1; j < size; j++) {
-                if (arr[j] < arr[minIndex]) {
+            for (int j = iLoop; j < size; j++) {
+                emit setColor(j,2);
+                if (j!=iLoop) {emit setColor(j-1,0);}
+
+                if (arr[j] < arr[minIndex] || minIndex==j) {
+                    lminIndex = minIndex;
                     minIndex = j;
                 }
 
+
+                emit setColor(lminIndex,0);
+                emit setColor(minIndex,2);
+
+                // 非阻塞延时
+                QEventLoop loop;
+                QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+                loop.exec();
+                // 处理事件，保持UI响应
+                QCoreApplication::processEvents();
+
             }
+
+            if (iLoop!=size-1 && minIndex != size-1){emit setColor(size-1,0);}
 
             // 将找到的最小元素与当前位置的元素交换
             if (minIndex != iLoop) {
@@ -152,7 +171,11 @@ class Sort : public QObject {
                 emit numSwap(minIndex,iLoop,1,1);
                 arr[minIndex] = temp;
                 emit numSwap(temp,minIndex,0,1);
+
             }
+
+            emit setColor(minIndex,0);
+            emit setColor(iLoop,1);
 
             iLoop++;
 
@@ -174,75 +197,77 @@ class Sort : public QObject {
 
         }
 
+        void quickSortFunction() {
+
+                qDebug()<<"后端快速排序结果："<<arrtoqs(arr,size);
+
+                // 取出当前要处理的区间
+
+                if(l.empty()&&h.empty()) {
+                    auto end = std::chrono::high_resolution_clock::now();
+                    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
+                    emit usingTime(QString::number(duration.count()));
+                    qDebug()<<"后端快速排序结果："<<arrtoqs(arr,size);
+
+                    return;
+                }
+
+                int low = l.top();
+                int high = h.top();
+                l.pop();
+                h.pop();
+
+                if (low >= high){QTimer::singleShot(0, this, &Sort::quickSortFunction);} // 区间无效，跳过
+
+                // 选择基准元素（这里选择第一个元素）
+                int pivot = arr[low];
+                int i = low;
+                int j = high;
+
+                // 分区操作
+                while (i < j) {
+                    // 从右向左找小于pivot的元素
+                    while (i < j && arr[j] >= pivot) j--;
+                    if (i < j) {
+                        arr[i] = arr[j];
+                        emit numSwap(j,i,1,1);
+                        i++;
+                    }
+
+                    // 从左向右找大于pivot的元素
+                    while (i < j && arr[i] <= pivot) i++;
+                    if (i < j) {
+                        arr[j] = arr[i];
+                        emit numSwap(i,j,1,1);
+                        j--;
+                    }
+                }
+
+                // 将基准元素放到正确位置
+                arr[i] = pivot;
+                emit numSwap(pivot,i,0,1);
+
+                // 将子区间压入栈中
+                if (low < i - 1) {
+                    l.push(low);
+                    h.push(i - 1);
+                }
+                if (i + 1 < high) {
+                    l.push(i + 1);
+                    h.push(high);
+                }
+
+
+                QTimer::singleShot(delay, this, &Sort::quickSortFunction);
+            }
+
         void SetDelay(int d) {
             delay=d;
         }
 
 
 
-    private:
-    void quickSortFunction() {
-
-        // 取出当前要处理的区间
-
-        if(l.empty()&&h.empty()) {
-            auto end = std::chrono::high_resolution_clock::now();
-            auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-
-            emit usingTime(QString::number(duration.count()));
-            qDebug()<<"后端快速排序结果："<<arrtoqs(arr,size);
-
-            return;
-        }
-
-        int low = l.top();
-        int high = h.top();
-        l.pop();
-        h.pop();
-
-            if (low >= high){QTimer::singleShot(0, this, &Sort::quickSortFunction);} // 区间无效，跳过
-
-            // 选择基准元素（这里选择第一个元素）
-            int pivot = arr[low];
-            int i = low;
-            int j = high;
-
-            // 分区操作
-            while (i < j) {
-                // 从右向左找小于pivot的元素
-                while (i < j && arr[j] >= pivot) j--;
-                if (i < j) {
-                    arr[i] = arr[j];
-                    emit numSwap(j,i,1,1);
-                    i++;
-                }
-
-                // 从左向右找大于pivot的元素
-                while (i < j && arr[i] <= pivot) i++;
-                if (i < j) {
-                    arr[j] = arr[i];
-                    emit numSwap(i,j,1,1);
-                    j--;
-                }
-            }
-
-            // 将基准元素放到正确位置
-            arr[i] = pivot;
-            emit numSwap(pivot,i,0,1);
-
-            // 将子区间压入栈中
-            if (low < i - 1) {
-                l.push(low);
-                h.push(i - 1);
-            }
-            if (i + 1 < high) {
-                l.push(i + 1);
-                h.push(high);
-            }
-
-
-        QTimer::singleShot(delay, this, &Sort::quickSortFunction);
-    }
 
 
     signals:

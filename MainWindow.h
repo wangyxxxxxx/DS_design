@@ -25,6 +25,7 @@
 #include <QString>
 #include <iostream>
 #include "SortWidget.h"
+#include "GraphWidget.h"
 
 class MainWindow : public QMainWindow
 {
@@ -48,11 +49,7 @@ public:
         tab1 = new SortWidget();
 
         // 创建第二个选项卡页面
-        tab2 = new QWidget();
-        label2 = new QLabel("这是第二个选项卡的页面", tab2);
-        QVBoxLayout *layout2 = new QVBoxLayout(tab2);
-        layout2->addWidget(label2);
-        tab2->setLayout(layout2);
+        tab2 = new GraphWidget();
 
         // 将选项卡添加到选项卡控件
         tabWidget->addTab(tab1, "排序算法演示");
@@ -70,7 +67,6 @@ public:
     QTabWidget *tabWidget;
     QWidget *tab1;
     QWidget *tab2;
-    //QLabel *label1;
-    QLabel *label2;
+
 };
 

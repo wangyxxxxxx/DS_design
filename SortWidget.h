@@ -62,6 +62,8 @@ public:
         chooseBox->addItem("直接插入排序");
         chooseBox->addItem("简单选择排序");
         chooseBox->addItem("快速排序");
+        chooseBox->setFixedWidth(210);
+        chooseBox->setFixedHeight(30);
         //布局
         QHBoxLayout *numInputLayout = new QHBoxLayout();
         QHBoxLayout *chooseLayout = new QHBoxLayout();
@@ -79,6 +81,7 @@ public:
         //算法选择区
         chooseLayout->addWidget(chooseLabel);
         chooseLayout->addWidget(chooseBox);
+        chooseLayout->addStretch(1);
         QGroupBox *chooseGroup = new QGroupBox("算法选择区");
         chooseGroup->setLayout(chooseLayout);
         controlLayout->addWidget(chooseGroup);
@@ -117,7 +120,7 @@ public:
 
         //用时输出框
         QLabel *timetLabel = new QLabel("用时:");
-        QLabel *nsLabel = new QLabel("ms");
+        QLabel *msLabel = new QLabel("ms");
         timeEdit = new QTextEdit();
         timeEdit->setFixedHeight(30);
         timeEdit->setReadOnly(true);
@@ -126,7 +129,7 @@ public:
         resultLayout->addWidget(resultEdit);
         resultLayout->addWidget(timetLabel);
         resultLayout->addWidget(timeEdit);
-        resultLayout->addWidget(nsLabel);
+        resultLayout->addWidget(msLabel);
 
         viewLayout->addWidget(graphLabel);
         viewLayout->addWidget(graphView);
@@ -296,7 +299,10 @@ private slots:
             rectList.operator[](num)->setBrush(QBrush(Qt::green));
         }else if (s==2) {
             rectList.operator[](num)->setBrush(QBrush(Qt::red));
+        }else if (s==3) {
+            rectList.operator[](num)->setBrush(QBrush(Qt::darkGreen));
         }
+
 
     }
 

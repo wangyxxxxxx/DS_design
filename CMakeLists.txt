@@ -21,6 +21,7 @@ add_executable(DS_d1 main.cpp
         Tool.h
         SortWidget.h
         MainWindow.h
+        GraphWidget.h
 )
 target_link_libraries(DS_d1
   Qt::Core
