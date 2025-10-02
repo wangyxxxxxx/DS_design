@@ -8,6 +8,7 @@
 #include <QWidget>
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QRandomGenerator>
 #include <QPropertyAnimation>
 #include <QGraphicsWidget>
 #include <QGraphicsTextItem>
@@ -29,6 +30,15 @@
 #include <iostream>
 #include "Sort.h"
 #include "Tool.h"
+#include "Vertex.h"
+#include "Edge.h"
+#include "Graph.h"
+
+#include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsItem>
+#include <QList>
+#include <QPointF>
 using namespace std;
 
 
@@ -60,12 +70,16 @@ public:
 
         ///////////////////边
         //边输入框
-        QLabel *edgeLabel1 = new QLabel("节点1:");
-        QLabel *edgeLabel2 = new QLabel("节点2:");
-        edgeEdit1 = new QLineEdit();
+        QLabel *edgeLabel1 = new QLabel("起点:");
+        QLabel *edgeLabel2 = new QLabel("终点:");
+        QLabel *edgeWeightLabel = new QLabel("权重:");
+        edgeEdit1 = new QTextEdit();
         edgeEdit1->setFixedHeight(30);
-        edgeEdit2 = new QLineEdit();
+        edgeEdit2 = new QTextEdit();
         edgeEdit2->setFixedHeight(30);
+        edgeWeightEdit = new QLineEdit();
+        edgeWeightEdit->setFixedHeight(30);
+
         //边按钮
         addEdgeButton = new QPushButton("添加边");
         delEdgeButton = new QPushButton("删除边");
@@ -76,9 +90,13 @@ public:
         QHBoxLayout *edgeInputLayout2 = new QHBoxLayout();
         edgeInputLayout2->addWidget(edgeLabel2);
         edgeInputLayout2->addWidget(edgeEdit2);
+        QHBoxLayout *edgeInputLayout3 = new QHBoxLayout();
+        edgeInputLayout3->addWidget(edgeWeightLabel);
+        edgeInputLayout3->addWidget(edgeWeightEdit);
         QVBoxLayout *edgeLayout = new QVBoxLayout();
         edgeLayout->addLayout(edgeInputLayout1);
         edgeLayout->addLayout(edgeInputLayout2);
+        edgeLayout->addLayout(edgeInputLayout3);
         edgeLayout->addWidget(addEdgeButton);
         edgeLayout->addWidget(delEdgeButton);
         QGroupBox *edgeGroup = new QGroupBox("边");
@@ -178,6 +196,43 @@ public:
 
 
 
+        ///////////////////////////////////////////////////////////////信号槽
+        connect(addVertexButton,&QPushButton::clicked,this, &GraphWidget::addVertex);
+        connect(addEdgeButton,&QPushButton::clicked,this, &GraphWidget::addEdge);
+
+
+
+    }
+
+private slots:
+    void addVertex() {
+        int x = QRandomGenerator::global()->bounded(100, 600);
+        int y = QRandomGenerator::global()->bounded(100, 400);
+        vertex = new Vertex(vertexEdit->text(), x, y);
+        scene->addItem(vertex);
+        vertexList.append(vertex);
+    }
+
+    void addEdge() {
+
+        int v1=-1;
+        int v2=-1;
+        for (int i = 0; i < vertexList.size(); ++i) {
+            if (vertexList.at(i)->getNumber() == edgeEdit1->toPlainText()) {
+                v1 = i;
+            }
+
+            if (vertexList.at(i)->getNumber() == edgeEdit2->toPlainText()) {
+                v2 = i;
+            }
+        }
+
+        if (v1==-1 || v2==-1) {
+            QMessageBox::warning(this, "错误", "未找到边");
+            return;
+        }
+        edge=new Edge(vertexList.operator[](v1), vertexList.operator[](v2), edgeWeightEdit->text().toInt());
+        scene->addItem(edge);
     }
 
 
@@ -188,8 +243,9 @@ private:
     QPushButton *addVertexButton;
     QPushButton *delVertexButton;
 
-    QLineEdit *edgeEdit1;
-    QLineEdit *edgeEdit2;
+    QTextEdit *edgeEdit1;
+    QTextEdit *edgeEdit2;
+    QLineEdit *edgeWeightEdit;
     QPushButton *addEdgeButton;
     QPushButton *delEdgeButton;
 
@@ -209,6 +265,11 @@ private:
     int ItemY;
     int arr[100];
     int size;
+
+    Vertex *vertex;
+    QList<Vertex *> vertexList;
+
+    Edge *edge;
 
 };
 

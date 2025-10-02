@@ -223,6 +223,12 @@
 	"HEADERS" : 
 	[
 		[
+			"D:/Clion_SaveFile/DS_design/DS_d1/Edge.h",
+			"MU",
+			"EWIEGA46WW/moc_Edge.cpp",
+			null
+		],
+		[
 			"D:/Clion_SaveFile/DS_design/DS_d1/Graph.h",
 			"MU",
 			"EWIEGA46WW/moc_Graph.cpp",
@@ -256,6 +262,12 @@
 			"D:/Clion_SaveFile/DS_design/DS_d1/Tool.h",
 			"MU",
 			"EWIEGA46WW/moc_Tool.cpp",
+			null
+		],
+		[
+			"D:/Clion_SaveFile/DS_design/DS_d1/Vertex.h",
+			"MU",
+			"EWIEGA46WW/moc_Vertex.cpp",
 			null
 		]
 	],
