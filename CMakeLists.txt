@@ -15,7 +15,6 @@ find_package(Qt6 COMPONENTS
   REQUIRED)
 
 add_executable(DS_d1 main.cpp
-        Graph.h
         Sort.h
         Tool.cpp
         Tool.h
@@ -24,6 +23,7 @@ add_executable(DS_d1 main.cpp
         GraphWidget.h
         Vertex.h
         Edge.h
+        Graph.h
 )
 target_link_libraries(DS_d1
   Qt::Core

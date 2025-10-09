@@ -33,7 +33,8 @@ public:
         vertexY = y;
         // 创建圆形
         circle = new QGraphicsEllipseItem(-25, -25, 50, 50, this);
-        circle->setBrush(QBrush(QColor(100, 150, 255))); // 蓝色填充
+        circle->setBrush(QBrush(Qt::white)); // 蓝色填充
+        color="white";
 
         // 创建文本项显示编号
         text = new QGraphicsTextItem(number, this);
@@ -41,7 +42,7 @@ public:
         font.setPointSize(12);
         font.setBold(true);
         text->setFont(font);
-        text->setDefaultTextColor(Qt::white);
+        text->setDefaultTextColor(Qt::black);
 
         // 居中文本
         QRectF textRect = text->boundingRect();
@@ -81,6 +82,23 @@ public:
     int getY() {
         return vertexY;
     }
+    void setColor(QString color) {
+        if (color == "white") {
+            circle->setBrush(QBrush(Qt::white));
+            color="white";
+        }else if (color == "green") {
+            circle->setBrush(QBrush(Qt::green));
+            color="green";
+        }else if (color == "red") {
+            circle->setBrush(QBrush(Qt::red));
+            color="red";
+        }
+
+    }
+
+    QString getColor() {
+        return color;
+    }
 
 
 private:
@@ -89,6 +107,7 @@ private:
     QString vertexNumber;
     int vertexX;
     int vertexY;
+    QString color;
 };
 
 

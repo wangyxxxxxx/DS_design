@@ -196,13 +196,19 @@ public:
 
 
 
+        Adjacency *adjacency = new Adjacency();
         ///////////////////////////////////////////////////////////////信号槽
         connect(addVertexButton,&QPushButton::clicked,this, &GraphWidget::addVertex);
         connect(addEdgeButton,&QPushButton::clicked,this, &GraphWidget::addEdge);
 
+        connect(this,&GraphWidget::sendVertex,adjacency,&Adjacency::addVertex);
 
 
     }
+
+
+signals :
+    void sendVertex(QString);
 
 private slots:
     void addVertex() {
@@ -211,6 +217,8 @@ private slots:
         vertex = new Vertex(vertexEdit->text(), x, y);
         scene->addItem(vertex);
         vertexList.append(vertex);
+
+        emit sendVertex(vertexEdit->text());
     }
 
     void addEdge() {
@@ -233,8 +241,8 @@ private slots:
         }
         edge=new Edge(vertexList.operator[](v1), vertexList.operator[](v2), edgeWeightEdit->text().toInt());
         scene->addItem(edge);
-    }
 
+    }
 
 
 
