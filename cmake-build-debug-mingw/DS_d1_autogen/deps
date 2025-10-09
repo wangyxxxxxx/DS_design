@@ -52,6 +52,7 @@ DS_d1_autogen/timestamp: \
 	D:/softwaredownload/CLion\ 2024.3.4/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-windres.cmake \
 	D:/softwaredownload/CLion\ 2024.3.4/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows.cmake \
 	D:/softwaredownload/CLion\ 2024.3.4/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/WindowsPaths.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QChar \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QEventLoop \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QList \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QObject \
