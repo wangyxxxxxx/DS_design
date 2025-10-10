@@ -134,6 +134,15 @@ public:
         QGroupBox *delayGroup = new QGroupBox("延时");
         delayGroup->setLayout(delayLayout);
 
+
+        //结构展示区
+        structLabel = new QLabel();
+        structLabel->setFixedHeight(200);
+        QVBoxLayout *structLayout = new QVBoxLayout();
+        structLayout->addWidget(structLabel);
+        QGroupBox *structGroup = new QGroupBox("结构");
+        structGroup->setLayout(structLayout);
+
         //////////////控制区总布局
         QVBoxLayout *controlLayout = new QVBoxLayout();
         controlLayout->addWidget(vertexGroup);
@@ -142,9 +151,12 @@ public:
         controlLayout->addWidget(delayGroup);
         controlLayout->addWidget(traverseButton);
         controlLayout->addWidget(clearButton);
+        controlLayout->addWidget(structGroup);
         controlLayout->addStretch(1);// 添加一个拉伸因子为1的spacer，它会吸收多余空间
         QGroupBox *controlGroup = new QGroupBox("控制区");
         controlGroup->setLayout(controlLayout);
+
+
 
 
         /////////////////////////////////////////////////////////////右侧观看区
@@ -196,12 +208,19 @@ public:
 
 
 
-        Adjacency *adjacency = new Adjacency();
+        AdjacencyMatrix *adjacencymatrix = new AdjacencyMatrix();
+        AdjacencyList *adjacencylist = new AdjacencyList();
         ///////////////////////////////////////////////////////////////信号槽
         connect(addVertexButton,&QPushButton::clicked,this, &GraphWidget::addVertex);
         connect(addEdgeButton,&QPushButton::clicked,this, &GraphWidget::addEdge);
 
-        connect(this,&GraphWidget::sendVertex,adjacency,&Adjacency::addVertex);
+        connect(this,&GraphWidget::sendVertex,adjacencymatrix,&AdjacencyMatrix::addVertex);
+        connect(this,&GraphWidget::sendEdge,adjacencymatrix,&AdjacencyMatrix::addEdge);
+        connect(adjacencymatrix,&AdjacencyMatrix::sendshow,this,&GraphWidget::showStruct);
+
+
+        connect(this,&GraphWidget::sendVertex,adjacencylist,&AdjacencyList::addVertex);
+        connect(this,&GraphWidget::sendEdge,adjacencylist,&AdjacencyList::addEdge);
 
 
     }
@@ -209,8 +228,9 @@ public:
 
 signals :
     void sendVertex(QString);
+    void sendEdge(QString,QString,int);
 
-private slots:
+public slots:
     void addVertex() {
         int x = QRandomGenerator::global()->bounded(100, 600);
         int y = QRandomGenerator::global()->bounded(100, 400);
@@ -242,6 +262,13 @@ private slots:
         edge=new Edge(vertexList.operator[](v1), vertexList.operator[](v2), edgeWeightEdit->text().toInt());
         scene->addItem(edge);
 
+        emit sendEdge(edgeEdit1->toPlainText(),edgeEdit2->toPlainText(),edgeWeightEdit->text().toInt());
+        emit sendEdge(edgeEdit2->toPlainText(),edgeEdit1->toPlainText(),edgeWeightEdit->text().toInt());
+
+    }
+
+    void showStruct(QString s) {
+        structLabel->setText(s);
     }
 
 
@@ -268,6 +295,8 @@ private:
     QGraphicsScene *scene;
     QTextEdit *resultEdit;
     QTextEdit *timeEdit;
+
+    QLabel *structLabel;
 
     int ItemX;
     int ItemY;
