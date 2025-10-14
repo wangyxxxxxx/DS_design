@@ -113,8 +113,10 @@ public slots:
 struct EdgeBackend {
 
     QString adjvex;
+    QString from;
     EdgeBackend *nextarc;
     int weight;
+    int visit;
 
 };
 
@@ -130,6 +132,7 @@ class AdjacencyList :public QObject{
     Q_OBJECT
 private:
     vector<VertexBackend> vertexList;
+    vector<EdgeBackend*> edgeList;
     int delay;
 
 public:
@@ -150,8 +153,10 @@ public slots:
     // 边操作
     void addEdge(QString from, QString to, int weight) {
         EdgeBackend *edge = new EdgeBackend();
+        edge->from = from;
         edge->adjvex = to;
         edge->weight = weight;
+        edge->visit=0;
         edge->nextarc = nullptr;
         for(int i=0;i<vertexList.size();i++) {
             if (from == vertexList[i].data) {
@@ -167,6 +172,8 @@ public slots:
                 break;
             }
         }
+
+        edgeList.push_back(edge);
 
         showList();
     }
@@ -239,7 +246,7 @@ public slots:
 
                 qDebug() << vertexList[vs.top()].data;
                 result+=vertexList[vs.top()].data + " ";
-                emit setcolor(vertexList[vs.top()].data,"green");
+                emit setvertexcolor(vertexList[vs.top()].data,"green");
 
                 // 非阻塞延时
                 QEventLoop loop;
@@ -312,7 +319,7 @@ public slots:
 
             qDebug() << vertexList[i].data;
             result+=vertexList[i].data + " ";
-            emit setcolor(vertexList[i].data,"green");
+            emit setvertexcolor(vertexList[i].data,"green");
 
             // 非阻塞延时
             QEventLoop loop;
@@ -338,7 +345,7 @@ public slots:
                                 vertexList[j].visit = 1;
                                 qDebug() << vertexList[j].data;
                                 result+=vertexList[j].data + " ";
-                                emit setcolor(vertexList[j].data,"green");
+                                emit setvertexcolor(vertexList[j].data,"green");
 
                                 ts.push(j);
 
@@ -371,47 +378,94 @@ public slots:
 
     }
 
-    void MST(QString startVertex){cout<<"MST";}
+    void MST(QString startVertex) {
+        emit resetcolor();
+
+        int minweight,minindex;
+        int sum=0;
+
+
+        for(int i=0; i<vertexList.size(); i++) {
+            vertexList[i].visit = 0;
+        }
+
+        for(int i=0; i<edgeList.size(); i++) {
+            edgeList[i]->visit = 0;
+        }
+
+
+        int out = 0;
+        while (out == 0){
+
+            minweight=INT_MAX;
+            minindex = -1;
+
+            for (int i=0; i<edgeList.size(); i++) {
+                if (edgeList[i]->weight <minweight && edgeList[i]->visit == 0 ) {
+
+                    if (vertexList[findVertexIndex(edgeList[i]->from)].visit == 0 || vertexList[findVertexIndex(edgeList[i]->adjvex)].visit == 0) {
+                        minweight=edgeList[i]->weight;
+                        minindex=i;
+                    }
+                }
+            }
+
+            edgeList[minindex]->visit = 1;
+            vertexList[findVertexIndex(edgeList[minindex]->from)].visit = 1;
+            vertexList[findVertexIndex(edgeList[minindex]->adjvex)].visit = 1;
+            sum+=edgeList[minindex]->weight;
+            emit setedgecolor(edgeList[minindex]->from,edgeList[minindex]->adjvex,"lightgreen");
+
+            // 非阻塞延时
+            QEventLoop loop;
+            QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+            loop.exec();
+            // 处理事件，保持UI响应
+            QCoreApplication::processEvents();
+
+
+            //检查是否结束
+            int m;
+            for (m=0;m<vertexList.size();m++) {
+                if (vertexList[m].visit == 0) {break;}
+            }
+            if (m==vertexList.size()) {out=1;}
+
+
+        }
+
+        emit showresult(QString::number(sum));
+
+
+
+
+    }
+
+    int findVertexIndex(QString id) {
+        int i;
+        for (i=0; i < vertexList.size(); i++) {
+            if (vertexList[i].data == id) {break;}
+        }
+        return i;
+    }
+
+    void changeDelay(int d) {
+        delay=d;
+    }
 
 
 signals:
     void showstruct(QString);
     void showresult(QString);
     void resetcolor();
-    void setcolor(QString,QString);
+    void setvertexcolor(QString,QString);
+    void setedgecolor(QString,QString,const QColor&);
 
 };
 
 
 
 #endif //GRAPH_H
-
-
-// vs.push(i);
-// EdgeBackend* temp;
-// while (!vs.empty()) {
-//
-//     if (vertexList[vs.top()].visit == 1) {break;}
-//     vertexList[vs.top()].visit = 1;
-//     qDebug() << vertexList[vs.top()].data;
-//     result+=vertexList[vs.top()].data + " ";
-//
-//     if (vertexList[vs.top()].firstarc == nullptr) {vs.pop();break;}
-//     temp=vertexList[vs.top()].firstarc;
-//     vs.pop();
-//
-//     while (temp!=nullptr) {
-//         for (int j=0; j<vertexList.size(); j++) {
-//             if (vertexList[j].data == temp->adjvex) {
-//                 vs.push(j);
-//             }
-//         }
-//         temp=temp->nextarc;
-//
-//     }
-//
-//
-// }
 
 
 

@@ -131,12 +131,12 @@ public :
         algorithmGroup->setLayout(algorithmLayout);
 
         ///////////////按钮
-        QPushButton *traverseButton = new QPushButton("遍历");
+        QPushButton *traverseButton = new QPushButton("开始");
         QPushButton *clearButton = new QPushButton("清除");
 
         //////////////延时
         QLabel *delayLabel = new QLabel("延时");
-        QLineEdit *delayEdit = new QLineEdit("1000");
+        delayEdit = new QLineEdit("1000");
         delayEdit->setFixedHeight(30);
         QHBoxLayout *delayLayout = new QHBoxLayout();
         delayLayout->addWidget(delayLabel);
@@ -243,8 +243,12 @@ public :
         connect(adjacencylist,&AdjacencyList::showresult,this,&GraphWidget::showResult);
 
         connect(adjacencylist,&AdjacencyList::resetcolor,this,&GraphWidget::resetColor);
-        connect(adjacencylist,&AdjacencyList::setcolor,this,&GraphWidget::setVertexColor);
+        connect(adjacencylist,&AdjacencyList::setvertexcolor,this,&GraphWidget::setVertexColor);
+        connect(adjacencylist,&AdjacencyList::setedgecolor,this,&GraphWidget::setEdgeColor);
 
+        connect(chooseBox,&QComboBox::currentIndexChanged,this, &GraphWidget::changeEdgeArrow);
+
+        connect(this,&GraphWidget::sendDelay,adjacencylist,&AdjacencyList::changeDelay);
 
     }
 
@@ -255,6 +259,7 @@ signals :
     void sendDFT(QString);
     void sendBFT(QString);
     void sendMST(QString);
+    void sendDelay(int);
 
 
 public slots:
@@ -309,6 +314,7 @@ public slots:
     }
 
     void traverseGraph() {
+        emit sendDelay(delayEdit->text().toInt());
         if (chooseBox->currentText() == "深度优先遍历") {emit sendDFT(startEdit->toPlainText());}
         else if (chooseBox->currentText() == "广度优先遍历"){emit sendBFT(startEdit->toPlainText());}
         else if (chooseBox->currentText() == "最小生成树") {emit sendMST(startEdit->toPlainText());}
@@ -333,7 +339,13 @@ public slots:
         }
         vertexList[i]->setColor(color);
         scene->update();
+
+        for (int i = 0; i < edgeList.size(); ++i) {
+            edgeList[i]->setLineColor("black");
+        }
     }
+
+
 
     void setEdgeColor(QString from,QString to,const QColor& color) {
         int i;
@@ -345,6 +357,18 @@ public slots:
 
         edgeList[i]->setLineColor(color);
 
+    }
+
+    void changeEdgeArrow() {
+        if (chooseBox->currentText() == "最小生成树") {
+            for (int i = 0; i < edgeList.size(); ++i) {
+                edgeList[i]->setArrowEnabled(false);
+            }
+        }else {
+            for (int i = 0; i < edgeList.size(); ++i) {
+                edgeList[i]->setArrowEnabled(true);
+            }
+        }
     }
 
 
@@ -378,6 +402,8 @@ private:
 
     QLabel *startLabel;
     QTextEdit *startEdit;
+
+    QLineEdit *delayEdit;
 
 
     int ItemX;

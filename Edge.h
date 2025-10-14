@@ -87,6 +87,14 @@ public:
         line->setPen(pen);
     }
 
+    void setArrowEnabled(bool enabled)
+    {
+        if (hasArrow != enabled) {
+            hasArrow = enabled;
+            updatePosition(); // 重新绘制边
+        }
+    }
+
 private slots:
     // 当顶点位置变化时更新边的位置
     void onVertexPositionChanged(Vertex* vertex, QPointF newPosition)
@@ -177,13 +185,7 @@ private:
         weightText->setPos(midX - textRect.width() / 2, midY - textRect.height() / 2);
     }
 
-    void setArrowEnabled(bool enabled)
-    {
-        if (hasArrow != enabled) {
-            hasArrow = enabled;
-            updatePosition(); // 重新绘制边
-        }
-    }
+
 
 private:
     Vertex* startVertex;
