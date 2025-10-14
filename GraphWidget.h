@@ -45,7 +45,7 @@ using namespace std;
 class GraphWidget : public QWidget {
     Q_OBJECT
 
-public:
+public :
     GraphWidget(QWidget *parent = nullptr) : QWidget(parent) {
         /////////////////////////////////////////////////////////////左侧控制区
 
@@ -112,13 +112,23 @@ public:
         chooseBox->addItem("最小生成树");
         chooseBox->setFixedHeight(30);
         chooseBox->setFixedWidth(210);
+
+        startLabel = new QLabel("起点:");
+        startEdit = new QTextEdit();
+        startEdit->setFixedHeight(30);
         //布局
         QHBoxLayout *chooseLayout = new QHBoxLayout();
         chooseLayout->addWidget(chooseLabel);
         chooseLayout->addWidget(chooseBox);
         chooseLayout->addStretch(1);// 添加一个拉伸因子为1的spacer，它会吸收多余空间
-        QGroupBox *chooseGroup = new QGroupBox("算法");
-        chooseGroup->setLayout(chooseLayout);
+        QHBoxLayout *startLayout = new QHBoxLayout();
+        startLayout->addWidget(startLabel);
+        startLayout->addWidget(startEdit);
+        QVBoxLayout *algorithmLayout = new QVBoxLayout();
+        algorithmLayout->addLayout(chooseLayout);
+        algorithmLayout->addLayout(startLayout);
+        QGroupBox *algorithmGroup = new QGroupBox("算法");
+        algorithmGroup->setLayout(algorithmLayout);
 
         ///////////////按钮
         QPushButton *traverseButton = new QPushButton("遍历");
@@ -147,14 +157,18 @@ public:
         QVBoxLayout *controlLayout = new QVBoxLayout();
         controlLayout->addWidget(vertexGroup);
         controlLayout->addWidget(edgeGroup);
-        controlLayout->addWidget(chooseGroup);
+        controlLayout->addWidget(algorithmGroup);
         controlLayout->addWidget(delayGroup);
         controlLayout->addWidget(traverseButton);
         controlLayout->addWidget(clearButton);
-        controlLayout->addWidget(structGroup);
+        //controlLayout->addWidget(structGroup);
         controlLayout->addStretch(1);// 添加一个拉伸因子为1的spacer，它会吸收多余空间
         QGroupBox *controlGroup = new QGroupBox("控制区");
         controlGroup->setLayout(controlLayout);
+
+        QVBoxLayout *leftLayout = new QVBoxLayout();
+        leftLayout->addWidget(controlGroup);
+        leftLayout->addWidget(structGroup);
 
 
 
@@ -200,7 +214,7 @@ public:
         QLabel *titleLabel = new QLabel("图形结构演示");
         titleLabel->setAlignment(Qt::AlignCenter);
 
-        Layout->addWidget(controlGroup,1);//拉伸因子
+        Layout->addLayout(leftLayout,1);//拉伸因子
         Layout->addLayout(viewLayout,3);//拉伸因子
 
         mainLayout->addWidget(titleLabel);
@@ -216,11 +230,20 @@ public:
 
         connect(this,&GraphWidget::sendVertex,adjacencymatrix,&AdjacencyMatrix::addVertex);
         connect(this,&GraphWidget::sendEdge,adjacencymatrix,&AdjacencyMatrix::addEdge);
-        connect(adjacencymatrix,&AdjacencyMatrix::sendshow,this,&GraphWidget::showStruct);
+        connect(adjacencylist,&AdjacencyList::showstruct,this,&GraphWidget::showStruct);
 
 
         connect(this,&GraphWidget::sendVertex,adjacencylist,&AdjacencyList::addVertex);
         connect(this,&GraphWidget::sendEdge,adjacencylist,&AdjacencyList::addEdge);
+
+        connect(traverseButton,&QPushButton::clicked,this, &GraphWidget::traverseGraph);
+        connect(this,&GraphWidget::sendDFT,adjacencylist,&AdjacencyList::DFT);
+        connect(this,&GraphWidget::sendBFT,adjacencylist,&AdjacencyList::BFT);
+        connect(this,&GraphWidget::sendMST,adjacencylist,&AdjacencyList::MST);
+        connect(adjacencylist,&AdjacencyList::showresult,this,&GraphWidget::showResult);
+
+        connect(adjacencylist,&AdjacencyList::resetcolor,this,&GraphWidget::resetColor);
+        connect(adjacencylist,&AdjacencyList::setcolor,this,&GraphWidget::setVertexColor);
 
 
     }
@@ -229,6 +252,10 @@ public:
 signals :
     void sendVertex(QString);
     void sendEdge(QString,QString,int);
+    void sendDFT(QString);
+    void sendBFT(QString);
+    void sendMST(QString);
+
 
 public slots:
     void addVertex() {
@@ -242,6 +269,15 @@ public slots:
     }
 
     void addEdge() {
+
+        bool hasArrow;
+        if (chooseBox->currentText() == "最小生成树") {
+            hasArrow = false;
+        }
+        else {
+            hasArrow = true;
+        }
+
 
         int v1=-1;
         int v2=-1;
@@ -259,17 +295,59 @@ public slots:
             QMessageBox::warning(this, "错误", "未找到边");
             return;
         }
-        edge=new Edge(vertexList.operator[](v1), vertexList.operator[](v2), edgeWeightEdit->text().toInt());
+        edge=new Edge(vertexList.operator[](v1), vertexList.operator[](v2), edgeWeightEdit->text().toInt(),hasArrow);
+        edgeList.append(edge);
         scene->addItem(edge);
 
         emit sendEdge(edgeEdit1->toPlainText(),edgeEdit2->toPlainText(),edgeWeightEdit->text().toInt());
-        emit sendEdge(edgeEdit2->toPlainText(),edgeEdit1->toPlainText(),edgeWeightEdit->text().toInt());
+        //emit sendEdge(edgeEdit2->toPlainText(),edgeEdit1->toPlainText(),edgeWeightEdit->text().toInt());
 
     }
 
     void showStruct(QString s) {
         structLabel->setText(s);
     }
+
+    void traverseGraph() {
+        if (chooseBox->currentText() == "深度优先遍历") {emit sendDFT(startEdit->toPlainText());}
+        else if (chooseBox->currentText() == "广度优先遍历"){emit sendBFT(startEdit->toPlainText());}
+        else if (chooseBox->currentText() == "最小生成树") {emit sendMST(startEdit->toPlainText());}
+
+    }
+
+    void showResult(QString result) {
+        resultEdit->setText(result);
+    }
+
+    void resetColor() {
+        for (int i = 0; i < vertexList.size(); ++i) {
+            vertexList[i]->setColor("white");
+        }
+        scene->update();
+    }
+
+    void setVertexColor(QString vertex,QString color) {
+        int i;
+        for (i = 0; i < vertexList.size(); ++i) {
+            if (vertexList.at(i)->getNumber() == vertex) {break;}
+        }
+        vertexList[i]->setColor(color);
+        scene->update();
+    }
+
+    void setEdgeColor(QString from,QString to,const QColor& color) {
+        int i;
+        for (i=0; i < edgeList.size(); i++) {
+            if (from == edgeList[i]->getStartVertex()->getNumber() && to == edgeList[i]->getEndVertex()->getNumber()) {
+                break;
+            }
+        }
+
+        edgeList[i]->setLineColor(color);
+
+    }
+
+
 
 
 
@@ -298,6 +376,10 @@ private:
 
     QLabel *structLabel;
 
+    QLabel *startLabel;
+    QTextEdit *startEdit;
+
+
     int ItemX;
     int ItemY;
     int arr[100];
@@ -307,6 +389,7 @@ private:
     QList<Vertex *> vertexList;
 
     Edge *edge;
+    QList<Edge *> edgeList;
 
 };
 

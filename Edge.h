@@ -14,17 +14,19 @@ class Edge : public QObject, public QGraphicsItemGroup
 {
     Q_OBJECT
 public:
-    Edge(Vertex* startVertex, Vertex* endVertex, int weight, QGraphicsItem* parent = nullptr)
-        : QObject(), QGraphicsItemGroup(parent), startVertex(startVertex), endVertex(endVertex), weight(weight)
+    Edge(Vertex* startVertex, Vertex* endVertex, int weight, bool hasArrow, QGraphicsItem* parent = nullptr)
+        : QObject(), QGraphicsItemGroup(parent), startVertex(startVertex), endVertex(endVertex), weight(weight), hasArrow(hasArrow)
     {
         // 创建直线
-        line = new QGraphicsLineItem(this);
+        line = new QGraphicsPathItem(this);
         updatePosition();
 
         // 设置线条样式
         QPen pen;
         pen.setWidth(3);
         pen.setColor(Qt::black);
+        pen.setCapStyle(Qt::RoundCap);
+        pen.setJoinStyle(Qt::RoundJoin);
         line->setPen(pen);
 
         // 创建权重文本
@@ -101,7 +103,63 @@ private:
     {
         QPointF startPos = startVertex->pos();
         QPointF endPos = endVertex->pos();
-        line->setLine(startPos.x(), startPos.y(), endPos.x(), endPos.y());
+
+        // 计算箭头方向
+        QPointF direction = endPos - startPos;
+        qreal length = qSqrt(direction.x() * direction.x() + direction.y() * direction.y());
+
+        // 如果长度为零，则不绘制
+        if (length == 0) {
+            line->setPath(QPainterPath());
+            return;
+        }
+
+        // 归一化方向向量
+        direction /= length;
+
+        // 考虑顶点半径，避免箭头与顶点重叠
+        qreal vertexRadius = 20.0;
+        QPointF adjustedStart = startPos + direction * vertexRadius;
+        QPointF adjustedEnd = endPos - direction * vertexRadius;
+
+        // 创建路径
+        QPainterPath path;
+
+        if (hasArrow) {
+            // 绘制带箭头的边
+
+            // 更新长度
+            length = qSqrt(direction.x() * direction.x() + direction.y() * direction.y());
+
+            // 箭头参数
+            qreal arrowSize = 15.0;
+            qreal arrowAngle = M_PI / 6; // 箭头角度（30度）
+
+            // 绘制主线
+            path.moveTo(adjustedStart);
+            path.lineTo(adjustedEnd);
+
+            // 计算箭头尖端位置
+            QPointF arrowTip = adjustedEnd;
+
+            // 计算箭头两侧点
+            QPointF perpendicular(-direction.y(), direction.x()); // 垂直方向
+
+            QPointF arrowPoint1 = arrowTip - direction * arrowSize + perpendicular * arrowSize * qTan(arrowAngle);
+            QPointF arrowPoint2 = arrowTip - direction * arrowSize - perpendicular * arrowSize * qTan(arrowAngle);
+
+            // 绘制箭头
+            path.moveTo(arrowTip);
+            path.lineTo(arrowPoint1);
+            path.moveTo(arrowTip);
+            path.lineTo(arrowPoint2);
+        } else {
+            // 绘制普通直线
+            path.moveTo(adjustedStart);
+            path.lineTo(adjustedEnd);
+        }
+
+        line->setPath(path);
     }
 
     // 更新权重文本位置
@@ -119,11 +177,20 @@ private:
         weightText->setPos(midX - textRect.width() / 2, midY - textRect.height() / 2);
     }
 
+    void setArrowEnabled(bool enabled)
+    {
+        if (hasArrow != enabled) {
+            hasArrow = enabled;
+            updatePosition(); // 重新绘制边
+        }
+    }
+
 private:
     Vertex* startVertex;
     Vertex* endVertex;
     int weight;
-    QGraphicsLineItem* line;
+    bool hasArrow; // 是否显示箭头
+    QGraphicsPathItem* line;
     QGraphicsTextItem* weightText;
 };
 

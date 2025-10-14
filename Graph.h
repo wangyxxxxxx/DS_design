@@ -11,7 +11,10 @@
 #include <vector>
 #include <QObject>
 #include <QChar>
+#include <QTimer>
 #include <rpc.h>
+#include <stack>
+#include <queue>
 using namespace std;
 
 
@@ -76,38 +79,28 @@ public slots:
     void removeEdge(int v1, int v2) {}
 
     void showMatrix() {
-        QString showstr;
-        //cout<<"    "<<vertexList[0];
-        showstr = "     " + QString::number(vertexList[0]);
+        cout<<"    "<<vertexList[0];
         for (int i = 1; i < vertexNum; i++) {
-            //cout<<"   "<<vertexList[i];
-            showstr+="   "+QString::number(vertexList[i]);
+            cout<<"   "<<vertexList[i];
         }
-        //cout<<endl<<"   ";
+        cout<<endl<<"   ";
 
         for (int i = 0; i < vertexNum; i++) {
-            //cout<<"--- ";
+            cout<<"--- ";
         }
-        //cout<<endl;
-        showstr+="\n";
+        cout<<endl;
 
         for(int i=0;i<vertexNum;i++) {
-            //cout<<vertexList[i]<<" | ";
-            showstr+=QString::number(vertexList[i])+" | ";
+            cout<<vertexList[i]<<" | ";
             for(int j=0;j<vertexNum;j++) {
-                //cout<<matrix[i][j]<<"   ";
-                showstr+=QString::number(matrix[i][j])+"   ";
+                cout<<matrix[i][j]<<"   ";
             }
-            //cout<<endl;
-            showstr+="\n";
+            cout<<endl;
         }
-        //cout<<endl;
-        showstr+="\n";
-        emit sendshow(showstr);
+        cout<<endl;
     }
 
-signals:
-    void sendshow(QString);
+
 
 };
 
@@ -128,6 +121,7 @@ struct EdgeBackend {
 struct VertexBackend {
     QString data;
     EdgeBackend *firstarc;
+    int visit;
 };
 
 
@@ -136,20 +130,22 @@ class AdjacencyList :public QObject{
     Q_OBJECT
 private:
     vector<VertexBackend> vertexList;
+    int delay;
 
 public:
-    AdjacencyList(){}
-
+    AdjacencyList():delay(1000){}
+public slots:
     // 顶点操作
     void addVertex(QString vertexId) {
         VertexBackend vertex;
         vertex.data = vertexId;
         vertex.firstarc = nullptr;
+        vertex.visit=0;
         vertexList.push_back(vertex);
 
         showList();
     }
-    void removeVertex();
+    void removeVertex(){}
 
     // 边操作
     void addEdge(QString from, QString to, int weight) {
@@ -177,42 +173,246 @@ public:
     void removeEdge(int from, int to){}
 
     void showList() {
+        QString showstr="";
         string s;
         EdgeBackend *temp = nullptr;
         for(int i=0;i<vertexList.size();i++) {
             s = vertexList[i].data.toStdString();
-            cout<<s;
+            //cout<<s;
+            showstr+=s;
 
             if (vertexList[i].firstarc == nullptr) {
-                cout<<endl;
+                //cout<<endl;
+                showstr+="\n";
                 continue;
             }else {
-                cout<<"->";
+                //cout<<"->";
+                showstr+="->";
                 temp=vertexList[i].firstarc;
                 while (temp->nextarc != nullptr) {
-                    cout << temp->adjvex.toStdString() << "|"<<temp->weight<<"->";
+                    //cout << temp->adjvex.toStdString() << "|"<<temp->weight<<"->";
+                    showstr+=temp->adjvex + "|" + QString::number(temp->weight) + "->";
                     temp = temp->nextarc;
                 }
-                cout << temp->adjvex.toStdString() << "|"<<temp->weight<<endl;
+                //cout << temp->adjvex.toStdString() << "|"<<temp->weight<<endl;
+                showstr+= temp->adjvex + "|" + QString::number(temp->weight) + "\n";
             }
 
         }
-        cout<<endl;
+        //cout<<endl;
+        showstr+="\n";
 
+        emit showstruct(showstr);
     }
 
     // // 遍历算法
-    // std::vector<int> depthFirstTraversal(int startVertex);
-    // std::vector<int> breadthFirstTraversal(int startVertex);
-    //
-    // // 最小生成树
-    // std::vector<Edge> primMST();
-    // std::vector<Edge> kruskalMST();
+    void DFT(QString startVertex) {
+        emit resetcolor();
+
+        stack<int> vs,ts;
+
+        QString result="";
+
+        for(int i=0; i<vertexList.size(); i++) {
+            vertexList[i].visit = 0;
+        }
+
+        int startIndex = -1;
+        for(int i=0; i<vertexList.size(); i++) {
+            if(vertexList[i].data == startVertex) {
+                startIndex = i;
+                break;
+            }
+        }
 
 
+        int out=0;
+        for (int i = startIndex; i != startIndex || out != 1 ; i++,i=i%vertexList.size()) {
+            if (i==startIndex-1 || i==startIndex-1+vertexList.size()) {out++;}
+
+            vs.push(i);
+            EdgeBackend* temp;
+            while (!vs.empty()) {
+
+                if (vertexList[vs.top()].visit == 1) {break;}
+                vertexList[vs.top()].visit = 1;
+
+                qDebug() << vertexList[vs.top()].data;
+                result+=vertexList[vs.top()].data + " ";
+                emit setcolor(vertexList[vs.top()].data,"green");
+
+                // 非阻塞延时
+                QEventLoop loop;
+                QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+                loop.exec();
+                // 处理事件，保持UI响应
+                QCoreApplication::processEvents();
+
+                if (vertexList[vs.top()].firstarc == nullptr) {vs.pop();break;}
+                temp=vertexList[vs.top()].firstarc;
+                vs.pop();
+
+
+                while (temp!=nullptr) {
+                    for (int j=0; j<vertexList.size(); j++) {
+                        if (vertexList[j].data == temp->adjvex) {
+                            ts.push(j);
+                        }
+                    }
+                    temp=temp->nextarc;
+
+                }
+
+                while(!ts.empty()) {
+                    vs.push(ts.top());
+                    ts.pop();
+                }
+
+
+            }
+
+
+
+
+
+        }
+
+        emit showresult(result);
+
+    }
+
+    void BFT(QString startVertex) {
+        emit resetcolor();
+
+        stack<int> vs,ts;
+
+        QString result="";
+
+        for(int i=0; i<vertexList.size(); i++) {
+            vertexList[i].visit = 0;
+        }
+
+        int startIndex = -1;
+        for(int i=0; i<vertexList.size(); i++) {
+            if(vertexList[i].data == startVertex) {
+                startIndex = i;
+                break;
+            }
+        }
+
+
+
+        int out=0;
+        for (int i = startIndex; i != startIndex || out != 1 ; i++,i=i%vertexList.size()) {
+            if (i==startIndex-1 || i==startIndex-1+vertexList.size()) {out++;}
+
+            if (vertexList[i].visit == 1) {continue;}
+
+            vs.push(i);
+
+            qDebug() << vertexList[i].data;
+            result+=vertexList[i].data + " ";
+            emit setcolor(vertexList[i].data,"green");
+
+            // 非阻塞延时
+            QEventLoop loop;
+            QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+            loop.exec();
+            // 处理事件，保持UI响应
+            QCoreApplication::processEvents();
+
+            vertexList[i].visit = 1;
+            EdgeBackend* temp;
+
+            while (!vs.empty()){
+                while (!vs.empty()) {
+
+                    if (vertexList[vs.top()].firstarc == nullptr) {vs.pop();break;}
+                    temp=vertexList[vs.top()].firstarc;
+                    vs.pop();
+
+                    while (temp!=nullptr) {
+                        for (int j=0; j<vertexList.size(); j++) {
+                            if (vertexList[j].data == temp->adjvex) {
+                                if (vertexList[j].visit == 1) {break;}
+                                vertexList[j].visit = 1;
+                                qDebug() << vertexList[j].data;
+                                result+=vertexList[j].data + " ";
+                                emit setcolor(vertexList[j].data,"green");
+
+                                ts.push(j);
+
+                                // 非阻塞延时
+                                QEventLoop loop;
+                                QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+                                loop.exec();
+                                // 处理事件，保持UI响应
+                                QCoreApplication::processEvents();
+
+
+                            }
+                        }
+                        temp=temp->nextarc;
+
+                    }
+                }
+
+                while(!ts.empty()) {
+                    vs.push(ts.top());
+                    ts.pop();
+                }
+            }
+
+
+        }
+
+        emit showresult(result);
+
+
+    }
+
+    void MST(QString startVertex){cout<<"MST";}
+
+
+signals:
+    void showstruct(QString);
+    void showresult(QString);
+    void resetcolor();
+    void setcolor(QString,QString);
 
 };
 
 
 
 #endif //GRAPH_H
+
+
+// vs.push(i);
+// EdgeBackend* temp;
+// while (!vs.empty()) {
+//
+//     if (vertexList[vs.top()].visit == 1) {break;}
+//     vertexList[vs.top()].visit = 1;
+//     qDebug() << vertexList[vs.top()].data;
+//     result+=vertexList[vs.top()].data + " ";
+//
+//     if (vertexList[vs.top()].firstarc == nullptr) {vs.pop();break;}
+//     temp=vertexList[vs.top()].firstarc;
+//     vs.pop();
+//
+//     while (temp!=nullptr) {
+//         for (int j=0; j<vertexList.size(); j++) {
+//             if (vertexList[j].data == temp->adjvex) {
+//                 vs.push(j);
+//             }
+//         }
+//         temp=temp->nextarc;
+//
+//     }
+//
+//
+// }
+
+
+
+
