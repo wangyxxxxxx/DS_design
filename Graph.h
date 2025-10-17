@@ -23,29 +23,18 @@ class AdjacencyMatrix :public QObject{
     Q_OBJECT
 private:
     vector<vector<int>> matrix;
-    vector<int> vertexList;
-    int vertexNum;
+    vector<QString> vertexList;
 
 public:
-    AdjacencyMatrix() {
-        vertexNum = 0;
-    }
+    AdjacencyMatrix() {}
+    ~AdjacencyMatrix() {}
 
 public slots:
 
     // 顶点操作
     void addVertex(QString vertexId) {
-        vertexNum++;
 
-        QChar c = vertexId.front();
-        int n;
-        if (c.isLetter()) {
-            n=c.toUpper().unicode() - 'A';
-        }else if (c.isDigit()) {
-            n=c.toUpper().unicode() - '0';
-        }
-
-        vertexList.push_back(n);
+        vertexList.push_back(vertexId);
 
         vector<int> tempv(vertexList.size(),0);
 
@@ -57,42 +46,63 @@ public slots:
         showMatrix();
 
     }
-    void removeVertex(){}
-
-    // 边操作
-    void addEdge(QString from,QString to,int weight) {
-        QChar c1 = from.front();
-        QChar c2 = to.front();
-        int n1;
-        int n2;
-        if (c1.isLetter() && c2.isLetter()) {
-            n1=c1.toUpper().unicode() - 'A';
-            n2=c2.toUpper().unicode() - 'A';
-        }else if (c1.isDigit() && c2.isDigit()) {
-            n1=c1.toUpper().unicode() - '0';
-            n2=c2.toUpper().unicode() - '0';
+    void removeVertex(QString v) {
+        int i=0;
+        for (i=0;i<vertexList.size()-1;i++) {
+            if (vertexList[i] == v) {break;}
         }
-        matrix[n1][n2]=weight;
+
+        matrix.erase(matrix.begin()+i);
+
+        for (int j=0;j<vertexList.size();j++) {
+            matrix[j].erase(matrix[j].begin()+i);
+        }
+
+        vertexList.erase(vertexList.begin()+i);
+
         showMatrix();
     }
 
-    void removeEdge(int v1, int v2) {}
+    // 边操作
+    void addEdge(QString from,QString to,int weight) {
+        int i,j;
+        for(i=0;i<vertexList.size()-1;i++) {
+            if(vertexList[i] == from) {break;}
+        }
+        for(j=0;j<vertexList.size()-1;j++) {
+            if(vertexList[j] == to) {break;}
+        }
+        matrix[i][j]=weight;
+        showMatrix();
+    }
+
+    void removeEdge(QString from,QString to) {
+        int i,j;
+        for(i=0;i<vertexList.size()-1;i++) {
+            if(vertexList[i] == from) {break;}
+        }
+        for(j=0;j<vertexList.size()-1;j++) {
+            if(vertexList[j] == to) {break;}
+        }
+        matrix[i][j]=0;
+        showMatrix();
+    }
 
     void showMatrix() {
-        cout<<"    "<<vertexList[0];
-        for (int i = 1; i < vertexNum; i++) {
-            cout<<"   "<<vertexList[i];
+        cout<<"    "<<vertexList[0].toStdString();
+        for (int i = 1; i < vertexList.size(); i++) {
+            cout<<"   "<<vertexList[i].toStdString();
         }
         cout<<endl<<"   ";
 
-        for (int i = 0; i < vertexNum; i++) {
+        for (int i = 0; i < vertexList.size(); i++) {
             cout<<"--- ";
         }
         cout<<endl;
 
-        for(int i=0;i<vertexNum;i++) {
-            cout<<vertexList[i]<<" | ";
-            for(int j=0;j<vertexNum;j++) {
+        for(int i=0;i<vertexList.size();i++) {
+            cout<<vertexList[i].toStdString()<<" | ";
+            for(int j=0;j<vertexList.size();j++) {
                 cout<<matrix[i][j]<<"   ";
             }
             cout<<endl;
@@ -137,6 +147,7 @@ private:
 
 public:
     AdjacencyList():delay(1000){}
+    ~AdjacencyList(){}
 public slots:
     // 顶点操作
     void addVertex(QString vertexId) {
@@ -148,7 +159,11 @@ public slots:
 
         showList();
     }
-    void removeVertex(){}
+    void removeVertex(QString v) {
+        removeEdge1(v);
+        vertexList.erase(vertexList.begin()+findVertexIndex(v));
+        showList();
+    }
 
     // 边操作
     void addEdge(QString from, QString to, int weight) {
@@ -177,7 +192,65 @@ public slots:
 
         showList();
     }
-    void removeEdge(int from, int to){}
+    void removeEdge2(QString from,QString to) {
+        int i=0;
+        for(i=0;i<vertexList.size();i++) {
+            if (from == vertexList[i].data) {break;}
+        }
+
+        EdgeBackend *temp = vertexList[i].firstarc;
+
+        if (temp -> adjvex == to) {
+            vertexList[i].firstarc = temp->nextarc;
+        }else {
+            while (temp->nextarc != nullptr) {
+                if (temp->nextarc->adjvex == to) {
+                    temp->nextarc = temp->nextarc->nextarc;
+                    break;
+                }
+                temp = temp->nextarc;
+            }
+
+        }
+
+        for (int i=0;i<edgeList.size();i++) {
+            if(edgeList[i]->adjvex == to && edgeList[i]->from == from) {
+                delete edgeList[i];
+                edgeList.erase(edgeList.begin()+i);
+            }
+        }
+        showList();
+    }
+    void removeEdge1(QString v) {
+
+        for(int i=0;i<vertexList.size();i++) {
+            EdgeBackend *temp = vertexList[i].firstarc;
+            if (temp == nullptr) {break;}
+            if (temp -> adjvex == v) {vertexList[i].firstarc = temp->nextarc;}
+            else {
+                while (temp->nextarc != nullptr) {
+                    if (temp->nextarc->adjvex == v) {
+                        temp->nextarc = temp->nextarc->nextarc;
+                        break;
+                    }
+                    temp = temp->nextarc;
+                }
+
+            }
+
+        }
+
+
+        int i=0;
+        while (i<edgeList.size()) {
+            if (edgeList[i]->from == v || edgeList[i]->adjvex == v) {
+                delete edgeList[i];
+                edgeList.erase(edgeList.begin()+i);
+            }else {
+                i++;
+            }
+        }
+    }
 
     void showList() {
         QString showstr="";

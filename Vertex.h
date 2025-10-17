@@ -26,6 +26,7 @@ class Vertex : public QObject, public QGraphicsItemGroup
 {
     Q_OBJECT
 public:
+    Vertex() : QObject(), QGraphicsItemGroup(), circle(nullptr), text(nullptr), vertexX(0), vertexY(0) {}
     Vertex(QString number, qreal x, qreal y): QObject(), QGraphicsItemGroup()
     {
         vertexNumber = number;
@@ -59,6 +60,9 @@ public:
         setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     }
 
+    friend QDataStream &operator<<(QDataStream &out, const Vertex &vertex);
+    friend QDataStream &operator>>(QDataStream &in, Vertex &vertex);
+
 
 signals:
     void positionChanged(Vertex* vertex, QPointF newPosition);
@@ -73,13 +77,13 @@ protected:
     }
 
 public:
-    QString getNumber() {
+    QString getNumber() const  {
         return vertexNumber;
     }
-    int getX() {
+    int getX()const {
         return vertexX;
     }
-    int getY() {
+    int getY()const {
         return vertexY;
     }
     void setColor(QString color) {
@@ -96,19 +100,71 @@ public:
 
     }
 
-    QString getColor() {
+    QString getColor()const {
         return color;
     }
+
+
 
 
 private:
     QGraphicsEllipseItem *circle;
     QGraphicsTextItem *text;
     QString vertexNumber;
-    int vertexX;
-    int vertexY;
+    qreal vertexX;
+    qreal vertexY;
     QString color;
 };
 
+
+
+
+
+// 在 Vertex.h 中
+inline QDataStream &operator<<(QDataStream &out, const Vertex &vertex) {
+    qDebug() << "序列化顶点:" << vertex.getNumber() << "位置:" << vertex.vertexX << vertex.vertexY << "颜色:" << vertex.color;
+    out << vertex.vertexNumber;
+    out << vertex.vertexX;
+    out << vertex.vertexY;
+    out << vertex.color;
+    qDebug() << "序列化顶点完成，数据流状态:" << out.status();
+    return out;
+}
+
+inline QDataStream &operator>>(QDataStream &in, Vertex &vertex) {
+    in >> vertex.vertexNumber;
+    in >> vertex.vertexX;
+    in >> vertex.vertexY;
+    in >> vertex.color;
+    qDebug() << "反序列化顶点:" << vertex.vertexNumber << "位置:" << vertex.vertexX << vertex.vertexY << "颜色:" << vertex.color;
+    qDebug() << "反序列化顶点完成，数据流状态:" << in.status();
+
+    // 重新创建图形项
+    vertex.circle = new QGraphicsEllipseItem(-25, -25, 50, 50, &vertex);
+    if (vertex.color == "white") {
+        vertex.circle->setBrush(QBrush(Qt::white));
+    } else if (vertex.color == "green") {
+        vertex.circle->setBrush(QBrush(Qt::green));
+    } else if (vertex.color == "red") {
+        vertex.circle->setBrush(QBrush(Qt::red));
+    }
+
+    vertex.text = new QGraphicsTextItem(vertex.vertexNumber, &vertex);
+    QFont font = vertex.text->font();
+    font.setPointSize(12);
+    font.setBold(true);
+    vertex.text->setFont(font);
+    vertex.text->setDefaultTextColor(Qt::black);
+
+    QRectF textRect = vertex.text->boundingRect();
+    vertex.text->setPos(-textRect.width()/2, -textRect.height()/2);
+    vertex.setPos(vertex.vertexX, vertex.vertexY);
+
+    vertex.setFlag(QGraphicsItem::ItemIsMovable, true);
+    vertex.setFlag(QGraphicsItem::ItemIsSelectable, true);
+    vertex.setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+
+    return in;
+}
 
 #endif //VERTEX_H

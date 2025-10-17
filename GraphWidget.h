@@ -39,6 +39,14 @@
 #include <QGraphicsItem>
 #include <QList>
 #include <QPointF>
+#include <QMenu>
+#include <QAction>
+#include <QFileDialog>
+#include <QDataStream>
+#include <QVector>
+#include <QPen>
+#include <QBrush>
+#include <cmath>
 using namespace std;
 
 
@@ -144,6 +152,12 @@ public :
         QGroupBox *delayGroup = new QGroupBox("延时");
         delayGroup->setLayout(delayLayout);
 
+        //////////////文件
+        savefileButton = new QPushButton("保存文件");
+        readfileButton = new QPushButton("打开文件");
+        QHBoxLayout *fileLayout = new QHBoxLayout();
+        fileLayout->addWidget(savefileButton);
+        fileLayout->addWidget(readfileButton);
 
         //结构展示区
         structLabel = new QLabel();
@@ -161,13 +175,13 @@ public :
         controlLayout->addWidget(delayGroup);
         controlLayout->addWidget(traverseButton);
         controlLayout->addWidget(clearButton);
-        //controlLayout->addWidget(structGroup);
         controlLayout->addStretch(1);// 添加一个拉伸因子为1的spacer，它会吸收多余空间
         QGroupBox *controlGroup = new QGroupBox("控制区");
         controlGroup->setLayout(controlLayout);
 
         QVBoxLayout *leftLayout = new QVBoxLayout();
         leftLayout->addWidget(controlGroup);
+        leftLayout->addLayout(fileLayout);
         leftLayout->addWidget(structGroup);
 
 
@@ -250,6 +264,18 @@ public :
 
         connect(this,&GraphWidget::sendDelay,adjacencylist,&AdjacencyList::changeDelay);
 
+        //删除顶点
+        connect(delVertexButton,&QPushButton::clicked,this, &GraphWidget::removeVertex);
+        connect(this,&GraphWidget::sendRemoveVertex,adjacencylist,&AdjacencyList::removeVertex);
+        connect(this,&GraphWidget::sendRemoveVertex,adjacencymatrix,&AdjacencyMatrix::removeVertex);
+        connect(delEdgeButton,&QPushButton::clicked,this, &GraphWidget::removeEdge2);
+        connect(this,&GraphWidget::sendRemoveEdge,adjacencylist,&AdjacencyList::removeEdge2);
+        connect(this,&GraphWidget::sendRemoveEdge,adjacencymatrix,&AdjacencyMatrix::removeEdge);
+
+        //文件
+        connect(savefileButton,&QPushButton::clicked,this, &GraphWidget::saveFile);
+        connect(readfileButton,&QPushButton::clicked,this, &GraphWidget::openFile);
+
     }
 
 
@@ -260,6 +286,8 @@ signals :
     void sendBFT(QString);
     void sendMST(QString);
     void sendDelay(int);
+    void sendRemoveVertex(QString);
+    void sendRemoveEdge(QString,QString);
 
 
 public slots:
@@ -271,6 +299,26 @@ public slots:
         vertexList.append(vertex);
 
         emit sendVertex(vertexEdit->text());
+    }
+
+    void removeVertex() {
+
+
+
+        int i;
+        for (i=0;i<vertexList.size();i++) {
+            if (vertexList[i]->getNumber() == vertexEdit->text()) {break;}
+        }
+        if (i==vertexList.size()) {
+            QMessageBox::warning(this, "错误", "未找到顶点");
+            return;
+        }
+
+        removeEdge1(vertexEdit->text());
+        delete vertexList.takeAt(i);
+        emit sendRemoveVertex(vertexEdit->text());
+
+
     }
 
     void addEdge() {
@@ -309,6 +357,38 @@ public slots:
 
     }
 
+    void removeEdge1(QString v) {
+
+        int i=0;
+        while (i<edgeList.size()) {
+            if (edgeList[i]->getStartVertex()->getNumber() == v || edgeList[i]->getEndVertex()->getNumber() == v) {
+                delete edgeList.at(i);
+                edgeList.removeAt(i);
+            }else {
+                i++;
+            }
+        }
+
+
+    }
+
+    void removeEdge2() {
+
+        int i=0;
+        while (i<edgeList.size()) {
+            if (edgeList[i]->getStartVertex()->getNumber() == edgeEdit1->toPlainText() && edgeList[i]->getEndVertex()->getNumber() == edgeEdit2->toPlainText()) {
+                delete edgeList.at(i);
+                edgeList.removeAt(i);
+            }else {
+                i++;
+            }
+        }
+
+        emit sendRemoveEdge(edgeEdit1->toPlainText(),edgeEdit2->toPlainText());
+
+
+}
+
     void showStruct(QString s) {
         structLabel->setText(s);
     }
@@ -345,8 +425,6 @@ public slots:
         }
     }
 
-
-
     void setEdgeColor(QString from,QString to,const QColor& color) {
         int i;
         for (i=0; i < edgeList.size(); i++) {
@@ -370,6 +448,217 @@ public slots:
             }
         }
     }
+
+    ////////////////文件
+    bool saveData(const QString &fileName) {
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly)) {
+            QMessageBox::warning(this, "错误", "无法创建文件！");
+            return false;
+        }
+
+        QDataStream out(&file);
+        out.setVersion(QDataStream::Qt_5_15);
+
+        // 写入文件标识
+        out << QString("GRAPH_SORT_V1.0");
+        qDebug() << "写入文件标识完成，数据流状态:" << out.status();
+
+        // 保存顶点数量
+        int vertexCount = vertexList.size();
+        out << vertexCount;
+        qDebug() << "写入顶点数量:" << vertexCount << "，数据流状态:" << out.status();
+
+        for (int i = 0; i < vertexCount; ++i) {
+            Vertex* vertex = vertexList[i];
+            out << *vertex;
+            if (out.status() != QDataStream::Ok) {
+                qDebug() << "写入顶点" << i << "时出错，数据流状态:" << out.status();
+                file.close();
+                return false;
+            }
+        }
+
+        // 保存边数量
+        int edgeCount = edgeList.size();
+        out << edgeCount;
+        qDebug() << "写入边数量:" << edgeCount << "，数据流状态:" << out.status();
+
+        for (int i = 0; i < edgeCount; ++i) {
+            Edge* edge = edgeList[i];
+            out << *edge;
+            if (out.status() != QDataStream::Ok) {
+                qDebug() << "写入边" << i << "时出错，数据流状态:" << out.status();
+                file.close();
+                return false;
+            }
+        }
+
+        file.close();
+        qDebug() << "文件保存完成";
+        return true;
+    }
+
+    void saveFile() {
+        QString fileName = QFileDialog::getSaveFileName(this, "保存文件", "", "可视化文件 (*.wyx)");
+        if (!fileName.isEmpty()) {
+            if (!fileName.endsWith(".wyx", Qt::CaseInsensitive)) {
+                fileName += ".wyx";
+            }
+            if (saveData(fileName)) {
+                QMessageBox::information(this, "成功", "文件保存成功！");
+            }
+        }
+    }
+
+    // 辅助函数：根据顶点编号查找顶点
+    Vertex* findVertexByNumber(const QString& number) {
+        for (Vertex* vertex : vertexList) {
+            if (vertex->getNumber() == number) {
+                return vertex;
+            }
+        }
+        return nullptr;
+    }
+
+    bool loadData(const QString &fileName) {
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly)) {
+        QMessageBox::warning(this, "错误", "无法打开文件！");
+        return false;
+    }
+
+    QDataStream in(&file);
+    in.setVersion(QDataStream::Qt_5_15);
+
+    // 读取文件标识
+    QString fileTag;
+    in >> fileTag;
+    qDebug() << "文件标识:" << fileTag << "，数据流状态:" << in.status();
+
+    if (fileTag != "GRAPH_SORT_V1.0") {
+        QMessageBox::warning(this, "错误", "文件格式不正确！");
+        file.close();
+        return false;
+    }
+
+    // 清空现有数据
+    qDeleteAll(vertexList);
+    vertexList.clear();
+    qDeleteAll(edgeList);
+    edgeList.clear();
+
+    // 读取顶点数量
+    int vertexCount;
+    in >> vertexCount;
+    qDebug() << "顶点数量:" << vertexCount << "，数据流状态:" << in.status();
+
+    if (in.status() != QDataStream::Ok) {
+        qDebug() << "读取顶点数量时出错";
+        file.close();
+        return false;
+    }
+
+    // 读取顶点
+    for (int i = 0; i < vertexCount; ++i) {
+        Vertex* vertex = new Vertex();
+        in >> *vertex;
+
+        if (in.status() != QDataStream::Ok) {
+            qDebug() << "读取顶点" << i << "时出错，数据流状态:" << in.status();
+            delete vertex;
+            file.close();
+            return false;
+        }
+
+        vertexList.append(vertex);
+    }
+
+    // 读取边数量
+    int edgeCount;
+    in >> edgeCount;
+    qDebug() << "边数量:" << edgeCount << "，数据流状态:" << in.status();
+
+    if (in.status() != QDataStream::Ok) {
+        qDebug() << "读取边数量时出错";
+        file.close();
+        return false;
+    }
+
+    // 读取边
+    for (int i = 0; i < edgeCount; ++i) {
+        Edge* edge = new Edge();
+        in >> *edge;
+
+        if (in.status() != QDataStream::Ok) {
+            qDebug() << "读取边" << i << "时出错，数据流状态:" << in.status();
+            delete edge;
+            file.close();
+            return false;
+        }
+
+        edgeList.append(edge);
+    }
+
+    // 建立边与顶点的连接
+    qDebug() << "开始建立边与顶点的连接";
+    for (Edge* edge : edgeList) {
+        QString startNumber = edge->getStartVertexNumber();
+        QString endNumber = edge->getEndVertexNumber();
+
+        Vertex* startVertex = nullptr;
+        Vertex* endVertex = nullptr;
+
+        // 查找对应的顶点
+        for (Vertex* vertex : vertexList) {
+            if (vertex->getNumber() == startNumber) {
+                startVertex = vertex;
+            }
+            if (vertex->getNumber() == endNumber) {
+                endVertex = vertex;
+            }
+        }
+
+        if (startVertex && endVertex) {
+            edge->setVertices(startVertex, endVertex);
+            qDebug() << "成功连接边:" << startNumber << "->" << endNumber;
+        } else {
+            qDebug() << "连接失败: 找不到顶点" << startNumber << "或" << endNumber;
+        }
+    }
+
+    file.close();
+    qDebug() << "文件加载完成";
+    return true;
+}
+
+    void openFile() {
+        QString fileName = QFileDialog::getOpenFileName(this, "打开文件", "", "可视化文件 (*.wyx)");
+        if (!fileName.isEmpty()) {
+            if (loadData(fileName)) {
+                QMessageBox::information(this, "成功", "文件读取成功！");
+                updateDisplay(); // 确保这个函数能正确更新显示
+            }
+        }
+    }
+
+    void updateDisplay() {
+    // 清空当前场景
+    scene->clear();
+
+    // 先添加边（确保边在顶点下方）
+    for (Edge* edge : edgeList) {
+        scene->addItem(edge);
+    }
+
+    // 再添加顶点
+    for (Vertex* vertex : vertexList) {
+        scene->addItem(vertex);
+    }
+}
+
+
+
 
 
 
@@ -404,6 +693,9 @@ private:
     QTextEdit *startEdit;
 
     QLineEdit *delayEdit;
+
+    QPushButton *savefileButton;
+    QPushButton *readfileButton;
 
 
     int ItemX;
