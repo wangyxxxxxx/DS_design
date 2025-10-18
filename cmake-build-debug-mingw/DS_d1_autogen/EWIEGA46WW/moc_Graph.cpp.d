@@ -1,9 +1,12 @@
 D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46WW/moc_Graph.cpp: D:/Clion_SaveFile/DS_design/DS_d1/Graph.h \
   D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/moc_predefs.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QChar \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDataStream \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDebug \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QObject \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QString \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QTimer \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/q20memory.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/q20type_traits.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qalgorithms.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qanystringview.h \
@@ -29,8 +32,10 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcontainerfwd.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcontainerinfo.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcontainertools_impl.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcontiguouscache.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qdarwinhelpers.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qdatastream.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qdebug.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qexceptionhandling.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qflags.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qfloat16.h \
@@ -39,6 +44,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qgenericatomic.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qglobal.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qglobalstatic.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qhash.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qhashfunctions.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qiodevicebase.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qiterable.h \
@@ -46,6 +52,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qlist.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qlogging.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qmalloc.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qmap.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qmath.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qmetacontainer.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qmetatype.h \
@@ -62,9 +69,15 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qrefcount.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qscopedpointer.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qscopeguard.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qset.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qshareddata.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qshareddata_impl.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qsharedpointer.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qsharedpointer_impl.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qstring.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qstringalgorithms.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qstringbuilder.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qstringconverter_base.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qstringfwd.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qstringlist.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qstringliteral.h \
@@ -81,6 +94,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtcoreexports.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtdeprecationmarkers.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtenvironmentvariables.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtextstream.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtimer.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtmetamacros.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtnoop.h \
@@ -93,8 +107,16 @@ D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtypeinfo.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtypes.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qutf8stringview.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qvarlengtharray.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qversiontagging.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qxptype_traits.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QFont \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qfont.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qtgui-config.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qtguiexports.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qtguiglobal.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qwindowdefs.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qwindowdefs_win.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed/limits.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed/syslimits.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/adxintrin.h \

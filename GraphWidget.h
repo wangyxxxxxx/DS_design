@@ -236,8 +236,8 @@ public :
 
 
 
-        AdjacencyMatrix *adjacencymatrix = new AdjacencyMatrix();
-        AdjacencyList *adjacencylist = new AdjacencyList();
+        adjacencymatrix = new AdjacencyMatrix();
+        adjacencylist = new AdjacencyList();
         ///////////////////////////////////////////////////////////////信号槽
         connect(addVertexButton,&QPushButton::clicked,this, &GraphWidget::addVertex);
         connect(addEdgeButton,&QPushButton::clicked,this, &GraphWidget::addEdge);
@@ -494,6 +494,7 @@ public slots:
             }
         }
 
+
         file.close();
         qDebug() << "文件保存完成";
         return true;
@@ -561,6 +562,7 @@ public slots:
 
     // 读取顶点
     for (int i = 0; i < vertexCount; ++i) {
+        //前端
         Vertex* vertex = new Vertex();
         in >> *vertex;
 
@@ -572,6 +574,10 @@ public slots:
         }
 
         vertexList.append(vertex);
+
+        //后端
+        emit sendVertex(vertex->getNumber());
+
     }
 
     // 读取边数量
@@ -587,6 +593,7 @@ public slots:
 
     // 读取边
     for (int i = 0; i < edgeCount; ++i) {
+        //前端
         Edge* edge = new Edge();
         in >> *edge;
 
@@ -598,6 +605,7 @@ public slots:
         }
 
         edgeList.append(edge);
+
     }
 
     // 建立边与顶点的连接
@@ -625,7 +633,11 @@ public slots:
         } else {
             qDebug() << "连接失败: 找不到顶点" << startNumber << "或" << endNumber;
         }
+
+        //后端
+        emit sendEdge(edge->getStartVertex()->getNumber(),edge->getEndVertex()->getNumber(),edge->getWeight());
     }
+
 
     file.close();
     qDebug() << "文件加载完成";
@@ -661,10 +673,10 @@ public slots:
 
 
 
-
-
-
 private:
+    AdjacencyList *adjacencylist;
+    AdjacencyMatrix *adjacencymatrix;
+
     QLineEdit *vertexEdit;
     QPushButton *addVertexButton;
     QPushButton *delVertexButton;

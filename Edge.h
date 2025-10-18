@@ -16,6 +16,8 @@ class Edge : public QObject, public QGraphicsItemGroup
 {
     Q_OBJECT
 public:
+    Edge() : QObject(), QGraphicsItemGroup(), startVertex(nullptr), endVertex(nullptr),
+             weight(0), hasArrow(false), line(nullptr), weightText(nullptr) {}
     Edge(Vertex* startVertex, Vertex* endVertex, int weight, bool hasArrow, QGraphicsItem* parent = nullptr)
         : QObject(), QGraphicsItemGroup(parent), startVertex(startVertex), endVertex(endVertex), weight(weight), hasArrow(hasArrow)
     {
@@ -98,8 +100,6 @@ public:
     }
 
     ////////////////文件
-    Edge() : QObject(), QGraphicsItemGroup(), startVertex(nullptr), endVertex(nullptr),
-             weight(0), hasArrow(false), line(nullptr), weightText(nullptr) {}
     friend QDataStream &operator<<(QDataStream &out, const Edge &edge);
     friend QDataStream &operator>>(QDataStream &in, Edge &edge);
     // 添加辅助方法用于设置顶点指针

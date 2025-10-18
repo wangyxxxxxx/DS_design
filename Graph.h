@@ -15,6 +15,9 @@
 #include <rpc.h>
 #include <stack>
 #include <queue>
+#include <QFont>
+#include <QDataStream>
+#include <QDebug>
 using namespace std;
 
 
@@ -535,6 +538,7 @@ signals:
     void setedgecolor(QString,QString,const QColor&);
 
 };
+
 
 
 
