@@ -55,15 +55,18 @@ public slots:
             if (vertexList[i] == v) {break;}
         }
 
+
         matrix.erase(matrix.begin()+i);
+
+        vertexList.erase(vertexList.begin()+i);
 
         for (int j=0;j<vertexList.size();j++) {
             matrix[j].erase(matrix[j].begin()+i);
         }
 
-        vertexList.erase(vertexList.begin()+i);
 
         showMatrix();
+
     }
 
     // 边操作
@@ -228,7 +231,8 @@ public slots:
 
         for(int i=0;i<vertexList.size();i++) {
             EdgeBackend *temp = vertexList[i].firstarc;
-            if (temp == nullptr) {break;}
+            if (temp == nullptr) {continue;}
+
             if (temp -> adjvex == v) {vertexList[i].firstarc = temp->nextarc;}
             else {
                 while (temp->nextarc != nullptr) {
@@ -240,6 +244,7 @@ public slots:
                 }
 
             }
+
 
         }
 
@@ -256,36 +261,28 @@ public slots:
     }
 
     void showList() {
-        QString showstr="";
         string s;
         EdgeBackend *temp = nullptr;
         for(int i=0;i<vertexList.size();i++) {
             s = vertexList[i].data.toStdString();
-            //cout<<s;
-            showstr+=s;
+            cout<<s;
 
             if (vertexList[i].firstarc == nullptr) {
-                //cout<<endl;
-                showstr+="\n";
+                cout<<endl;
                 continue;
             }else {
-                //cout<<"->";
-                showstr+="->";
+                cout<<"->";
                 temp=vertexList[i].firstarc;
                 while (temp->nextarc != nullptr) {
-                    //cout << temp->adjvex.toStdString() << "|"<<temp->weight<<"->";
-                    showstr+=temp->adjvex + "|" + QString::number(temp->weight) + "->";
+                    cout << temp->adjvex.toStdString() << "|"<<temp->weight<<"->";
                     temp = temp->nextarc;
                 }
-                //cout << temp->adjvex.toStdString() << "|"<<temp->weight<<endl;
-                showstr+= temp->adjvex + "|" + QString::number(temp->weight) + "\n";
+                cout << temp->adjvex.toStdString() << "|"<<temp->weight<<endl;
             }
 
         }
-        //cout<<endl;
-        showstr+="\n";
+        cout<<endl;
 
-        emit showstruct(showstr);
     }
 
     // // 遍历算法
@@ -531,7 +528,6 @@ public slots:
 
 
 signals:
-    void showstruct(QString);
     void showresult(QString);
     void resetcolor();
     void setvertexcolor(QString,QString);

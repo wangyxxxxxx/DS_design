@@ -1,5 +1,5 @@
-D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/CMakeFiles/DS_d1.dir
-D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/CMakeFiles/edit_cache.dir
-D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/CMakeFiles/rebuild_cache.dir
-D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/CMakeFiles/DS_d1_autogen_timestamp_deps.dir
-D:/Clion_SaveFile/DS_design/DS_d1/cmake-build-debug-mingw/CMakeFiles/DS_d1_autogen.dir
+D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/CMakeFiles/DS_d1.dir
+D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/CMakeFiles/edit_cache.dir
+D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/CMakeFiles/rebuild_cache.dir
+D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/CMakeFiles/DS_d1_autogen_timestamp_deps.dir
+D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/CMakeFiles/DS_d1_autogen.dir

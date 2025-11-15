@@ -159,13 +159,6 @@ public :
         fileLayout->addWidget(savefileButton);
         fileLayout->addWidget(readfileButton);
 
-        //结构展示区
-        structLabel = new QLabel();
-        structLabel->setFixedHeight(200);
-        QVBoxLayout *structLayout = new QVBoxLayout();
-        structLayout->addWidget(structLabel);
-        QGroupBox *structGroup = new QGroupBox("结构");
-        structGroup->setLayout(structLayout);
 
         //////////////控制区总布局
         QVBoxLayout *controlLayout = new QVBoxLayout();
@@ -182,7 +175,6 @@ public :
         QVBoxLayout *leftLayout = new QVBoxLayout();
         leftLayout->addWidget(controlGroup);
         leftLayout->addLayout(fileLayout);
-        leftLayout->addWidget(structGroup);
 
 
 
@@ -244,7 +236,6 @@ public :
 
         connect(this,&GraphWidget::sendVertex,adjacencymatrix,&AdjacencyMatrix::addVertex);
         connect(this,&GraphWidget::sendEdge,adjacencymatrix,&AdjacencyMatrix::addEdge);
-        connect(adjacencylist,&AdjacencyList::showstruct,this,&GraphWidget::showStruct);
 
 
         connect(this,&GraphWidget::sendVertex,adjacencylist,&AdjacencyList::addVertex);
@@ -389,9 +380,7 @@ public slots:
 
 }
 
-    void showStruct(QString s) {
-        structLabel->setText(s);
-    }
+
 
     void traverseGraph() {
         emit sendDelay(delayEdit->text().toInt());
@@ -699,7 +688,6 @@ private:
     QTextEdit *resultEdit;
     QTextEdit *timeEdit;
 
-    QLabel *structLabel;
 
     QLabel *startLabel;
     QTextEdit *startEdit;
