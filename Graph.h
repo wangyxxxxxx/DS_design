@@ -285,6 +285,7 @@ public slots:
 
     }
 
+
     // // 遍历算法
     void DFT(QString startVertex) {
         emit resetcolor();

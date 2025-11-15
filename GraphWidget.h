@@ -227,7 +227,6 @@ public :
         mainLayout->addLayout(Layout);
 
 
-
         adjacencymatrix = new AdjacencyMatrix();
         adjacencylist = new AdjacencyList();
         ///////////////////////////////////////////////////////////////信号槽
