@@ -23,6 +23,8 @@
 #include <QPushButton>
 #include <QString>
 #include <iostream>
+#include <QFileDialog>
+#include <QDataStream>
 #include "Sort.h"
 #include "Tool.h"
 using namespace std;
@@ -94,11 +96,21 @@ public:
         delayGroup->setLayout(delayLayout);
         controlLayout->addWidget(delayGroup);
 
+        //文件保存读取
+        savefileButton = new QPushButton("保存文件");
+        readfileButton = new QPushButton("打开文件");
+        QHBoxLayout *fileLayout = new QHBoxLayout();
+        fileLayout->addWidget(savefileButton);
+        fileLayout->addWidget(readfileButton);
+
+
         controlLayout->addWidget(sortButton);
         controlLayout->addWidget(clearButton);
+        controlLayout->addLayout(fileLayout);
         controlLayout->addStretch(1);
 
         controlGroup->setLayout(controlLayout);
+
 
 
         /////////////////////////////////////////////////////////////右侧观看区
@@ -161,6 +173,9 @@ public:
         connect(clearButton, QPushButton::clicked, this, &SortWidget::ClearAll);
         connect(sort, &Sort::numSwap, this, &SortWidget::RectSwap);
         connect(sort, &Sort::setColor, this, &SortWidget::SetRectColor);
+
+        connect(savefileButton, QPushButton::clicked, this, &SortWidget::saveFile);
+        connect(readfileButton, QPushButton::clicked, this, &SortWidget::openFile);
 
 
     }
@@ -308,6 +323,83 @@ private slots:
 
     }
 
+    bool saveData(const QString &fileName) {
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly)) {
+            QMessageBox::warning(this, "错误", "无法创建文件！");
+            return false;
+        }
+
+        QDataStream out(&file);
+        out.setVersion(QDataStream::Qt_5_15);
+
+        // 写入文件标识
+        out << QString("GRAPH_SORT_V1.0");
+        qDebug() << "写入文件标识完成，数据流状态:" << out.status();
+
+        out << numstrEdit->toPlainText();
+        qDebug() << "保存数组";
+
+        file.close();
+        qDebug() << "文件保存完成";
+        return true;
+    }
+
+    void saveFile() {
+        QString fileName = QFileDialog::getSaveFileName(this, "保存文件", "", "可视化文件 (*.wyxsort)");
+        if (!fileName.isEmpty()) {
+            if (!fileName.endsWith(".wyxsort", Qt::CaseInsensitive)) {
+                fileName += ".wyxsort";
+            }
+            if (saveData(fileName)) {
+                QMessageBox::information(this, "成功", "文件保存成功！");
+            }
+        }
+    }
+
+    bool loadData(const QString &fileName) {
+        QFile file(fileName);
+        if (!file.open(QIODevice::ReadOnly)) {
+            QMessageBox::warning(this, "错误", "无法打开文件！");
+            return false;
+        }
+
+        QDataStream in(&file);
+        in.setVersion(QDataStream::Qt_5_15);
+
+        // 读取文件标识
+        QString fileTag;
+        in >> fileTag;
+        qDebug() << "文件标识:" << fileTag << "，数据流状态:" << in.status();
+
+        if (fileTag != "GRAPH_SORT_V1.0") {
+            QMessageBox::warning(this, "错误", "文件格式不正确！");
+            file.close();
+            return false;
+        }
+
+        QString arrtext;
+        in >> arrtext;
+        numstrEdit->setPlainText(arrtext);
+        qDebug() << "读取数组";
+
+
+        file.close();
+        qDebug() << "文件加载完成";
+        return true;
+    }
+
+    void openFile() {
+        QString fileName = QFileDialog::getOpenFileName(this, "打开文件", "", "可视化文件 (*.wyxsort)");
+        if (!fileName.isEmpty()) {
+            if (loadData(fileName)) {
+                QMessageBox::information(this, "成功", "文件读取成功！");
+                ClearRectAndResult();
+                creatGraph();
+            }
+        }
+    }
+
 
 
 private:
@@ -348,6 +440,9 @@ private:
     int ItemY;
     int arr[100];
     int size;
+
+    QPushButton *savefileButton;
+    QPushButton *readfileButton;
 };
 
 #include "main.moc"

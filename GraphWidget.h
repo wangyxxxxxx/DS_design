@@ -168,13 +168,13 @@ public :
         controlLayout->addWidget(delayGroup);
         controlLayout->addWidget(traverseButton);
         controlLayout->addWidget(clearButton);
+        controlLayout->addLayout(fileLayout);
         controlLayout->addStretch(1);// 添加一个拉伸因子为1的spacer，它会吸收多余空间
         QGroupBox *controlGroup = new QGroupBox("控制区");
         controlGroup->setLayout(controlLayout);
 
         QVBoxLayout *leftLayout = new QVBoxLayout();
         leftLayout->addWidget(controlGroup);
-        leftLayout->addLayout(fileLayout);
 
 
 
@@ -489,10 +489,10 @@ public slots:
     }
 
     void saveFile() {
-        QString fileName = QFileDialog::getSaveFileName(this, "保存文件", "", "可视化文件 (*.wyx)");
+        QString fileName = QFileDialog::getSaveFileName(this, "保存文件", "", "可视化文件 (*.wyxgraph)");
         if (!fileName.isEmpty()) {
-            if (!fileName.endsWith(".wyx", Qt::CaseInsensitive)) {
-                fileName += ".wyx";
+            if (!fileName.endsWith(".wyxgraph", Qt::CaseInsensitive)) {
+                fileName += ".wyxgraph";
             }
             if (saveData(fileName)) {
                 QMessageBox::information(this, "成功", "文件保存成功！");
@@ -633,7 +633,7 @@ public slots:
 }
 
     void openFile() {
-        QString fileName = QFileDialog::getOpenFileName(this, "打开文件", "", "可视化文件 (*.wyx)");
+        QString fileName = QFileDialog::getOpenFileName(this, "打开文件", "", "可视化文件 (*.wyxgraph)");
         if (!fileName.isEmpty()) {
             if (loadData(fileName)) {
                 QMessageBox::information(this, "成功", "文件读取成功！");
