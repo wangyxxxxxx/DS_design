@@ -294,13 +294,15 @@ private slots:
 
     void SetRectColor(int num,int s) {
         if (s==0) {
-            rectList.operator[](num)->setBrush(QBrush(Qt::white));
+            rectList.operator[](num)->setBrush(QBrush(Qt::transparent));
         }else if (s==1) {
             rectList.operator[](num)->setBrush(QBrush(Qt::green));
         }else if (s==2) {
             rectList.operator[](num)->setBrush(QBrush(Qt::red));
         }else if (s==3) {
             rectList.operator[](num)->setBrush(QBrush(Qt::darkGreen));
+        }else if (s==4) {
+            rectList.operator[](num)->setBrush(QBrush(Qt::blue));
         }
 
 

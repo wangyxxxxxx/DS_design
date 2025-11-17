@@ -198,6 +198,9 @@ class Sort : public QObject {
         }
 
         void quickSortFunction() {
+            while (1){
+                int templ=-1;
+                int temph=-1;
 
                 qDebug()<<"后端快速排序结果："<<arrtoqs(arr,size);
 
@@ -223,29 +226,90 @@ class Sort : public QObject {
                 // 选择基准元素（这里选择第一个元素）
                 int pivot = arr[low];
                 int i = low;
+                templ = i;
+                emit setColor(i,1);
                 int j = high;
+                temph = j;
+                emit setColor(j,2);
+
+                // 非阻塞延时
+                QEventLoop loop;
+                QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+                loop.exec();
+                // 处理事件，保持UI响应
+                QCoreApplication::processEvents();
 
                 // 分区操作
                 while (i < j) {
-                    // 从右向左找小于pivot的元素
-                    while (i < j && arr[j] >= pivot) j--;
+                    //////////////////////////////// 从右向左找小于pivot的元素
+                    while (i < j && arr[j] >= pivot) {
+                        j--;
+
+                        emit setColor(temph,0);
+                        temph = j;
+                        emit setColor(j,2);
+
+                        // 非阻塞延时
+                        QEventLoop loop;
+                        QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+                        loop.exec();
+                        // 处理事件，保持UI响应
+                        QCoreApplication::processEvents();
+                    }
                     if (i < j) {
                         arr[i] = arr[j];
                         emit numSwap(j,i,1,1);
                         i++;
+
+                        emit setColor(templ,0);
+                        templ = i;
+                        emit setColor(i,1);
                     }
 
-                    // 从左向右找大于pivot的元素
-                    while (i < j && arr[i] <= pivot) i++;
+                    // 非阻塞延时
+                    QEventLoop loop;
+                    QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+                    loop.exec();
+                    // 处理事件，保持UI响应
+                    QCoreApplication::processEvents();
+
+                    ///////////////////////////////////// 从左向右找大于pivot的元素
+                    while (i < j && arr[i] <= pivot) {
+                        i++;
+
+                        emit setColor(templ,0);
+                        templ = i;
+                        emit setColor(i,1);
+
+                        // 非阻塞延时
+                        QEventLoop loop;
+                        QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+                        loop.exec();
+                        // 处理事件，保持UI响应
+                        QCoreApplication::processEvents();
+                    }
                     if (i < j) {
                         arr[j] = arr[i];
                         emit numSwap(i,j,1,1);
                         j--;
+                        emit setColor(temph,0);
+                        temph = j;
+                        emit setColor(j,2);
                     }
+
+                    // 非阻塞延时
+                    //QEventLoop loop;
+                    QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+                    loop.exec();
+                    // 处理事件，保持UI响应
+                    QCoreApplication::processEvents();
+
+
                 }
 
                 // 将基准元素放到正确位置
                 arr[i] = pivot;
+                emit setColor(i,4);
                 emit numSwap(pivot,i,0,1);
 
                 // 将子区间压入栈中
@@ -259,8 +323,9 @@ class Sort : public QObject {
                 }
 
 
-                QTimer::singleShot(delay, this, &Sort::quickSortFunction);
+
             }
+        }
 
         void SetDelay(int d) {
             delay=d;
