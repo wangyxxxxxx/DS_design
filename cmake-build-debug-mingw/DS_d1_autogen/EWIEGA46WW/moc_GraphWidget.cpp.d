@@ -2,6 +2,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/moc_predefs.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Edge.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Graph.h \
+  D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/GraphStruct.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Sort.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Tool.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Vertex.h \
@@ -158,6 +159,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QColor \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QDoubleValidator \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QFont \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QPainterPath \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QPen \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QTransform \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qaction.h \
