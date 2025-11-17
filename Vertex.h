@@ -34,7 +34,7 @@ public:
         vertexY = y;
         // 创建圆形
         circle = new QGraphicsEllipseItem(-25, -25, 50, 50, this);
-        circle->setBrush(QBrush(Qt::white)); // 蓝色填充
+        circle->setBrush(QBrush(Qt::white));
         color="white";
 
         // 创建文本项显示编号

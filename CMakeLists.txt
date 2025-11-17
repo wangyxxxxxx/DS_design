@@ -24,6 +24,7 @@ add_executable(DS_d1 main.cpp
         Vertex.h
         Edge.h
         Graph.h
+        GraphStruct.h
 )
 target_link_libraries(DS_d1
   Qt::Core

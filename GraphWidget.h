@@ -47,6 +47,8 @@
 #include <QPen>
 #include <QBrush>
 #include <cmath>
+#include <sstream>
+#include "GraphStruct.h"
 using namespace std;
 
 
@@ -189,6 +191,19 @@ public :
         graphView->setScene(scene);
         graphView->setRenderHint(QPainter::Antialiasing);
 
+        //结构展示
+        structView = new QGraphicsView();
+        scene2= new QGraphicsScene(this);
+        scene2->setSceneRect(0, 0, 800, 600);
+        structView->setScene(scene2);
+        structView->setRenderHint(QPainter::Antialiasing);
+
+        //选项卡切换画布
+        tabWidget = new QTabWidget(this);
+        tabWidget -> addTab(graphView,"图形演示");
+        tabWidget -> addTab(structView,"结构展示");
+
+
         //序列输出框
         QHBoxLayout *resultLayout = new QHBoxLayout();
         QLabel *resultLabel = new QLabel("结果:");
@@ -210,7 +225,7 @@ public :
         resultLayout->addWidget(nsLabel);
 
         viewLayout->addWidget(graphLabel);
-        viewLayout->addWidget(graphView);
+        viewLayout->addWidget(tabWidget);
         viewLayout->addLayout(resultLayout);
 
 
@@ -265,6 +280,9 @@ public :
         //文件
         connect(savefileButton,&QPushButton::clicked,this, &GraphWidget::saveFile);
         connect(readfileButton,&QPushButton::clicked,this, &GraphWidget::openFile);
+
+        //结构展示
+        connect(adjacencylist,&AdjacencyList::showstruct,this,&GraphWidget::showStruct);
 
     }
 
@@ -386,6 +404,87 @@ public slots:
         if (chooseBox->currentText() == "深度优先遍历") {emit sendDFT(startEdit->toPlainText());}
         else if (chooseBox->currentText() == "广度优先遍历"){emit sendBFT(startEdit->toPlainText());}
         else if (chooseBox->currentText() == "最小生成树") {emit sendMST(startEdit->toPlainText());}
+
+    }
+
+    void showStruct(string str) {
+
+        int structx=0;
+        int structy=0;
+        int firstarrow=0;
+
+         //清除
+         while (!structnodelist.isEmpty()) {
+             delete structnodelist.takeAt(0);
+         }
+        while (!structedgelist.isEmpty()) {
+            delete structedgelist.takeAt(0);
+        }
+        while (!structarrowlist.isEmpty()) {
+            delete structarrowlist.takeAt(0);
+        }
+
+        string temp;
+
+        for (std::size_t i = 0; i < str.length(); i++) {
+
+            if (i==0) {
+                temp = str[0];
+                structnode = new StructNode(structx,structy,QString::fromStdString(temp));
+                scene2->addItem(structnode);
+                structnodelist.append(structnode);
+                firstarrow=1;
+                continue;
+            }
+
+            if (str[i] == '@' && str[i+1]!=NULL) {
+                structy = structy + 100;
+                structx = 0;
+                i++;
+                temp = str[i];
+                structnode = new StructNode(structx,structy,QString::fromStdString(temp));
+                structnodelist.append(structnode);
+                scene2->addItem(structnode);
+                firstarrow=1;
+                continue;
+            }
+
+            string num,weight;
+
+            if (str[i] == '>' ) {
+                structx = structx + 200;
+                i++;
+                num = str[i];
+                i = i + 2;
+                weight = str[i];
+
+
+
+                //绘制箭头
+                if (firstarrow==1) {
+                    structarrow = new StructArrow(structx-125,structx,structy);
+                }else {
+                    structarrow = new StructArrow(structx-75,structx,structy);
+                }
+
+                structarrowlist.append(structarrow);
+                scene2->addItem(structarrow);
+
+                //绘制矩形
+                structedge = new StructEdge(structx,structy,QString::fromStdString(num),QString::fromStdString(weight));
+                structedgelist.append(structedge);
+                scene2->addItem(structedge);
+
+                firstarrow=0;
+                continue;
+            }
+
+
+
+        }
+
+
+        update();
 
     }
 
@@ -683,7 +782,9 @@ private:
     QPushButton *delayButton;
 
     QGraphicsView *graphView;
+    QGraphicsView *structView;
     QGraphicsScene *scene;
+    QGraphicsScene *scene2;
     QTextEdit *resultEdit;
     QTextEdit *timeEdit;
 
@@ -707,6 +808,15 @@ private:
 
     Edge *edge;
     QList<Edge *> edgeList;
+
+    QTabWidget *tabWidget;
+
+    QList <StructNode *> structnodelist;
+    QList <StructEdge *> structedgelist;
+    QList <StructArrow *> structarrowlist;
+    StructNode *structnode;
+    StructEdge *structedge;
+    StructArrow *structarrow;
 
 };
 

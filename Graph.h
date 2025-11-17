@@ -262,26 +262,35 @@ public slots:
 
     void showList() {
         string s;
+        string showstr = "";
         EdgeBackend *temp = nullptr;
         for(int i=0;i<vertexList.size();i++) {
             s = vertexList[i].data.toStdString();
             cout<<s;
+            showstr += s;
 
             if (vertexList[i].firstarc == nullptr) {
                 cout<<endl;
+                showstr += "@";
                 continue;
             }else {
                 cout<<"->";
+                showstr += "->";
                 temp=vertexList[i].firstarc;
                 while (temp->nextarc != nullptr) {
                     cout << temp->adjvex.toStdString() << "|"<<temp->weight<<"->";
+                    showstr += temp->adjvex.toStdString() + "|" + QString::number(temp->weight).toStdString() + "->";
                     temp = temp->nextarc;
                 }
                 cout << temp->adjvex.toStdString() << "|"<<temp->weight<<endl;
+                showstr += temp->adjvex.toStdString() + "|" + QString::number(temp->weight).toStdString() + "@";
             }
 
         }
+        //showstr = showstr - "@";
         cout<<endl;
+
+        emit showstruct(showstr);
 
     }
 
@@ -530,6 +539,7 @@ public slots:
 
 signals:
     void showresult(QString);
+    void showstruct(string);
     void resetcolor();
     void setvertexcolor(QString,QString);
     void setedgecolor(QString,QString,const QColor&);
