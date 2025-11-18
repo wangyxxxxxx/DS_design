@@ -284,6 +284,11 @@ public :
         //结构展示
         connect(adjacencylist,&AdjacencyList::showstruct,this,&GraphWidget::showStruct);
 
+        //清除
+        connect(clearButton,&QPushButton::clicked,this, &GraphWidget::clearall);
+        connect(this,&GraphWidget::clear,adjacencymatrix,&AdjacencyMatrix::clearall);
+        connect(this,&GraphWidget::clear,adjacencylist,&AdjacencyList::clearall);
+
     }
 
 
@@ -296,6 +301,7 @@ signals :
     void sendDelay(int);
     void sendRemoveVertex(QString);
     void sendRemoveEdge(QString,QString);
+    void clear();
 
 
 public slots:
@@ -397,7 +403,32 @@ public slots:
 
 }
 
+    void clearall() {
 
+        //清除结构
+        showlist = "";
+
+        while (!structnodelist.isEmpty()) {
+            delete structnodelist.takeAt(0);
+        }
+        while (!structedgelist.isEmpty()) {
+            delete structedgelist.takeAt(0);
+        }
+        while (!structarrowlist.isEmpty()) {
+            delete structarrowlist.takeAt(0);
+        }
+        //清除前端边
+        while (!edgeList.isEmpty()) {
+            delete edgeList.takeAt(0);
+        }
+        //清除前端点
+        while (!vertexList.isEmpty()) {
+            delete vertexList.takeAt(0);
+        }
+
+        emit clear();
+
+    }
 
     void traverseGraph() {
         emit sendDelay(delayEdit->text().toInt());
@@ -408,6 +439,8 @@ public slots:
     }
 
     void showStruct(string str) {
+
+        showlist = QString::fromStdString(str);
 
         int structx=0;
         int structy=0;
@@ -581,6 +614,7 @@ public slots:
             }
         }
 
+        out<<showlist;
 
         file.close();
         qDebug() << "文件保存完成";
@@ -725,6 +759,7 @@ public slots:
         emit sendEdge(edge->getStartVertex()->getNumber(),edge->getEndVertex()->getNumber(),edge->getWeight());
     }
 
+    in >> showlist;
 
     file.close();
     qDebug() << "文件加载完成";
@@ -734,8 +769,10 @@ public slots:
     void openFile() {
         QString fileName = QFileDialog::getOpenFileName(this, "打开文件", "", "可视化文件 (*.wyxgraph)");
         if (!fileName.isEmpty()) {
+            clearall();
             if (loadData(fileName)) {
                 QMessageBox::information(this, "成功", "文件读取成功！");
+                showStruct(showlist.toStdString());
                 updateDisplay(); // 确保这个函数能正确更新显示
             }
         }
@@ -817,6 +854,8 @@ private:
     StructNode *structnode;
     StructEdge *structedge;
     StructArrow *structarrow;
+
+    QString showlist;
 
 };
 

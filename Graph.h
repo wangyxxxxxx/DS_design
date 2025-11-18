@@ -94,6 +94,19 @@ public slots:
         showMatrix();
     }
 
+    void clearall() {
+        for (auto& innerVec : matrix) {
+            innerVec.clear();           // 清空元素
+            innerVec.shrink_to_fit();   // 释放内存
+        }
+
+        // 清空外层 vector 的内存
+        matrix.clear();           // 清空元素
+        matrix.shrink_to_fit();   // 释放内存
+
+        vertexList.clear();
+    }
+
     void showMatrix() {
         cout<<"    "<<vertexList[0].toStdString();
         for (int i = 1; i < vertexList.size(); i++) {
@@ -292,6 +305,16 @@ public slots:
 
         emit showstruct(showstr);
 
+    }
+
+    void clearall() {
+        //清除点
+        vertexList.clear();
+        //清除边
+        for (auto* ptr : edgeList) {
+            delete ptr;
+        }
+        edgeList.clear();
     }
 
 
