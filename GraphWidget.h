@@ -191,17 +191,24 @@ public :
         graphView->setScene(scene);
         graphView->setRenderHint(QPainter::Antialiasing);
 
-        //结构展示
+        //邻接表结构展示
         structView = new QGraphicsView();
         scene2= new QGraphicsScene(this);
         scene2->setSceneRect(0, 0, 800, 600);
         structView->setScene(scene2);
         structView->setRenderHint(QPainter::Antialiasing);
+        //矩阵结构展示
+        matrixView = new QGraphicsView();
+        scene3= new QGraphicsScene(this);
+        scene3->setSceneRect(0, 0, 800, 600);
+        matrixView->setScene(scene3);
+        matrixView->setRenderHint(QPainter::Antialiasing);
 
         //选项卡切换画布
         tabWidget = new QTabWidget(this);
         tabWidget -> addTab(graphView,"图形演示");
-        tabWidget -> addTab(structView,"结构展示");
+        tabWidget -> addTab(structView,"邻接表");
+        tabWidget -> addTab(matrixView,"相邻矩阵");
 
 
         //序列输出框
@@ -283,6 +290,7 @@ public :
 
         //结构展示
         connect(adjacencylist,&AdjacencyList::showstruct,this,&GraphWidget::showStruct);
+        connect(adjacencymatrix,&AdjacencyMatrix::showmatrixstruct,this,&GraphWidget::showMatrix);
 
         //清除
         connect(clearButton,&QPushButton::clicked,this, &GraphWidget::clearall);
@@ -407,6 +415,7 @@ public slots:
 
         //清除结构
         showlist = "";
+        showmatrix = "";
 
         while (!structnodelist.isEmpty()) {
             delete structnodelist.takeAt(0);
@@ -417,6 +426,11 @@ public slots:
         while (!structarrowlist.isEmpty()) {
             delete structarrowlist.takeAt(0);
         }
+
+        while (!structmatrixlist.isEmpty()) {
+            delete structmatrixlist.takeAt(0);
+        }
+
         //清除前端边
         while (!edgeList.isEmpty()) {
             delete edgeList.takeAt(0);
@@ -521,6 +535,70 @@ public slots:
 
     }
 
+    void showMatrix(string str) {
+
+        showmatrix = QString::fromStdString(str);
+
+        int structx=0;
+        int structy=0;
+
+         //清除
+         while (!structmatrixlist.isEmpty()) {
+             delete structmatrixlist.takeAt(0);
+         }
+
+        string temp;
+
+        for (std::size_t i = 0; i < str.length(); i++) {
+
+            if (i==0) {
+                structmatrix = new StructMatrixRect(structx,structy," ","yellow");
+                scene3->addItem(structmatrix);
+                structmatrixlist.append(structmatrix);
+            }
+
+            if (str[i] == ',' ) {
+                i++;
+                temp = str[i];
+                structx = structx + 50;
+                structmatrix = new StructMatrixRect(structx,structy,QString::fromStdString(temp),"yellow");
+                scene3->addItem(structmatrix);
+                structmatrixlist.append(structmatrix);
+                continue;
+
+            }
+
+            if (str[i] == '@' && str[i+1]!=NULL) {
+                structy = structy + 50;
+                structx = 0;
+                i++;
+                temp = str[i];
+                structmatrix = new StructMatrixRect(structx,structy,QString::fromStdString(temp),"yellow");
+                scene3->addItem(structmatrix);
+                structmatrixlist.append(structmatrix);
+                continue;
+            }
+
+
+            if (str[i] == '<' ) {
+                i++;
+                temp = str[i];
+                structx = structx + 50;
+                structmatrix = new StructMatrixRect(structx,structy,QString::fromStdString(temp),"white");
+                scene3->addItem(structmatrix);
+                structmatrixlist.append(structmatrix);
+                continue;
+
+            }
+
+
+        }
+
+
+        update();
+
+    }
+
     void showResult(QString result) {
         resultEdit->setText(result);
     }
@@ -615,6 +693,7 @@ public slots:
         }
 
         out<<showlist;
+        out<<showmatrix;
 
         file.close();
         qDebug() << "文件保存完成";
@@ -760,6 +839,7 @@ public slots:
     }
 
     in >> showlist;
+    in >> showmatrix;
 
     file.close();
     qDebug() << "文件加载完成";
@@ -773,6 +853,7 @@ public slots:
             if (loadData(fileName)) {
                 QMessageBox::information(this, "成功", "文件读取成功！");
                 showStruct(showlist.toStdString());
+                showMatrix(showmatrix.toStdString());
                 updateDisplay(); // 确保这个函数能正确更新显示
             }
         }
@@ -820,8 +901,10 @@ private:
 
     QGraphicsView *graphView;
     QGraphicsView *structView;
+    QGraphicsView *matrixView;
     QGraphicsScene *scene;
     QGraphicsScene *scene2;
+    QGraphicsScene *scene3;
     QTextEdit *resultEdit;
     QTextEdit *timeEdit;
 
@@ -848,14 +931,17 @@ private:
 
     QTabWidget *tabWidget;
 
+    QList <StructMatrixRect *> structmatrixlist;
     QList <StructNode *> structnodelist;
     QList <StructEdge *> structedgelist;
     QList <StructArrow *> structarrowlist;
+    StructMatrixRect *structmatrix;
     StructNode *structnode;
     StructEdge *structedge;
     StructArrow *structarrow;
 
     QString showlist;
+    QString showmatrix;
 
 };
 

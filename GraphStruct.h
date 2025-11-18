@@ -10,6 +10,49 @@
 #include <QPen>
 #include <cmath>
 
+class StructMatrixRect : public QObject, public QGraphicsItemGroup{
+    Q_OBJECT
+
+private:
+    QGraphicsRectItem * structRect;
+    QGraphicsTextItem *text;
+    int x;
+    int y;
+    QString num;
+
+public:
+    ~StructMatrixRect(){}
+    StructMatrixRect(int X,int Y,QString number,QString Color) {
+        x=X;
+        y=Y;
+        num=number;
+        structRect = new QGraphicsRectItem(0,0,50,50,this);
+        if (Color == "yellow") {
+            structRect->setBrush(QBrush(Qt::yellow));
+        }else if (Color == "white") {
+            structRect->setBrush(QBrush(Qt::white));
+        }else {
+            structRect->setBrush(QBrush(Qt::white));
+        }
+
+
+        // 创建文本项显示编号
+        text = new QGraphicsTextItem(number, structRect );
+        QFont font = text->font();
+        font.setPointSize(12);
+        font.setBold(true);
+        text->setFont(font);
+        text->setDefaultTextColor(Qt::black);
+
+        // 居中文本
+        QRectF textRect = text->boundingRect();
+        text->setPos(25 - textRect.width()/2, 25 - textRect.height()/2);
+
+        setPos(x, y);
+
+    }
+
+};
 
 class StructNode : public QObject, public QGraphicsItemGroup{
     Q_OBJECT

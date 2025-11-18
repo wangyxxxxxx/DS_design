@@ -108,9 +108,12 @@ public slots:
     }
 
     void showMatrix() {
+        string showmatrix="";
         cout<<"    "<<vertexList[0].toStdString();
+        showmatrix += ","+vertexList[0].toStdString();
         for (int i = 1; i < vertexList.size(); i++) {
             cout<<"   "<<vertexList[i].toStdString();
+            showmatrix += ","+vertexList[i].toStdString();
         }
         cout<<endl<<"   ";
 
@@ -118,16 +121,25 @@ public slots:
             cout<<"--- ";
         }
         cout<<endl;
+        showmatrix += '@';
 
         for(int i=0;i<vertexList.size();i++) {
             cout<<vertexList[i].toStdString()<<" | ";
+            showmatrix += vertexList[i].toStdString() ;
             for(int j=0;j<vertexList.size();j++) {
                 cout<<matrix[i][j]<<"   ";
+                showmatrix += '<' + to_string(matrix[i][j]);
             }
             cout<<endl;
+            showmatrix += '@';
         }
         cout<<endl;
+        emit showmatrixstruct(showmatrix);
     }
+
+
+signals:
+    void showmatrixstruct(string);
 
 
 
