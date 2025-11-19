@@ -161,6 +161,24 @@ public :
         fileLayout->addWidget(savefileButton);
         fileLayout->addWidget(readfileButton);
 
+        //DSL组件
+        QLabel *DSLLabel = new QLabel("DSL:");
+        DSLEdit = new QTextEdit();
+        DSLEdit->setFixedHeight(100);
+        DSLButton = new QPushButton("执行");
+        QHBoxLayout *DSLInputLayout = new QHBoxLayout();
+        DSLInputLayout->addWidget(DSLLabel);
+        DSLInputLayout->addWidget(DSLEdit);
+        QVBoxLayout *DSLLayout = new QVBoxLayout();
+        DSLLayout->addLayout(DSLInputLayout);
+        DSLLayout->addWidget(DSLButton);
+        QGroupBox * DLSGroup = new QGroupBox("DLS");
+        DLSGroup->setLayout(DSLLayout);
+
+        //开始和清除按钮水平排列
+        QHBoxLayout * ButtonLayout = new QHBoxLayout();
+        ButtonLayout->addWidget(traverseButton);
+        ButtonLayout->addWidget(clearButton);
 
         //////////////控制区总布局
         QVBoxLayout *controlLayout = new QVBoxLayout();
@@ -168,8 +186,8 @@ public :
         controlLayout->addWidget(edgeGroup);
         controlLayout->addWidget(algorithmGroup);
         controlLayout->addWidget(delayGroup);
-        controlLayout->addWidget(traverseButton);
-        controlLayout->addWidget(clearButton);
+        controlLayout->addWidget(DLSGroup);
+        controlLayout->addLayout(ButtonLayout);
         controlLayout->addLayout(fileLayout);
         controlLayout->addStretch(1);// 添加一个拉伸因子为1的spacer，它会吸收多余空间
         QGroupBox *controlGroup = new QGroupBox("控制区");
@@ -916,6 +934,9 @@ private:
 
     QPushButton *savefileButton;
     QPushButton *readfileButton;
+
+    QPushButton *DSLButton;
+    QTextEdit *DSLEdit;
 
 
     int ItemX;

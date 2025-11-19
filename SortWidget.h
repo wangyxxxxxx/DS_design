@@ -27,6 +27,7 @@
 #include <QDataStream>
 #include "Sort.h"
 #include "Tool.h"
+#include "DSLFunctionSort.h"
 using namespace std;
 
 
@@ -103,9 +104,30 @@ public:
         fileLayout->addWidget(savefileButton);
         fileLayout->addWidget(readfileButton);
 
+        QLabel *DSLLabel = new QLabel("DSL:");
+        DSLEdit = new QTextEdit();
+        DSLEdit->setFixedHeight(100);
+        DSLButton = new QPushButton("执行");
+        QHBoxLayout *DSLInputLayout = new QHBoxLayout();
+        DSLInputLayout->addWidget(DSLLabel);
+        DSLInputLayout->addWidget(DSLEdit);
+        QVBoxLayout *DSLLayout = new QVBoxLayout();
+        DSLLayout->addLayout(DSLInputLayout);
+        DSLLayout->addWidget(DSLButton);
+        QGroupBox * DLSGroup = new QGroupBox("DLS");
+        DLSGroup->setLayout(DSLLayout);
 
-        controlLayout->addWidget(sortButton);
-        controlLayout->addWidget(clearButton);
+
+
+        //排序和清除按钮水平排列
+        QHBoxLayout * ButtonLayout = new QHBoxLayout();
+        ButtonLayout->addWidget(sortButton);
+        ButtonLayout->addWidget(clearButton);
+
+
+        //左边总布局
+        controlLayout->addWidget(DLSGroup);
+        controlLayout->addLayout(ButtonLayout);
         controlLayout->addLayout(fileLayout);
         controlLayout->addStretch(1);
 
@@ -136,6 +158,7 @@ public:
         timeEdit = new QTextEdit();
         timeEdit->setFixedHeight(30);
         timeEdit->setReadOnly(true);
+
 
         resultLayout->addWidget(resultLabel);
         resultLayout->addWidget(resultEdit);
@@ -177,16 +200,44 @@ public:
         connect(savefileButton, QPushButton::clicked, this, &SortWidget::saveFile);
         connect(readfileButton, QPushButton::clicked, this, &SortWidget::openFile);
 
+        //DSL连接
+        DSLSort *dslsort = new DSLSort();
+        connect(DSLButton, QPushButton::clicked, this, &SortWidget::executeDSL);
+        connect(this, &SortWidget::sendDataDSL, dslsort, &DSLSort::execute);
+        connect(dslsort, DSLSort::sendSEQ, this, &SortWidget::DSLcreatSEQ);
+        connect(dslsort, DSLSort::sendSelectSort, this, &SortWidget::DSLSelectSort);
 
     }
 
 
 signals:
     void sendData(QString,int,int);
+    void sendDataDSL(const string&);
 
 
 private slots:
 
+    //DSL相关
+    void executeDSL() {
+        const string& code = DSLEdit->toPlainText().toStdString();
+        emit sendDataDSL(code);
+    }
+
+    void DSLcreatSEQ(QString str) {
+        numstrEdit -> setText(str);
+        creatGraph();
+    }
+
+    void DSLSelectSort(QString str) {
+        if (str == "IS") {
+            chooseBox->setCurrentIndex(1);
+        }else if (str == "SS") {
+            chooseBox->setCurrentIndex(2);
+        }else if (str == "QS") {
+            chooseBox->setCurrentIndex(3);
+        }
+        submitData();
+    }
 
     void DisplayTime(QString usingtime) {
         timeEdit->setText(usingtime);
@@ -443,6 +494,9 @@ private:
 
     QPushButton *savefileButton;
     QPushButton *readfileButton;
+
+    QPushButton *DSLButton;
+    QTextEdit *DSLEdit;
 };
 
 #include "main.moc"
