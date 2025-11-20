@@ -49,6 +49,7 @@
 #include <cmath>
 #include <sstream>
 #include "GraphStruct.h"
+#include "DSLFunctionGraph.h"
 using namespace std;
 
 
@@ -315,6 +316,15 @@ public :
         connect(this,&GraphWidget::clear,adjacencymatrix,&AdjacencyMatrix::clearall);
         connect(this,&GraphWidget::clear,adjacencylist,&AdjacencyList::clearall);
 
+        //DSL连接
+        DSLGraph *dslgraph = new DSLGraph();
+        connect(DSLButton, QPushButton::clicked, this, &GraphWidget::executeDSL);
+        connect(this, &GraphWidget::sendDataDSL, dslgraph, &DSLGraph::execute);
+        connect(dslgraph, DSLGraph::sendV, this, &GraphWidget::DSLaddVertex);
+        connect(dslgraph, DSLGraph::sendE, this, &GraphWidget::DSLaddEdge);
+        connect(dslgraph, DSLGraph::sendSelect, this, &GraphWidget::DSLSelect);
+        connect(dslgraph, DSLGraph::delV, this, &GraphWidget::DSLdelVertex);
+        connect(dslgraph, DSLGraph::delE, this, &GraphWidget::DSLdelEdge);
     }
 
 
@@ -328,9 +338,54 @@ signals :
     void sendRemoveVertex(QString);
     void sendRemoveEdge(QString,QString);
     void clear();
+    void sendDataDSL(string);
 
 
 public slots:
+
+    //DSL相关
+    void executeDSL() {
+        const string& code = DSLEdit->toPlainText().toStdString();
+        emit sendDataDSL(code);
+    }
+
+    void DSLaddVertex(QString v) {
+        vertexEdit->setText(v);
+        addVertex();
+    }
+
+    void DSLdelVertex(QString v) {
+        vertexEdit->setText(v);
+        removeVertex();
+    }
+
+    void DSLaddEdge(QString from,QString to, QString weight) {
+        edgeEdit1->setText(from);
+        edgeEdit2->setText(to);
+        edgeWeightEdit->setText(weight);
+        addEdge();
+    }
+
+    void DSLdelEdge(QString from,QString to) {
+        edgeEdit1->setText(from);
+        edgeEdit2->setText(to);
+        removeEdge2();
+    }
+
+    void DSLSelect(QString s,QString v) {
+        if (s=="DFS") {
+            chooseBox->setCurrentIndex(1);
+        }else if (s=="BFS") {
+            chooseBox->setCurrentIndex(2);
+        }else if (s=="MST") {
+            chooseBox->setCurrentIndex(3);
+        }
+
+        startEdit->setText(v);
+
+        traverseGraph();
+    }
+
     void addVertex() {
         int x = QRandomGenerator::global()->bounded(100, 600);
         int y = QRandomGenerator::global()->bounded(100, 400);
@@ -502,7 +557,7 @@ public slots:
                 continue;
             }
 
-            if (str[i] == '@' && str[i+1]!=NULL) {
+            if (str[i] == '@' && i+1<str.length()) {
                 structy = structy + 100;
                 structx = 0;
                 i++;
@@ -586,7 +641,7 @@ public slots:
 
             }
 
-            if (str[i] == '@' && str[i+1]!=NULL) {
+            if (str[i] == '@' && i+1<str.length()) {
                 structy = structy + 50;
                 structx = 0;
                 i++;

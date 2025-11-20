@@ -26,6 +26,7 @@ add_executable(DS_d1 main.cpp
         Graph.h
         GraphStruct.h
         DSLFunctionSort.h
+        DSLFunctionGraph.h
 )
 target_link_libraries(DS_d1
   Qt::Core

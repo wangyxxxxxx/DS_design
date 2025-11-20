@@ -1,5 +1,6 @@
 D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46WW/moc_GraphWidget.cpp: D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/GraphWidget.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/moc_predefs.h \
+  D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/DSLFunctionGraph.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Edge.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Graph.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/GraphStruct.h \
