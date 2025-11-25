@@ -50,6 +50,7 @@
 #include <sstream>
 #include "GraphStruct.h"
 #include "DSLFunctionGraph.h"
+#include "NaturalLanguageToDSL.h"
 using namespace std;
 
 
@@ -72,10 +73,12 @@ public :
         QHBoxLayout *vertexInputLayout = new QHBoxLayout();
         vertexInputLayout->addWidget(vertexLabel);
         vertexInputLayout->addWidget(vertexEdit);
+        QHBoxLayout *vertexButtonLayout = new QHBoxLayout();
+        vertexButtonLayout->addWidget(addVertexButton);
+        vertexButtonLayout->addWidget(delVertexButton);
         QVBoxLayout *vertexLayout = new QVBoxLayout();
         vertexLayout->addLayout(vertexInputLayout);
-        vertexLayout->addWidget(addVertexButton);
-        vertexLayout->addWidget(delVertexButton);
+        vertexLayout->addLayout(vertexButtonLayout);
         QGroupBox *vertexGroup = new QGroupBox("节点");
         vertexGroup->setLayout(vertexLayout);
 
@@ -104,12 +107,14 @@ public :
         QHBoxLayout *edgeInputLayout3 = new QHBoxLayout();
         edgeInputLayout3->addWidget(edgeWeightLabel);
         edgeInputLayout3->addWidget(edgeWeightEdit);
+        QHBoxLayout *edgeButtonLayout = new QHBoxLayout();
+        edgeButtonLayout->addWidget(addEdgeButton);
+        edgeButtonLayout->addWidget(delEdgeButton);
         QVBoxLayout *edgeLayout = new QVBoxLayout();
         edgeLayout->addLayout(edgeInputLayout1);
         edgeLayout->addLayout(edgeInputLayout2);
         edgeLayout->addLayout(edgeInputLayout3);
-        edgeLayout->addWidget(addEdgeButton);
-        edgeLayout->addWidget(delEdgeButton);
+        edgeLayout->addLayout(edgeButtonLayout);
         QGroupBox *edgeGroup = new QGroupBox("边");
         edgeGroup->setLayout(edgeLayout);
 
@@ -167,14 +172,30 @@ public :
         DSLEdit = new QTextEdit();
         DSLEdit->setFixedHeight(100);
         DSLButton = new QPushButton("执行");
-        QHBoxLayout *DSLInputLayout = new QHBoxLayout();
+        QVBoxLayout *DSLInputLayout = new QVBoxLayout();
         DSLInputLayout->addWidget(DSLLabel);
         DSLInputLayout->addWidget(DSLEdit);
         QVBoxLayout *DSLLayout = new QVBoxLayout();
         DSLLayout->addLayout(DSLInputLayout);
         DSLLayout->addWidget(DSLButton);
-        QGroupBox * DLSGroup = new QGroupBox("DLS");
-        DLSGroup->setLayout(DSLLayout);
+
+        //自然语言
+        QLabel *naturalLabel = new QLabel("自然语言");
+        naturalEdit = new QTextEdit();
+        naturalEdit->setFixedHeight(100);
+        naturalButton = new QPushButton("自然语言执行");
+        QVBoxLayout *naturalInputLayout = new QVBoxLayout();
+        naturalInputLayout->addWidget(naturalLabel);
+        naturalInputLayout->addWidget(naturalEdit);
+        QVBoxLayout *naturalLayout = new QVBoxLayout();
+        naturalLayout->addLayout(naturalInputLayout);
+        naturalLayout->addWidget(naturalButton);
+
+        QHBoxLayout* languageLayout = new QHBoxLayout();
+        languageLayout-> addLayout(DSLLayout);
+        languageLayout->addLayout(naturalLayout);
+        QGroupBox * languageGroup = new QGroupBox("DLS & 自然语言");
+        languageGroup->setLayout(languageLayout);
 
         //开始和清除按钮水平排列
         QHBoxLayout * ButtonLayout = new QHBoxLayout();
@@ -187,7 +208,7 @@ public :
         controlLayout->addWidget(edgeGroup);
         controlLayout->addWidget(algorithmGroup);
         controlLayout->addWidget(delayGroup);
-        controlLayout->addWidget(DLSGroup);
+        controlLayout->addWidget(languageGroup);
         controlLayout->addLayout(ButtonLayout);
         controlLayout->addLayout(fileLayout);
         controlLayout->addStretch(1);// 添加一个拉伸因子为1的spacer，它会吸收多余空间
@@ -325,6 +346,12 @@ public :
         connect(dslgraph, DSLGraph::sendSelect, this, &GraphWidget::DSLSelect);
         connect(dslgraph, DSLGraph::delV, this, &GraphWidget::DSLdelVertex);
         connect(dslgraph, DSLGraph::delE, this, &GraphWidget::DSLdelEdge);
+
+        //自然语言
+        ntod = new NaturalLanguageToDSL();
+        connect(naturalButton, QPushButton::clicked, this, &GraphWidget::executeNatural);
+        connect(this, &GraphWidget::sendNatural, ntod, &NaturalLanguageToDSL::execute);
+        connect(ntod, NaturalLanguageToDSL::sendDSL, this, &GraphWidget::showNaturalToDSL);
     }
 
 
@@ -339,9 +366,26 @@ signals :
     void sendRemoveEdge(QString,QString);
     void clear();
     void sendDataDSL(string);
+    void sendNatural(string);
 
 
 public slots:
+
+    //自然语言相关
+    void setAPI(QString getapi) {
+        APIkey = getapi;
+        ntod->setApiKey(APIkey.toStdWString());
+    }
+
+        void executeNatural() {
+        emit sendNatural(naturalEdit->toPlainText().toStdString());
+
+    }
+
+        void showNaturalToDSL(QString str) {
+        DSLEdit->setText(str);
+        executeDSL();
+    }
 
     //DSL相关
     void executeDSL() {
@@ -1018,6 +1062,13 @@ private:
 
     QString showlist;
     QString showmatrix;
+
+
+    QPushButton *naturalButton;
+    QTextEdit *naturalEdit;
+
+    NaturalLanguageToDSL* ntod;
+    QString APIkey;
 
 };
 

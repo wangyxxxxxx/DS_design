@@ -117,7 +117,7 @@ public:
         DSLLayout->addLayout(DSLInputLayout);
         DSLLayout->addWidget(DSLButton);
 
-        //字然语言
+        //自然语言
         QLabel *naturalLabel = new QLabel("自然语言");
         naturalEdit = new QTextEdit();
         naturalEdit->setFixedHeight(100);

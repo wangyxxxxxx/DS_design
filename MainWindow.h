@@ -73,6 +73,7 @@ public:
 
         connect(sendapiButton, QPushButton::clicked, this, &MainWindow::sendAPI);
         connect(this, &MainWindow::sendapi, tab1, &SortWidget::setAPI);
+        connect(this, &MainWindow::sendapi, tab2, &GraphWidget::setAPI);
     }
 
 public slots:
@@ -87,7 +88,7 @@ signals:
 private:
     QTabWidget *tabWidget;
     SortWidget *tab1;
-    QWidget *tab2;
+    GraphWidget *tab2;
 
     QTextEdit *apiEdit;
     QPushButton *sendapiButton;
