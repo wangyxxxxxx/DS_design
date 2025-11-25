@@ -28,6 +28,7 @@
 #include "Sort.h"
 #include "Tool.h"
 #include "DSLFunctionSort.h"
+#include "NaturalLanguageToDSL.h"
 using namespace std;
 
 
@@ -104,18 +105,35 @@ public:
         fileLayout->addWidget(savefileButton);
         fileLayout->addWidget(readfileButton);
 
-        QLabel *DSLLabel = new QLabel("DSL:");
+        //DSL
+        QLabel *DSLLabel = new QLabel("DSL");
         DSLEdit = new QTextEdit();
         DSLEdit->setFixedHeight(100);
-        DSLButton = new QPushButton("执行");
-        QHBoxLayout *DSLInputLayout = new QHBoxLayout();
+        DSLButton = new QPushButton("DSL执行");
+        QVBoxLayout *DSLInputLayout = new QVBoxLayout();
         DSLInputLayout->addWidget(DSLLabel);
         DSLInputLayout->addWidget(DSLEdit);
         QVBoxLayout *DSLLayout = new QVBoxLayout();
         DSLLayout->addLayout(DSLInputLayout);
         DSLLayout->addWidget(DSLButton);
-        QGroupBox * DLSGroup = new QGroupBox("DLS");
-        DLSGroup->setLayout(DSLLayout);
+
+        //字然语言
+        QLabel *naturalLabel = new QLabel("自然语言");
+        naturalEdit = new QTextEdit();
+        naturalEdit->setFixedHeight(100);
+        naturalButton = new QPushButton("自然语言执行");
+        QVBoxLayout *naturalInputLayout = new QVBoxLayout();
+        naturalInputLayout->addWidget(naturalLabel);
+        naturalInputLayout->addWidget(naturalEdit);
+        QVBoxLayout *naturalLayout = new QVBoxLayout();
+        naturalLayout->addLayout(naturalInputLayout);
+        naturalLayout->addWidget(naturalButton);
+
+        QHBoxLayout* languageLayout = new QHBoxLayout();
+        languageLayout-> addLayout(DSLLayout);
+        languageLayout->addLayout(naturalLayout);
+        QGroupBox * languageGroup = new QGroupBox("DLS & 自然语言");
+        languageGroup->setLayout(languageLayout);
 
 
 
@@ -126,7 +144,7 @@ public:
 
 
         //左边总布局
-        controlLayout->addWidget(DLSGroup);
+        controlLayout->addWidget(languageGroup);
         controlLayout->addLayout(ButtonLayout);
         controlLayout->addLayout(fileLayout);
         controlLayout->addStretch(1);
@@ -187,6 +205,7 @@ public:
 
 
 
+
         //////////////////////////////////////////////////////////// 连接按钮点击信号到槽函数
         Sort* sort = new Sort();
         connect(sortButton, QPushButton::clicked, this, &SortWidget::submitData);
@@ -207,15 +226,38 @@ public:
         connect(dslsort, DSLSort::sendSEQ, this, &SortWidget::DSLcreatSEQ);
         connect(dslsort, DSLSort::sendSelectSort, this, &SortWidget::DSLSelectSort);
 
+        //自然语言
+        ntod = new NaturalLanguageToDSL();
+        connect(naturalButton, QPushButton::clicked, this, &SortWidget::executeNatural);
+        connect(this, &SortWidget::sendNatural, ntod, &NaturalLanguageToDSL::execute);
+        connect(ntod, NaturalLanguageToDSL::sendDSL, this, &SortWidget::showNaturalToDSL);
     }
 
 
 signals:
     void sendData(QString,int,int);
     void sendDataDSL(const string&);
+    void applyAPI();
+    void sendNatural(string);
 
 
-private slots:
+public slots:
+
+    //自然语言相关
+    void setAPI(QString getapi) {
+        APIkey = getapi;
+        ntod->setApiKey(APIkey.toStdWString());
+    }
+
+    void executeNatural() {
+        emit sendNatural(naturalEdit->toPlainText().toStdString());
+
+    }
+
+    void showNaturalToDSL(QString str) {
+        DSLEdit->setText(str);
+        executeDSL();
+    }
 
     //DSL相关
     void executeDSL() {
@@ -497,6 +539,11 @@ private:
 
     QPushButton *DSLButton;
     QTextEdit *DSLEdit;
+    QPushButton *naturalButton;
+    QTextEdit *naturalEdit;
+
+    NaturalLanguageToDSL* ntod;
+    QString APIkey;
 };
 
 #include "main.moc"

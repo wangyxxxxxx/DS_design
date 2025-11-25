@@ -27,12 +27,16 @@ add_executable(DS_d1 main.cpp
         GraphStruct.h
         DSLFunctionSort.h
         DSLFunctionGraph.h
+        NaturalLanguageToDSL.h
 )
 target_link_libraries(DS_d1
   Qt::Core
   Qt::Gui
   Qt::Widgets
+  winhttp
+  ws2_32
 )
+
 
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     set(DEBUG_SUFFIX)

@@ -6,6 +6,7 @@
 #include "EWIEGA46WW/moc_GraphStruct.cpp"
 #include "EWIEGA46WW/moc_GraphWidget.cpp"
 #include "EWIEGA46WW/moc_MainWindow.cpp"
+#include "EWIEGA46WW/moc_NaturalLanguageToDSL.cpp"
 #include "EWIEGA46WW/moc_Sort.cpp"
 #include "EWIEGA46WW/moc_SortWidget.cpp"
 #include "EWIEGA46WW/moc_Vertex.cpp"

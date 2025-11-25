@@ -42,6 +42,15 @@ public:
         QWidget *centralWidget = new QWidget(this);
         setCentralWidget(centralWidget);
 
+        QLabel *apilabel = new QLabel("设置 API :");
+        apiEdit = new QTextEdit("sk-c9e63545f5f7482bb0c2683f692b2a73");
+        apiEdit->setFixedHeight(30);
+        sendapiButton = new QPushButton("设置");
+        QHBoxLayout *apilayout = new QHBoxLayout();
+        apilayout->addWidget(apilabel);
+        apilayout->addWidget(apiEdit);
+        apilayout->addWidget(sendapiButton);
+
         // 创建选项卡控件
         tabWidget = new QTabWidget(centralWidget);
 
@@ -51,6 +60,7 @@ public:
         // 创建第二个选项卡页面
         tab2 = new GraphWidget();
 
+
         // 将选项卡添加到选项卡控件
         tabWidget->addTab(tab1, "排序算法演示");
         tabWidget->addTab(tab2, "图形结构演示");
@@ -58,15 +68,29 @@ public:
         // 设置中央部件的布局
         QVBoxLayout *mainLayout = new QVBoxLayout(centralWidget);
         mainLayout->addWidget(tabWidget);
+        mainLayout->addLayout(apilayout);
         centralWidget->setLayout(mainLayout);
 
+        connect(sendapiButton, QPushButton::clicked, this, &MainWindow::sendAPI);
+        connect(this, &MainWindow::sendapi, tab1, &SortWidget::setAPI);
     }
 
+public slots:
+    void sendAPI() {
+        emit sendapi(apiEdit->toPlainText());
+    }
+
+signals:
+    void sendapi(QString);
 
 
+private:
     QTabWidget *tabWidget;
-    QWidget *tab1;
+    SortWidget *tab1;
     QWidget *tab2;
+
+    QTextEdit *apiEdit;
+    QPushButton *sendapiButton;
 
 };
 
