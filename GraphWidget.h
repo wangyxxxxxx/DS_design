@@ -656,12 +656,16 @@ public slots:
             delete structarrowlist.takeAt(0);
         }
 
-        string temp;
+        string temp="";
 
         for (std::size_t i = 0; i < str.length(); i++) {
 
             if (i==0) {
-                temp = str[0];
+
+                temp="";
+                i++;
+                while (str[i]!=')'){temp+=str[i]; i++;}
+
                 structnode = new StructNode(structx,structy,QString::fromStdString(temp));
                 scene2->addItem(structnode);
                 structnodelist.append(structnode);
@@ -673,7 +677,11 @@ public slots:
                 structy = structy + 100;
                 structx = 0;
                 i++;
-                temp = str[i];
+
+                temp="";
+                i++;
+                while (str[i]!=')'){temp+=str[i]; i++;}
+
                 structnode = new StructNode(structx,structy,QString::fromStdString(temp));
                 structnodelist.append(structnode);
                 scene2->addItem(structnode);
@@ -681,14 +689,21 @@ public slots:
                 continue;
             }
 
-            string num,weight;
+            string num="";
+            string weight="";
 
             if (str[i] == '>' ) {
                 structx = structx + 200;
                 i++;
-                num = str[i];
+
+                num="";
+                i++;
+                while (str[i]!=')'){num+=str[i]; i++;}
+
                 i = i + 2;
-                weight = str[i];
+                weight="";
+                i++;
+                while (str[i]!=']'){weight+=str[i]; i++;}
 
 
 
@@ -732,7 +747,7 @@ public slots:
              delete structmatrixlist.takeAt(0);
          }
 
-        string temp;
+        string temp="";
 
         for (std::size_t i = 0; i < str.length(); i++) {
 
@@ -744,7 +759,9 @@ public slots:
 
             if (str[i] == ',' ) {
                 i++;
-                temp = str[i];
+                temp="";
+                i++;
+                while (str[i]!=')'){temp+=str[i]; i++;}
                 structx = structx + 50;
                 structmatrix = new StructMatrixRect(structx,structy,QString::fromStdString(temp),"yellow");
                 scene3->addItem(structmatrix);
@@ -757,7 +774,9 @@ public slots:
                 structy = structy + 50;
                 structx = 0;
                 i++;
-                temp = str[i];
+                temp="";
+                i++;
+                while (str[i]!=')'){temp+=str[i]; i++;}
                 structmatrix = new StructMatrixRect(structx,structy,QString::fromStdString(temp),"yellow");
                 scene3->addItem(structmatrix);
                 structmatrixlist.append(structmatrix);
@@ -767,7 +786,9 @@ public slots:
 
             if (str[i] == '<' ) {
                 i++;
-                temp = str[i];
+                temp="";
+                i++;
+                while (str[i]!=']'){temp+=str[i]; i++;}
                 structx = structx + 50;
                 structmatrix = new StructMatrixRect(structx,structy,QString::fromStdString(temp),"white");
                 scene3->addItem(structmatrix);
