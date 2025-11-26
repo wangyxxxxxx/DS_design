@@ -1,9 +1,3 @@
-//
-// Created by 王雨轩 on 25-11-25.
-//
-
-#ifndef NATURALLANGUAGETODSL_H
-#define NATURALLANGUAGETODSL_H
 
 #include <windows.h>
 #include <winhttp.h>
@@ -15,20 +9,25 @@
 #include <sstream>
 #include <regex>
 #include <algorithm>
-
+#pragma once
 #pragma comment(lib, "winhttp.lib")
 
-class NaturalLanguageToDSL : public QObject {
+
+class NaturalLanguageToDSL : public QObject{
     Q_OBJECT
 private:
     std::wstring api_key;
     std::wstring api_url = L"https://api.deepseek.com/v1/chat/completions";
 
-    // 关键词映射表
+    // 更新关键词映射表，添加新算法命令
     std::map<std::string, std::vector<std::string>> keyword_mapping = {
         // 排序相关
         {"序列", {"seq"}}, {"数列", {"seq"}}, {"数组", {"seq"}}, {"数据", {"seq"}},
         {"插入排序", {"IS"}}, {"选择排序", {"SS"}}, {"快速排序", {"QS"}}, {"冒泡排序", {"BS"}}, {"排序", {"IS"}},
+
+        // 图方向设置
+        {"有向图", {"direct"}}, {"无向图", {"direct"}}, {"有向", {"direct"}}, {"无向", {"direct"}},
+        {"方向", {"direct"}}, {"设置方向", {"direct"}},
 
         // 图顶点操作
         {"顶点", {"addv"}}, {"节点", {"addv"}}, {"添加顶点", {"addv"}}, {"增加顶点", {"addv"}}, {"创建顶点", {"addv"}},
@@ -40,13 +39,20 @@ private:
 
         // 图算法
         {"深度优先", {"DFS"}}, {"深度遍历", {"DFS"}}, {"广度优先", {"BFS"}}, {"广度遍历", {"BFS"}},
-        {"最小生成树", {"MST"}}, {"生成树", {"MST"}}, {"普里姆", {"MST"}}, {"克鲁斯卡尔", {"MST"}}
+        {"最小生成树", {"MST"}}, {"生成树", {"MST"}}, {"普里姆", {"Prim"}}, {"克鲁斯卡尔", {"Kruskal"}},
+        {"迪杰斯特拉", {"Dijkstra"}}, {"最短路径", {"Dijkstra"}}
     };
 
 public:
     NaturalLanguageToDSL(const std::wstring& key = L"") : api_key(key) {}
 
-    // 设置API密钥（使用std::wstring）
+    // 设置API密钥 - 接受QString
+    void setApiKey(const QString& key) {
+        api_key = key.toStdWString();
+        std::cout << "API密钥已设置" << std::endl;
+    }
+
+    // 设置API密钥 - 接受std::wstring
     void setApiKey(const std::wstring& key) {
         api_key = key;
         std::cout << "API密钥已设置" << std::endl;
@@ -197,6 +203,22 @@ private:
         return "";
     }
 
+    // 构建API请求JSON - 更新system prompt以包含新命令
+    std::string buildRequestJSON(const std::string& natural_language) {
+        std::stringstream json;
+        json << "{";
+        json << "\"model\": \"deepseek-chat\",";
+        json << "\"messages\": [";
+        json << "{\"role\": \"system\", \"content\": \"将以下自然语言翻译为排序和图算法的DSL代码。DSL命令包括：\\n排序：seq [数字] - 创建序列，IS - 插入排序，SS - 选择排序，QS - 快速排序\\n图：direct [0/1] - 设置图方向（0无向，1有向），addv [顶点名] - 添加顶点，delv [顶点名] - 删除顶点，adde [起点] [终点] [权重] - 添加边，dele [起点] [终点] - 删除边，DFS [起点] - 深度优先搜索，BFS [起点] - 广度优先搜索，Prim - 普里姆算法，Kruskal - 克鲁斯卡尔算法，Dijkstra - 迪杰斯特拉算法\\n只输出DSL代码，每行一条命令。\"},";
+        json << "{\"role\": \"user\", \"content\": \"" << escapeJSON(natural_language) << "\"}";
+        json << "],";
+        json << "\"temperature\": 0.1,";
+        json << "\"max_tokens\": 1000";
+        json << "}";
+
+        return json.str();
+    }
+
     // 读取响应数据
     std::string readResponseData(HINTERNET hRequest) {
         std::string response;
@@ -227,22 +249,6 @@ private:
         } while (dwSize > 0);
 
         return response;
-    }
-
-    // 构建API请求JSON
-    std::string buildRequestJSON(const std::string& natural_language) {
-        std::stringstream json;
-        json << "{";
-        json << "\"model\": \"deepseek-chat\",";
-        json << "\"messages\": [";
-        json << "{\"role\": \"system\", \"content\": \"将以下自然语言翻译为排序和图算法的DSL代码。DSL命令包括：\\n排序：seq [元素] [元素] ...- 用来创建序列,[元素]用来表示序列中的元素而不是元素个数，输出时元素不需要[]，有可能我会给你需要的元素个数但是不告诉你元素的具体数值，你要自己想清楚是要多少个元素，让你随机那你就不要生成有序序列了，IS - 插入排序，SS - 选择排序，QS - 快速排序\\n图：addv [顶点名] [顶点名] - 添加顶点，delv [顶点名] [顶点名] - 删除顶点，adde [起点] [终点] [权重] - 添加边，dele [起点] [终点] - 删除边，DFS [起点] - 深度优先搜索，BFS [起点] - 广度优先搜索，MST - 最小生成树\\n只输出DSL代码，每行一条命令。\"},";
-        json << "{\"role\": \"user\", \"content\": \"" << escapeJSON(natural_language) << "\"}";
-        json << "],";
-        json << "\"temperature\": 0.1,";
-        json << "\"max_tokens\": 1000";
-        json << "}";
-
-        return json.str();
     }
 
     // 解析API响应
@@ -290,13 +296,14 @@ private:
         return output.empty() ? "" : output;
     }
 
-    // 检查是否为有效的DSL命令
+    // 检查是否为有效的DSL命令 - 添加新命令
     bool isValidDSLCommand(const std::string& line) {
         if (line.empty() || line[0] == '#') return true;
 
         std::vector<std::string> valid_commands = {
             "seq", "IS", "SS", "QS", "BS",
-            "addv", "delv", "adde", "dele", "DFS", "BFS", "MST"
+            "direct", "addv", "delv", "adde", "dele",
+            "DFS", "BFS", "Prim", "Kruskal", "Dijkstra"
         };
 
         std::string first_word = line.substr(0, line.find(' '));
@@ -309,7 +316,7 @@ private:
         return false;
     }
 
-    // 关键词匹配翻译
+    // 关键词匹配翻译 - 添加新算法支持
     std::string fallbackTranslation(const std::string& natural_language) {
         std::cout << "正在使用关键词匹配..." << std::endl;
 
@@ -320,6 +327,15 @@ private:
 
         // 提取顶点名称
         std::vector<std::string> vertices = extractVertices(natural_language);
+
+        // 首先处理图方向设置
+        if (containsChinese(natural_language, "有向图") || containsChinese(natural_language, "有向")) {
+            dsl_code << "direct 1\n";
+            std::cout << "检测到有向图设置" << std::endl;
+        } else if (containsChinese(natural_language, "无向图") || containsChinese(natural_language, "无向")) {
+            dsl_code << "direct 0\n";
+            std::cout << "检测到无向图设置" << std::endl;
+        }
 
         // 根据关键词生成DSL代码
         if (containsChinese(natural_language, "序列") ||
@@ -396,10 +412,23 @@ private:
             std::cout << "检测到广度优先搜索命令" << std::endl;
         }
 
-        if (containsChinese(natural_language, "最小生成树") ||
+        // 新增算法命令
+        if (containsChinese(natural_language, "普里姆") ||
+            containsChinese(natural_language, "最小生成树") ||
             containsChinese(natural_language, "生成树")) {
-            dsl_code << "MST\n";
-            std::cout << "检测到最小生成树命令" << std::endl;
+            dsl_code << "Prim\n";
+            std::cout << "检测到普里姆算法命令" << std::endl;
+        }
+
+        if (containsChinese(natural_language, "克鲁斯卡尔")) {
+            dsl_code << "Kruskal\n";
+            std::cout << "检测到克鲁斯卡尔算法命令" << std::endl;
+        }
+
+        if (containsChinese(natural_language, "迪杰斯特拉") ||
+            containsChinese(natural_language, "最短路径")) {
+            dsl_code << "Dijkstra\n";
+            std::cout << "检测到迪杰斯特拉算法命令" << std::endl;
         }
 
         std::string result = dsl_code.str();
@@ -503,8 +532,8 @@ private:
     }
 
 
-public slots:
-    void execute(string str) {
+    public slots:
+        void execute(string str) {
 
         std::vector<std::string> lines;
 
@@ -519,12 +548,12 @@ public slots:
         string result="";
 
         for (const auto& test_case : lines) {
-                std::cout << "\n=========================================" << std::endl;
-                std::cout << "自然语言: " << str << std::endl;
-                std::string dsl_code = translate(str);
-                std::cout << "生成的DSL代码:\n" << dsl_code;
-                result += dsl_code + "\n";
-                std::cout << "=========================================" << std::endl;
+            std::cout << "\n=========================================" << std::endl;
+            std::cout << "自然语言: " << str << std::endl;
+            std::string dsl_code = translate(str);
+            std::cout << "生成的DSL代码:\n" << dsl_code;
+            result += dsl_code + "\n";
+            std::cout << "=========================================" << std::endl;
         }
 
         QString qstr = QString::fromStdString(escapeJSON(result));
@@ -536,10 +565,7 @@ public slots:
         emit sendDSL(qstr);
     }
 
-signals:
-     void sendDSL(QString);
-
+    signals:
+        void sendDSL(QString);
 };
 
-
-#endif //NATURALLANGUAGETODSL_H

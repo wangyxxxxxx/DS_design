@@ -175,11 +175,16 @@ private:
     vector<VertexBackend> vertexList;
     vector<EdgeBackend*> edgeList;
     int delay;
+    int isdirect;
 
 public:
-    AdjacencyList():delay(1000){}
+    AdjacencyList():delay(1000){isdirect=1;}
     ~AdjacencyList(){}
 public slots:
+    void setDirect(int d) {
+        isdirect=d;
+    }
+
     // 顶点操作
     void addVertex(QString vertexId) {
         VertexBackend vertex;
@@ -330,80 +335,152 @@ public slots:
     }
 
 
-    // // 遍历算法
+
     void DFT(QString startVertex) {
+        // 重置所有顶点和边的访问状态
+        for (auto& vertex : vertexList) {
+            vertex.visit = 0;
+        }
+        for (auto* edge : edgeList) {
+            edge->visit = 0;
+        }
+
         emit resetcolor();
 
-        stack<int> vs,ts;
+        vector<QString> result;
 
-        QString result="";
-
-        for(int i=0; i<vertexList.size(); i++) {
-            vertexList[i].visit = 0;
-        }
-
-        int startIndex = -1;
-        for(int i=0; i<vertexList.size(); i++) {
-            if(vertexList[i].data == startVertex) {
-                startIndex = i;
-                break;
+        // 如果有指定起始顶点，从该顶点开始
+        if (!startVertex.isEmpty()) {
+            int startIndex = findVertexIndex(startVertex);
+            if (startIndex >= vertexList.size()) {
+                emit showresult("起始顶点不存在！");
+                return;
             }
+
+            // 从指定顶点开始DFS
+            DFSFromVertex(startIndex, result);
         }
 
-
-        int out=0;
-        for (int i = startIndex; i != startIndex || out != 1 ; i++,i=i%vertexList.size()) {
-            if (i==startIndex-1 || i==startIndex-1+vertexList.size()) {out++;}
-
-            vs.push(i);
-            EdgeBackend* temp;
-            while (!vs.empty()) {
-
-                if (vertexList[vs.top()].visit == 1) {break;}
-                vertexList[vs.top()].visit = 1;
-
-                qDebug() << vertexList[vs.top()].data;
-                result+=vertexList[vs.top()].data + " ";
-                emit setvertexcolor(vertexList[vs.top()].data,"green");
-
-                // 非阻塞延时
+        // 遍历所有未访问的顶点（处理多个连通分支）
+        for (int i = 0; i < vertexList.size(); ++i) {
+            if (vertexList[i].visit == 0) {
+                // 非阻塞延时，区分不同连通分支
                 QEventLoop loop;
                 QTimer::singleShot(delay, &loop, &QEventLoop::quit);
                 loop.exec();
-                // 处理事件，保持UI响应
                 QCoreApplication::processEvents();
 
-                if (vertexList[vs.top()].firstarc == nullptr) {vs.pop();break;}
-                temp=vertexList[vs.top()].firstarc;
-                vs.pop();
-
-
-                while (temp!=nullptr) {
-                    for (int j=0; j<vertexList.size(); j++) {
-                        if (vertexList[j].data == temp->adjvex) {
-                            ts.push(j);
-                        }
-                    }
-                    temp=temp->nextarc;
-
-                }
-
-                while(!ts.empty()) {
-                    vs.push(ts.top());
-                    ts.pop();
-                }
-
-
+                // 开始新的连通分支
+                DFSFromVertex(i, result);
             }
-
-
-
-
-
         }
 
-        emit showresult(result);
+        // 显示遍历结果
+        QString traversalResult = "DFS遍历结果: ";
+        for (int i = 0; i < result.size(); ++i) {
+            traversalResult += result[i];
+            if (i < result.size() - 1) {
+                traversalResult += " -> ";
+            }
+        }
+        emit showresult(traversalResult);
+    }
 
+    // 从指定顶点开始DFS
+    void DFSFromVertex(int startIndex, vector<QString>& result) {
+        // 使用栈实现DFS
+        stack<int> vertexStack;
+
+        // 访问起始顶点
+        vertexList[startIndex].visit = 1;
+        vertexStack.push(startIndex);
+        result.push_back(vertexList[startIndex].data);
+
+        // 设置起始顶点颜色
+        emit setvertexcolor(vertexList[startIndex].data, "green");
+
+        // 非阻塞延时
+        QEventLoop loop;
+        QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+        loop.exec();
+        QCoreApplication::processEvents();
+
+        while (!vertexStack.empty()) {
+            int currentIndex = vertexStack.top();
+            bool foundUnvisited = false;
+
+            // 遍历当前顶点的所有邻接边
+            EdgeBackend* currentEdge = vertexList[currentIndex].firstarc;
+            while (currentEdge != nullptr) {
+                // 找到邻接顶点的索引
+                int adjIndex = findVertexIndex(currentEdge->adjvex);
+
+                if (adjIndex < vertexList.size() && vertexList[adjIndex].visit == 0) {
+                    // 标记边为已访问
+                    currentEdge->visit = 1;
+
+                    // 对于无向图，需要同时标记反向边
+                    if (isdirect == 0) {
+                        markReverseEdge(currentEdge->from, currentEdge->adjvex);
+                    }
+
+                    // 访问邻接顶点
+                    vertexList[adjIndex].visit = 1;
+                    vertexStack.push(adjIndex);
+                    result.push_back(vertexList[adjIndex].data);
+
+
+
+                    // 非阻塞延时
+                    QEventLoop loop;
+                    QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+                    loop.exec();
+                    QCoreApplication::processEvents();
+
+                    emit setvertexcolor(vertexList[adjIndex].data, "green");
+
+                    // 非阻塞延时
+                    QEventLoop loop2;
+                    QTimer::singleShot(delay, &loop2, &QEventLoop::quit);
+                    loop2.exec();
+                    QCoreApplication::processEvents();
+
+                    foundUnvisited = true;
+                    break;
+                }
+                currentEdge = currentEdge->nextarc;
+            }
+
+            // 如果没有找到未访问的邻接顶点，则回溯
+            if (!foundUnvisited) {
+                vertexStack.pop();
+            }
+        }
+    }
+
+    // 辅助函数：标记反向边（用于无向图）
+    void markReverseEdge(QString from, QString to) {
+        // 找到to顶点的索引
+        int toIndex = findVertexIndex(to);
+        if (toIndex >= vertexList.size()) return;
+
+        // 在to顶点的边链表中找到指向from的边
+        EdgeBackend* edge = vertexList[toIndex].firstarc;
+        while (edge != nullptr) {
+            if (edge->adjvex == from) {
+                edge->visit = 1;
+                break;
+            }
+            edge = edge->nextarc;
+        }
+
+        // 同时在edgeList中标记
+        for (auto* e : edgeList) {
+            if (e->from == to && e->adjvex == from) {
+                e->visit = 1;
+                break;
+            }
+        }
     }
 
     void BFT(QString startVertex) {

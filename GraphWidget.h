@@ -15,6 +15,8 @@
 #include <QGraphicsItemGroup>
 #include <QGroupBox>
 #include <QComboBox>
+#include <QButtonGroup>
+#include <QRadioButton>
 #include <QTimer>
 #include <QMainWindow>
 #include <QVBoxLayout>
@@ -59,7 +61,22 @@ class GraphWidget : public QWidget {
 
 public :
     GraphWidget(QWidget *parent = nullptr) : QWidget(parent) {
+
+        isdirect=1;
+
         /////////////////////////////////////////////////////////////左侧控制区
+
+        //有无向图
+        QHBoxLayout *directlayout = new QHBoxLayout();
+        directbuttonGroup = new QButtonGroup();
+        // 创建两个单选按钮
+        optiondirect = new QRadioButton("有向图");
+        optionundirect = new QRadioButton("无向图");
+        directbuttonGroup->addButton(optiondirect);
+        directbuttonGroup->addButton(optionundirect);
+        directlayout->addWidget(optiondirect);
+        directlayout->addWidget(optionundirect);
+        optiondirect->setChecked(true);
 
         ////////////////////节点
         //节点输入框
@@ -125,7 +142,7 @@ public :
         chooseBox->addItem("请选择算法");
         chooseBox->addItem("深度优先遍历");
         chooseBox->addItem("广度优先遍历");
-        chooseBox->addItem("最小生成树");
+        chooseBox->addItem("Prim");
         chooseBox->setFixedHeight(30);
         chooseBox->setFixedWidth(210);
 
@@ -204,6 +221,7 @@ public :
 
         //////////////控制区总布局
         QVBoxLayout *controlLayout = new QVBoxLayout();
+        controlLayout->addLayout(directlayout);
         controlLayout->addWidget(vertexGroup);
         controlLayout->addWidget(edgeGroup);
         controlLayout->addWidget(algorithmGroup);
@@ -312,7 +330,7 @@ public :
         connect(adjacencylist,&AdjacencyList::setvertexcolor,this,&GraphWidget::setVertexColor);
         connect(adjacencylist,&AdjacencyList::setedgecolor,this,&GraphWidget::setEdgeColor);
 
-        connect(chooseBox,&QComboBox::currentIndexChanged,this, &GraphWidget::changeEdgeArrow);
+        //connect(chooseBox,&QComboBox::currentIndexChanged,this, &GraphWidget::changeEdgeArrow);
 
         connect(this,&GraphWidget::sendDelay,adjacencylist,&AdjacencyList::changeDelay);
 
@@ -346,12 +364,18 @@ public :
         connect(dslgraph, DSLGraph::sendSelect, this, &GraphWidget::DSLSelect);
         connect(dslgraph, DSLGraph::delV, this, &GraphWidget::DSLdelVertex);
         connect(dslgraph, DSLGraph::delE, this, &GraphWidget::DSLdelEdge);
+        connect(dslgraph, DSLGraph::senddirect, this, &GraphWidget::DSLsetdirect);
 
         //自然语言
         ntod = new NaturalLanguageToDSL();
         connect(naturalButton, QPushButton::clicked, this, &GraphWidget::executeNatural);
         connect(this, &GraphWidget::sendNatural, ntod, &NaturalLanguageToDSL::execute);
         connect(ntod, NaturalLanguageToDSL::sendDSL, this, &GraphWidget::showNaturalToDSL);
+
+        //方向
+        connect(directbuttonGroup, QOverload<QAbstractButton *>::of(&QButtonGroup::buttonClicked),this, &GraphWidget::setDirect);
+        connect(this, &GraphWidget::sendDirect, adjacencylist, &AdjacencyList::setDirect);
+
     }
 
 
@@ -367,27 +391,48 @@ signals :
     void clear();
     void sendDataDSL(string);
     void sendNatural(string);
+    void sendDirect(int);
 
 
 public slots:
+    //方向
+    void setDirect() {
+        if (optiondirect->isChecked()) {
+            isdirect=1;
+            cout<<"有向图";
+        }else if (optionundirect->isChecked()) {
+            isdirect=0;
+            cout<<"无向图";
+        }
+        emit sendDirect(isdirect);
+    }
 
     //自然语言相关
     void setAPI(QString getapi) {
         APIkey = getapi;
-        ntod->setApiKey(APIkey.toStdWString());
+        ntod->setApiKey(APIkey);
     }
 
-        void executeNatural() {
+    void executeNatural() {
         emit sendNatural(naturalEdit->toPlainText().toStdString());
 
     }
 
-        void showNaturalToDSL(QString str) {
+    void showNaturalToDSL(QString str) {
         DSLEdit->setText(str);
         executeDSL();
     }
 
     //DSL相关
+    void DSLsetdirect(int d) {
+        isdirect=d;
+        if (isdirect==0) {
+            optionundirect -> setChecked(true);
+        }else if (isdirect==1) {
+            optiondirect -> setChecked(true);
+        }
+    }
+
     void executeDSL() {
         const string& code = DSLEdit->toPlainText().toStdString();
         emit sendDataDSL(code);
@@ -421,7 +466,7 @@ public slots:
             chooseBox->setCurrentIndex(1);
         }else if (s=="BFS") {
             chooseBox->setCurrentIndex(2);
-        }else if (s=="MST") {
+        }else if (s=="Prim") {
             chooseBox->setCurrentIndex(3);
         }
 
@@ -463,10 +508,10 @@ public slots:
     void addEdge() {
 
         bool hasArrow;
-        if (chooseBox->currentText() == "最小生成树") {
+        if (optionundirect->isChecked()) {
             hasArrow = false;
         }
-        else {
+        else if (optiondirect->isChecked()) {
             hasArrow = true;
         }
 
@@ -487,12 +532,19 @@ public slots:
             QMessageBox::warning(this, "错误", "未找到边");
             return;
         }
+
+
         edge=new Edge(vertexList.operator[](v1), vertexList.operator[](v2), edgeWeightEdit->text().toInt(),hasArrow);
         edgeList.append(edge);
         scene->addItem(edge);
-
         emit sendEdge(edgeEdit1->toPlainText(),edgeEdit2->toPlainText(),edgeWeightEdit->text().toInt());
-        //emit sendEdge(edgeEdit2->toPlainText(),edgeEdit1->toPlainText(),edgeWeightEdit->text().toInt());
+
+        if (isdirect==0) {
+            edge=new Edge(vertexList.operator[](v2), vertexList.operator[](v1), edgeWeightEdit->text().toInt(),hasArrow);
+            edgeList.append(edge);
+            emit sendEdge(edgeEdit2->toPlainText(),edgeEdit1->toPlainText(),edgeWeightEdit->text().toInt());
+        }
+
 
     }
 
@@ -524,6 +576,22 @@ public slots:
         }
 
         emit sendRemoveEdge(edgeEdit1->toPlainText(),edgeEdit2->toPlainText());
+
+        if (isdirect==0) {
+            i=0;
+            while (i<edgeList.size()) {
+                if (edgeList[i]->getStartVertex()->getNumber() == edgeEdit2->toPlainText() && edgeList[i]->getEndVertex()->getNumber() == edgeEdit1->toPlainText()) {
+                    delete edgeList.at(i);
+                    edgeList.removeAt(i);
+                }else {
+                    i++;
+                }
+            }
+
+            emit sendRemoveEdge(edgeEdit2->toPlainText(),edgeEdit1->toPlainText());
+        }
+
+
 
 
 }
@@ -565,7 +633,7 @@ public slots:
         emit sendDelay(delayEdit->text().toInt());
         if (chooseBox->currentText() == "深度优先遍历") {emit sendDFT(startEdit->toPlainText());}
         else if (chooseBox->currentText() == "广度优先遍历"){emit sendBFT(startEdit->toPlainText());}
-        else if (chooseBox->currentText() == "最小生成树") {emit sendMST(startEdit->toPlainText());}
+        else if (chooseBox->currentText() == "Prim") {emit sendMST(startEdit->toPlainText());}
 
     }
 
@@ -752,17 +820,6 @@ public slots:
 
     }
 
-    void changeEdgeArrow() {
-        if (chooseBox->currentText() == "最小生成树") {
-            for (int i = 0; i < edgeList.size(); ++i) {
-                edgeList[i]->setArrowEnabled(false);
-            }
-        }else {
-            for (int i = 0; i < edgeList.size(); ++i) {
-                edgeList[i]->setArrowEnabled(true);
-            }
-        }
-    }
 
     ////////////////文件
     bool saveData(const QString &fileName) {
@@ -778,6 +835,9 @@ public slots:
         // 写入文件标识
         out << QString("GRAPH_SORT_V1.0");
         qDebug() << "写入文件标识完成，数据流状态:" << out.status();
+
+        //保存是有向图还是无向图
+        out << isdirect;
 
         // 保存顶点数量
         int vertexCount = vertexList.size();
@@ -865,6 +925,9 @@ public slots:
     vertexList.clear();
     qDeleteAll(edgeList);
     edgeList.clear();
+
+    //读取是有向图还是无向图
+    in >> isdirect;
 
     // 读取顶点数量
     int vertexCount;
@@ -969,6 +1032,16 @@ public slots:
             clearall();
             if (loadData(fileName)) {
                 QMessageBox::information(this, "成功", "文件读取成功！");
+
+
+
+                if (isdirect==0) {
+                    optionundirect->setChecked(true);
+                }else if (isdirect==1) {
+                    optiondirect->setChecked(true);
+                }
+
+
                 showStruct(showlist.toStdString());
                 showMatrix(showmatrix.toStdString());
                 updateDisplay(); // 确保这个函数能正确更新显示
@@ -1069,6 +1142,12 @@ private:
 
     NaturalLanguageToDSL* ntod;
     QString APIkey;
+
+    QButtonGroup * directbuttonGroup;
+    QRadioButton *optiondirect;
+    QRadioButton *optionundirect;
+
+    int isdirect;
 
 };
 

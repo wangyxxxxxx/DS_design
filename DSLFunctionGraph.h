@@ -53,6 +53,9 @@ class DSLGraph :public QObject{
 public:
     DSLGraph() {
         // 使用 lambda 捕获 this 指针
+        commands["direct"] = [this](const std::vector<std::string>& args) {
+            this->setdirect(args);
+        };
         commands["addv"] = [this](const std::vector<std::string>& args) {
             this->creatVertex(args);
         };
@@ -65,8 +68,14 @@ public:
         commands["BFS"] = [this](const std::vector<std::string>& args) {
             this->executeBFS(args);
         };
-        commands["MST"] = [this](const std::vector<std::string>& args) {
-            this->executeMST(args);
+        commands["Prim"] = [this](const std::vector<std::string>& args) {
+            this->executePrim(args);
+        };
+        commands["Kruskal"] = [this](const std::vector<std::string>& args) {
+            this->executeKruskal(args);
+        };
+        commands["Dijkstra"] = [this](const std::vector<std::string>& args) {
+            this->executeDijkstra(args);
         };
         commands["delv"] = [this](const std::vector<std::string>& args) {
             this->deletVertex(args);
@@ -85,6 +94,17 @@ public slots:
 
 
     // 命令处理函数作为类的静态成员
+    void setdirect(const std::vector<std::string>& args) {
+
+
+        cout << "set direct :" << args[0];
+        emit senddirect(QString::fromStdString(args[0]).toInt());
+        cout << endl;
+
+
+
+    }
+
     void creatVertex(const std::vector<std::string>& args) {
 
 
@@ -158,9 +178,19 @@ public slots:
         emit sendSelect("BFS",temp);
     }
 
-    void executeMST(const std::vector<std::string>& args) {
-        cout << "execute command MST" << endl;
-        emit sendSelect("MST","");
+    void executePrim(const std::vector<std::string>& args) {
+        cout << "execute command Prim" << endl;
+        emit sendSelect("Prim","");
+    }
+
+    void executeKruskal(const std::vector<std::string>& args) {
+        cout << "execute command Kruskal" << endl;
+        emit sendSelect("Kruskal","");
+    }
+
+    void executeDijkstra(const std::vector<std::string>& args) {
+        cout << "execute command Dijkstra" << endl;
+        emit sendSelect("Dijkstra","");
     }
 
     // 执行DSL代码
@@ -211,6 +241,7 @@ signals:
     void sendE(QString,QString,QString);
     void delE(QString,QString);
     void sendSelect(QString,QString);
+    void senddirect(int);
 
 };
 

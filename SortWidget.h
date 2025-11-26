@@ -246,7 +246,7 @@ public slots:
     //自然语言相关
     void setAPI(QString getapi) {
         APIkey = getapi;
-        ntod->setApiKey(APIkey.toStdWString());
+        ntod->setApiKey(APIkey);
     }
 
     void executeNatural() {

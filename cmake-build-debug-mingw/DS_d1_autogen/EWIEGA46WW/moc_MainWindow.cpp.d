@@ -212,6 +212,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qwindowdefs.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qwindowdefs_win.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QApplication \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QButtonGroup \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QComboBox \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QFileDialog \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsEllipseItem \
@@ -232,6 +233,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QMenu \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QMessageBox \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QPushButton \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QRadioButton \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QTextEdit \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QVBoxLayout \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QWidget \
@@ -242,6 +244,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractspinbox.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qapplication.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qboxlayout.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qbuttongroup.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qcombobox.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qdialog.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qfiledialog.h \
@@ -262,6 +265,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qmenu.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qmessagebox.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qpushbutton.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qradiobutton.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qrubberband.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qscrollarea.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qsizepolicy.h \
