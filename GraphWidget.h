@@ -142,6 +142,7 @@ public :
         chooseBox->addItem("请选择算法");
         chooseBox->addItem("深度优先遍历");
         chooseBox->addItem("广度优先遍历");
+        chooseBox->addItem("Kruskal");
         chooseBox->addItem("Prim");
         chooseBox->setFixedHeight(30);
         chooseBox->setFixedWidth(210);
@@ -323,7 +324,8 @@ public :
         connect(traverseButton,&QPushButton::clicked,this, &GraphWidget::traverseGraph);
         connect(this,&GraphWidget::sendDFT,adjacencylist,&AdjacencyList::DFT);
         connect(this,&GraphWidget::sendBFT,adjacencylist,&AdjacencyList::BFT);
-        connect(this,&GraphWidget::sendMST,adjacencylist,&AdjacencyList::MST);
+        connect(this,&GraphWidget::sendKruskal,adjacencylist,&AdjacencyList::Kruskal);
+        connect(this,&GraphWidget::sendPrim,adjacencylist,&AdjacencyList::Prim);
         connect(adjacencylist,&AdjacencyList::showresult,this,&GraphWidget::showResult);
 
         connect(adjacencylist,&AdjacencyList::resetcolor,this,&GraphWidget::resetColor);
@@ -384,7 +386,8 @@ signals :
     void sendEdge(QString,QString,int);
     void sendDFT(QString);
     void sendBFT(QString);
-    void sendMST(QString);
+    void sendKruskal(QString);
+    void sendPrim(QString);
     void sendDelay(int);
     void sendRemoveVertex(QString);
     void sendRemoveEdge(QString,QString);
@@ -466,8 +469,10 @@ public slots:
             chooseBox->setCurrentIndex(1);
         }else if (s=="BFS") {
             chooseBox->setCurrentIndex(2);
-        }else if (s=="Prim") {
+        }else if (s=="Kruskal") {
             chooseBox->setCurrentIndex(3);
+        }else if (s=="Prim") {
+            chooseBox->setCurrentIndex(4);
         }
 
         startEdit->setText(v);
@@ -633,7 +638,8 @@ public slots:
         emit sendDelay(delayEdit->text().toInt());
         if (chooseBox->currentText() == "深度优先遍历") {emit sendDFT(startEdit->toPlainText());}
         else if (chooseBox->currentText() == "广度优先遍历"){emit sendBFT(startEdit->toPlainText());}
-        else if (chooseBox->currentText() == "Prim") {emit sendMST(startEdit->toPlainText());}
+        else if (chooseBox->currentText() == "Kruskal") {emit sendKruskal(startEdit->toPlainText());}
+        else if (chooseBox->currentText() == "Prim") {emit sendPrim(startEdit->toPlainText());}
 
     }
 
@@ -814,6 +820,10 @@ public slots:
             vertexList[i]->setColor("white");
         }
         scene->update();
+
+        for (int i = 0; i < edgeList.size(); i++) {
+            edgeList[i]->setLineColor("black");
+        }
     }
 
     void setVertexColor(QString vertex,QString color) {

@@ -575,67 +575,206 @@ public slots:
 
     }
 
-    void MST(QString startVertex) {
+    void Kruskal(QString startVertex) {
         emit resetcolor();
 
-        int minweight,minindex;
-        int sum=0;
+        // 1. 从邻接表中提取所有边
+        QVector<EdgeBackend*> allEdges;
+        QSet<QString> edgeSet; // 用于去重（无向图每条边存储了两次）
 
+        for(int i = 0; i < vertexList.size(); i++) {
+            EdgeBackend* edge = vertexList[i].firstarc;
+            while(edge != nullptr) {
+                // 使用排序的顶点名称作为键来去重
+                QString key1 = vertexList[i].data + "-" + edge->adjvex;
+                QString key2 = edge->adjvex + "-" + vertexList[i].data;
 
-        for(int i=0; i<vertexList.size(); i++) {
+                if(!edgeSet.contains(key1) && !edgeSet.contains(key2)) {
+                    allEdges.append(edge);
+                    edgeSet.insert(key1);
+                }
+                edge = edge->nextarc;
+            }
+        }
+
+        // 2. 初始化并查集
+        QVector<int> parent(vertexList.size());
+        for(int i = 0; i < vertexList.size(); i++) {
+            parent[i] = i;
+        }
+
+        // 查找函数（带路径压缩）
+        auto find = [&](int x) {
+            int root = x;
+            while(parent[root] != root) {
+                root = parent[root];
+            }
+
+            // 路径压缩
+            while(parent[x] != root) {
+                int next = parent[x];
+                parent[x] = root;
+                x = next;
+            }
+            return root;
+        };
+
+        // 3. 对边按权重排序
+        std::sort(allEdges.begin(), allEdges.end(),
+                  [](EdgeBackend* a, EdgeBackend* b) {
+                      return a->weight < b->weight;
+                  });
+
+        // 4. 重置访问状态
+        for(int i = 0; i < vertexList.size(); i++) {
             vertexList[i].visit = 0;
         }
-
-        for(int i=0; i<edgeList.size(); i++) {
-            edgeList[i]->visit = 0;
+        for(int i = 0; i < allEdges.size(); i++) {
+            allEdges[i]->visit = 0;
         }
 
+        int sum = 0;
+        int edgesSelected = 0;
+        int totalVertices = vertexList.size();
 
-        int out = 0;
-        while (out == 0){
+        // 5. Kruskal算法主循环
+        for(int i = 0; i < allEdges.size() && edgesSelected < totalVertices - 1; i++) {
+            EdgeBackend* edge = allEdges[i];
 
-            minweight=INT_MAX;
-            minindex = -1;
-
-            for (int i=0; i<edgeList.size(); i++) {
-                if (edgeList[i]->weight <minweight && edgeList[i]->visit == 0 ) {
-
-                    if (vertexList[findVertexIndex(edgeList[i]->from)].visit == 0 || vertexList[findVertexIndex(edgeList[i]->adjvex)].visit == 0) {
-                        minweight=edgeList[i]->weight;
-                        minindex=i;
-                    }
-                }
+            // 找到边的两个端点在vertexList中的索引
+            int u = -1, v = -1;
+            for(int j = 0; j < vertexList.size(); j++) {
+                if(vertexList[j].data == edge->from) u = j;
+                if(vertexList[j].data == edge->adjvex) v = j;
+                if(u != -1 && v != -1) break;
             }
 
-            edgeList[minindex]->visit = 1;
-            vertexList[findVertexIndex(edgeList[minindex]->from)].visit = 1;
-            vertexList[findVertexIndex(edgeList[minindex]->adjvex)].visit = 1;
-            sum+=edgeList[minindex]->weight;
-            emit setedgecolor(edgeList[minindex]->from,edgeList[minindex]->adjvex,"lightgreen");
+            if(u == -1 || v == -1) continue; // 顶点未找到，跳过
 
-            // 非阻塞延时
-            QEventLoop loop;
-            QTimer::singleShot(delay, &loop, &QEventLoop::quit);
-            loop.exec();
-            // 处理事件，保持UI响应
-            QCoreApplication::processEvents();
+            int rootU = find(u);
+            int rootV = find(v);
 
+            // 如果两个顶点不在同一集合中，选择这条边
+            if(rootU != rootV) {
+                // 合并集合
+                parent[rootV] = rootU;
 
-            //检查是否结束
-            int m;
-            for (m=0;m<vertexList.size();m++) {
-                if (vertexList[m].visit == 0) {break;}
+                edge->visit = 1;
+                sum += edge->weight;
+                edgesSelected++;
+
+                // 标记顶点为已访问（用于可视化）
+                vertexList[u].visit = 1;
+                vertexList[v].visit = 1;
+
+                // 可视化
+                emit setedgecolor(edge->from, edge->adjvex, "lightgreen");
+                emit setedgecolor(edge->adjvex, edge->from, "lightgreen");
+
+                // 非阻塞延时
+                QEventLoop loop;
+                QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+                loop.exec();
+
+                // 处理事件，保持UI响应
+                QCoreApplication::processEvents();
             }
-            if (m==vertexList.size()) {out=1;}
-
-
         }
 
         emit showresult(QString::number(sum));
+    }
 
+    void Prim(QString startVertex) {
+        emit resetcolor();
 
+        // 检查是否为空图
+        if (vertexList.empty()) {
+            emit showresult("图为空！");
+            return;
+        }
 
+        // 找到起始顶点索引
+        int startIndex = findVertexIndex(startVertex);
+        if (startIndex >= vertexList.size()) {
+            emit showresult("起始顶点不存在！");
+            return;
+        }
 
+        int n = vertexList.size();
+        vector<int> key(n, INT_MAX);        // 存储顶点到MST的最小权值
+        vector<int> parent(n, -1);          // 存储MST中顶点的父节点
+        vector<bool> inMST(n, false);       // 标记顶点是否已在MST中
+
+        // 初始化起始顶点
+        key[startIndex] = 0;
+        parent[startIndex] = -1;
+
+        int totalWeight = 0;
+        int edgesSelected = 0;
+
+        // 需要选择n-1条边
+        for (int count = 0; count < n; count++) {
+            // 找到不在MST中且具有最小key值的顶点
+            int minKey = INT_MAX;
+            int u = -1;
+
+            for (int v = 0; v < n; v++) {
+                if (!inMST[v] && key[v] < minKey) {
+                    minKey = key[v];
+                    u = v;
+                }
+            }
+
+            if (u == -1) {
+                // 图不连通
+                emit showresult("图不连通，无法构建最小生成树！");
+                return;
+            }
+
+            // 将顶点u加入MST
+            inMST[u] = true;
+
+            // 如果不是起始顶点，标记对应的边并累加权值
+            if (parent[u] != -1) {
+                QString fromVertex = vertexList[parent[u]].data;
+                QString toVertex = vertexList[u].data;
+
+                emit setedgecolor(fromVertex, toVertex, "lightgreen");
+                emit setedgecolor(toVertex, fromVertex, "lightgreen");
+                // if (isdirect == 0) {
+                //     emit setedgecolor(toVertex, fromVertex, "lightgreen");
+                // }
+
+                totalWeight += key[u];
+                edgesSelected++;
+
+                // 非阻塞延时
+                QEventLoop loop;
+                QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+                loop.exec();
+                QCoreApplication::processEvents();
+            }
+
+            // 更新u的所有邻接顶点的key值
+            EdgeBackend* edge = vertexList[u].firstarc;
+            while (edge != nullptr) {
+                int v = findVertexIndex(edge->adjvex);
+
+                // 如果顶点v不在MST中，且当前边的权值小于已知的最小权值
+                if (!inMST[v] && edge->weight < key[v]) {
+                    key[v] = edge->weight;
+                    parent[v] = u;
+                }
+                edge = edge->nextarc;
+            }
+        }
+
+        // 检查是否成功构建MST
+        if (edgesSelected == n - 1) {
+            emit showresult("Prim算法最小生成树总权重: " + QString::number(totalWeight));
+        } else {
+            emit showresult("图不连通，无法构建最小生成树！");
+        }
     }
 
     int findVertexIndex(QString id) {
