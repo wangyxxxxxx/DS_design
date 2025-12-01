@@ -50,13 +50,14 @@ static constexpr auto qt_meta_stringdata_CLASSAdjacencyMatrixENDCLASS = QtMocHel
     "from",
     "to",
     "weight",
+    "setWeight",
     "removeEdge",
     "clearall",
     "showMatrix"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSAdjacencyMatrixENDCLASS_t {
-    uint offsetsAndSizes[30];
+    uint offsetsAndSizes[32];
     char stringdata0[16];
     char stringdata1[17];
     char stringdata2[1];
@@ -69,9 +70,10 @@ struct qt_meta_stringdata_CLASSAdjacencyMatrixENDCLASS_t {
     char stringdata9[5];
     char stringdata10[3];
     char stringdata11[7];
-    char stringdata12[11];
-    char stringdata13[9];
-    char stringdata14[11];
+    char stringdata12[10];
+    char stringdata13[11];
+    char stringdata14[9];
+    char stringdata15[11];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSAdjacencyMatrixENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -89,9 +91,10 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSAdjacencyMatrixENDCLASS_t qt_me
         QT_MOC_LITERAL(83, 4),  // "from"
         QT_MOC_LITERAL(88, 2),  // "to"
         QT_MOC_LITERAL(91, 6),  // "weight"
-        QT_MOC_LITERAL(98, 10),  // "removeEdge"
-        QT_MOC_LITERAL(109, 8),  // "clearall"
-        QT_MOC_LITERAL(118, 10)   // "showMatrix"
+        QT_MOC_LITERAL(98, 9),  // "setWeight"
+        QT_MOC_LITERAL(108, 10),  // "removeEdge"
+        QT_MOC_LITERAL(119, 8),  // "clearall"
+        QT_MOC_LITERAL(128, 10)   // "showMatrix"
     },
     "AdjacencyMatrix",
     "showmatrixstruct",
@@ -105,6 +108,7 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSAdjacencyMatrixENDCLASS_t qt_me
     "from",
     "to",
     "weight",
+    "setWeight",
     "removeEdge",
     "clearall",
     "showMatrix"
@@ -119,7 +123,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSAdjacencyMatrixENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -127,15 +131,16 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSAdjacencyMatrixENDCLASS[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   56,    2, 0x06,    1 /* Public */,
+       1,    1,   62,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       4,    1,   59,    2, 0x0a,    3 /* Public */,
-       6,    1,   62,    2, 0x0a,    5 /* Public */,
-       8,    3,   65,    2, 0x0a,    7 /* Public */,
-      12,    2,   72,    2, 0x0a,   11 /* Public */,
-      13,    0,   77,    2, 0x0a,   14 /* Public */,
-      14,    0,   78,    2, 0x0a,   15 /* Public */,
+       4,    1,   65,    2, 0x0a,    3 /* Public */,
+       6,    1,   68,    2, 0x0a,    5 /* Public */,
+       8,    3,   71,    2, 0x0a,    7 /* Public */,
+      12,    3,   78,    2, 0x0a,   11 /* Public */,
+      13,    2,   85,    2, 0x0a,   15 /* Public */,
+      14,    0,   90,    2, 0x0a,   18 /* Public */,
+      15,    0,   91,    2, 0x0a,   19 /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
@@ -143,6 +148,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSAdjacencyMatrixENDCLASS[] = {
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    5,
     QMetaType::Void, QMetaType::QString,    7,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Int,    9,   10,   11,
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Int,    9,   10,   11,
     QMetaType::Void, QMetaType::QString, QMetaType::QString,    9,   10,
     QMetaType::Void,
@@ -174,6 +180,11 @@ Q_CONSTINIT const QMetaObject AdjacencyMatrix::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'setWeight'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'removeEdge'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
@@ -196,9 +207,10 @@ void AdjacencyMatrix::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 1: _t->addVertex((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 2: _t->removeVertex((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 3: _t->addEdge((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
-        case 4: _t->removeEdge((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
-        case 5: _t->clearall(); break;
-        case 6: _t->showMatrix(); break;
+        case 4: _t->setWeight((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
+        case 5: _t->removeEdge((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 6: _t->clearall(); break;
+        case 7: _t->showMatrix(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -232,13 +244,13 @@ int AdjacencyMatrix::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }
@@ -272,6 +284,7 @@ static constexpr auto qt_meta_stringdata_CLASSAdjacencyListENDCLASS = QtMocHelpe
     "from",
     "to",
     "weight",
+    "setWeight",
     "removeEdge2",
     "removeEdge1",
     "showList",
@@ -292,7 +305,7 @@ static constexpr auto qt_meta_stringdata_CLASSAdjacencyListENDCLASS = QtMocHelpe
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSAdjacencyListENDCLASS_t {
-    uint offsetsAndSizes[70];
+    uint offsetsAndSizes[72];
     char stringdata0[14];
     char stringdata1[11];
     char stringdata2[1];
@@ -311,23 +324,24 @@ struct qt_meta_stringdata_CLASSAdjacencyListENDCLASS_t {
     char stringdata15[5];
     char stringdata16[3];
     char stringdata17[7];
-    char stringdata18[12];
+    char stringdata18[10];
     char stringdata19[12];
-    char stringdata20[9];
+    char stringdata20[12];
     char stringdata21[9];
-    char stringdata22[4];
-    char stringdata23[12];
-    char stringdata24[14];
-    char stringdata25[11];
-    char stringdata26[17];
-    char stringdata27[7];
-    char stringdata28[16];
-    char stringdata29[4];
-    char stringdata30[8];
-    char stringdata31[5];
-    char stringdata32[16];
-    char stringdata33[3];
-    char stringdata34[12];
+    char stringdata22[9];
+    char stringdata23[4];
+    char stringdata24[12];
+    char stringdata25[14];
+    char stringdata26[11];
+    char stringdata27[17];
+    char stringdata28[7];
+    char stringdata29[16];
+    char stringdata30[4];
+    char stringdata31[8];
+    char stringdata32[5];
+    char stringdata33[16];
+    char stringdata34[3];
+    char stringdata35[12];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSAdjacencyListENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -351,23 +365,24 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSAdjacencyListENDCLASS_t qt_meta
         QT_MOC_LITERAL(137, 4),  // "from"
         QT_MOC_LITERAL(142, 2),  // "to"
         QT_MOC_LITERAL(145, 6),  // "weight"
-        QT_MOC_LITERAL(152, 11),  // "removeEdge2"
-        QT_MOC_LITERAL(164, 11),  // "removeEdge1"
-        QT_MOC_LITERAL(176, 8),  // "showList"
-        QT_MOC_LITERAL(185, 8),  // "clearall"
-        QT_MOC_LITERAL(194, 3),  // "DFT"
-        QT_MOC_LITERAL(198, 11),  // "startVertex"
-        QT_MOC_LITERAL(210, 13),  // "DFSFromVertex"
-        QT_MOC_LITERAL(224, 10),  // "startIndex"
-        QT_MOC_LITERAL(235, 16),  // "vector<QString>&"
-        QT_MOC_LITERAL(252, 6),  // "result"
-        QT_MOC_LITERAL(259, 15),  // "markReverseEdge"
-        QT_MOC_LITERAL(275, 3),  // "BFT"
-        QT_MOC_LITERAL(279, 7),  // "Kruskal"
-        QT_MOC_LITERAL(287, 4),  // "Prim"
-        QT_MOC_LITERAL(292, 15),  // "findVertexIndex"
-        QT_MOC_LITERAL(308, 2),  // "id"
-        QT_MOC_LITERAL(311, 11)   // "changeDelay"
+        QT_MOC_LITERAL(152, 9),  // "setWeight"
+        QT_MOC_LITERAL(162, 11),  // "removeEdge2"
+        QT_MOC_LITERAL(174, 11),  // "removeEdge1"
+        QT_MOC_LITERAL(186, 8),  // "showList"
+        QT_MOC_LITERAL(195, 8),  // "clearall"
+        QT_MOC_LITERAL(204, 3),  // "DFT"
+        QT_MOC_LITERAL(208, 11),  // "startVertex"
+        QT_MOC_LITERAL(220, 13),  // "DFSFromVertex"
+        QT_MOC_LITERAL(234, 10),  // "startIndex"
+        QT_MOC_LITERAL(245, 16),  // "vector<QString>&"
+        QT_MOC_LITERAL(262, 6),  // "result"
+        QT_MOC_LITERAL(269, 15),  // "markReverseEdge"
+        QT_MOC_LITERAL(285, 3),  // "BFT"
+        QT_MOC_LITERAL(289, 7),  // "Kruskal"
+        QT_MOC_LITERAL(297, 4),  // "Prim"
+        QT_MOC_LITERAL(302, 15),  // "findVertexIndex"
+        QT_MOC_LITERAL(318, 2),  // "id"
+        QT_MOC_LITERAL(321, 11)   // "changeDelay"
     },
     "AdjacencyList",
     "showresult",
@@ -387,6 +402,7 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSAdjacencyListENDCLASS_t qt_meta
     "from",
     "to",
     "weight",
+    "setWeight",
     "removeEdge2",
     "removeEdge1",
     "showList",
@@ -415,7 +431,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSAdjacencyListENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-      21,   14, // methods
+      22,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -423,29 +439,30 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSAdjacencyListENDCLASS[] = {
        5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,  140,    2, 0x06,    1 /* Public */,
-       3,    1,  143,    2, 0x06,    3 /* Public */,
-       5,    0,  146,    2, 0x06,    5 /* Public */,
-       6,    2,  147,    2, 0x06,    6 /* Public */,
-       7,    3,  152,    2, 0x06,    9 /* Public */,
+       1,    1,  146,    2, 0x06,    1 /* Public */,
+       3,    1,  149,    2, 0x06,    3 /* Public */,
+       5,    0,  152,    2, 0x06,    5 /* Public */,
+       6,    2,  153,    2, 0x06,    6 /* Public */,
+       7,    3,  158,    2, 0x06,    9 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       8,    1,  159,    2, 0x0a,   13 /* Public */,
-      10,    1,  162,    2, 0x0a,   15 /* Public */,
-      12,    1,  165,    2, 0x0a,   17 /* Public */,
-      14,    3,  168,    2, 0x0a,   19 /* Public */,
-      18,    2,  175,    2, 0x0a,   23 /* Public */,
-      19,    1,  180,    2, 0x0a,   26 /* Public */,
-      20,    0,  183,    2, 0x0a,   28 /* Public */,
-      21,    0,  184,    2, 0x0a,   29 /* Public */,
-      22,    1,  185,    2, 0x0a,   30 /* Public */,
-      24,    2,  188,    2, 0x0a,   32 /* Public */,
-      28,    2,  193,    2, 0x0a,   35 /* Public */,
-      29,    1,  198,    2, 0x0a,   38 /* Public */,
-      30,    1,  201,    2, 0x0a,   40 /* Public */,
-      31,    1,  204,    2, 0x0a,   42 /* Public */,
-      32,    1,  207,    2, 0x0a,   44 /* Public */,
-      34,    1,  210,    2, 0x0a,   46 /* Public */,
+       8,    1,  165,    2, 0x0a,   13 /* Public */,
+      10,    1,  168,    2, 0x0a,   15 /* Public */,
+      12,    1,  171,    2, 0x0a,   17 /* Public */,
+      14,    3,  174,    2, 0x0a,   19 /* Public */,
+      18,    3,  181,    2, 0x0a,   23 /* Public */,
+      19,    2,  188,    2, 0x0a,   27 /* Public */,
+      20,    1,  193,    2, 0x0a,   30 /* Public */,
+      21,    0,  196,    2, 0x0a,   32 /* Public */,
+      22,    0,  197,    2, 0x0a,   33 /* Public */,
+      23,    1,  198,    2, 0x0a,   34 /* Public */,
+      25,    2,  201,    2, 0x0a,   36 /* Public */,
+      29,    2,  206,    2, 0x0a,   39 /* Public */,
+      30,    1,  211,    2, 0x0a,   42 /* Public */,
+      31,    1,  214,    2, 0x0a,   44 /* Public */,
+      32,    1,  217,    2, 0x0a,   46 /* Public */,
+      33,    1,  220,    2, 0x0a,   48 /* Public */,
+      35,    1,  223,    2, 0x0a,   50 /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    2,
@@ -459,17 +476,18 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSAdjacencyListENDCLASS[] = {
     QMetaType::Void, QMetaType::QString,   11,
     QMetaType::Void, QMetaType::QString,   13,
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Int,   15,   16,   17,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Int,   15,   16,   17,
     QMetaType::Void, QMetaType::QString, QMetaType::QString,   15,   16,
     QMetaType::Void, QMetaType::QString,   13,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   23,
-    QMetaType::Void, QMetaType::Int, 0x80000000 | 26,   25,   27,
+    QMetaType::Void, QMetaType::QString,   24,
+    QMetaType::Void, QMetaType::Int, 0x80000000 | 27,   26,   28,
     QMetaType::Void, QMetaType::QString, QMetaType::QString,   15,   16,
-    QMetaType::Void, QMetaType::QString,   23,
-    QMetaType::Void, QMetaType::QString,   23,
-    QMetaType::Void, QMetaType::QString,   23,
-    QMetaType::Int, QMetaType::QString,   33,
+    QMetaType::Void, QMetaType::QString,   24,
+    QMetaType::Void, QMetaType::QString,   24,
+    QMetaType::Void, QMetaType::QString,   24,
+    QMetaType::Int, QMetaType::QString,   34,
     QMetaType::Void, QMetaType::Int,    9,
 
        0        // eod
@@ -511,6 +529,11 @@ Q_CONSTINIT const QMetaObject AdjacencyList::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         // method 'addEdge'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'setWeight'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
@@ -571,19 +594,20 @@ void AdjacencyList::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 6: _t->addVertex((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 7: _t->removeVertex((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 8: _t->addEdge((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
-        case 9: _t->removeEdge2((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
-        case 10: _t->removeEdge1((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 11: _t->showList(); break;
-        case 12: _t->clearall(); break;
-        case 13: _t->DFT((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 14: _t->DFSFromVertex((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<vector<QString>&>>(_a[2]))); break;
-        case 15: _t->markReverseEdge((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
-        case 16: _t->BFT((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 17: _t->Kruskal((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 18: _t->Prim((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 19: { int _r = _t->findVertexIndex((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
+        case 9: _t->setWeight((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
+        case 10: _t->removeEdge2((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 11: _t->removeEdge1((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 12: _t->showList(); break;
+        case 13: _t->clearall(); break;
+        case 14: _t->DFT((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 15: _t->DFSFromVertex((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<vector<QString>&>>(_a[2]))); break;
+        case 16: _t->markReverseEdge((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 17: _t->BFT((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 18: _t->Kruskal((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 19: _t->Prim((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 20: { int _r = _t->findVertexIndex((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 20: _t->changeDelay((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 21: _t->changeDelay((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -645,13 +669,13 @@ int AdjacencyList::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 21)
+        if (_id < 22)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 21;
+        _id -= 22;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 21)
+        if (_id < 22)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 21;
+        _id -= 22;
     }
     return _id;
 }

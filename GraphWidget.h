@@ -563,8 +563,10 @@ public slots:
         //判断是否已有该边
         for (int i = 0; i < edgeList.size(); ++i) {
             if (isdirect==1) {
-                if (edgeList[i]->getStartVertexNumber() == edgeEdit1->toPlainText()  &&  edgeList[i]->getEndVertexNumber() == edgeEdit2->toPlainText()) {
+                if (edgeList[i]->getStartVertex()->getNumber() == edgeEdit1->toPlainText()  &&  edgeList[i]->getEndVertex()->getNumber() == edgeEdit2->toPlainText()) {
+
                     if (QString::number(edgeList[i]->getWeight()) != edgeWeightEdit->text()) {
+
                         setWeight(edgeEdit1->toPlainText(),edgeEdit2->toPlainText(),edgeWeightEdit->text().toInt());
                         edgeList[i]->setWeight(edgeWeightEdit->text().toInt());
 
@@ -575,7 +577,7 @@ public slots:
                     break;
                 }
             }else if (isdirect==0) {
-                if (edgeList[i]->getStartVertexNumber() == edgeEdit1->toPlainText()  &&  edgeList[i]->getEndVertexNumber() == edgeEdit2->toPlainText()) {
+                if (edgeList[i]->getStartVertex()->getNumber() == edgeEdit1->toPlainText()  &&  edgeList[i]->getEndVertex()->getNumber() == edgeEdit2->toPlainText()) {
                     if (QString::number(edgeList[i]->getWeight()) != edgeWeightEdit->text()) {
                         setWeight(edgeEdit1->toPlainText(),edgeEdit2->toPlainText(),edgeWeightEdit->text().toInt());
                         edgeList[i]->setWeight(edgeWeightEdit->text().toInt());
@@ -583,7 +585,7 @@ public slots:
                     ifhaveweight++;
                 }
 
-                if (edgeList[i]->getStartVertexNumber() == edgeEdit2->toPlainText()  &&  edgeList[i]->getEndVertexNumber() == edgeEdit1->toPlainText()) {
+                if (edgeList[i]->getStartVertex()->getNumber() == edgeEdit2->toPlainText()  &&  edgeList[i]->getEndVertex()->getNumber() == edgeEdit1->toPlainText()) {
                     if (QString::number(edgeList[i]->getWeight()) != edgeWeightEdit->text()) {
                         setWeight(edgeEdit2->toPlainText(),edgeEdit1->toPlainText(),edgeWeightEdit->text().toInt());
                         edgeList[i]->setWeight(edgeWeightEdit->text().toInt());
@@ -617,7 +619,7 @@ public slots:
 
     void setWeight(QString from,QString to,int weight) {
         for (int i = 0; i < edgeList.size(); ++i) {
-            if (edgeList[i]->getStartVertexNumber() == from  &&  edgeList[i]->getEndVertexNumber() == to) {
+            if (edgeList[i]->getStartVertex()->getNumber() == from  &&  edgeList[i]->getEndVertex()->getNumber() == to) {
                 edgeList[i]->setWeight(weight);
                 emit setweight(from,to,weight);
             }
