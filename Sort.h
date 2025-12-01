@@ -257,8 +257,11 @@ class Sort : public QObject {
                         QCoreApplication::processEvents();
                     }
                     if (i < j) {
+                        int temp = arr[i];
                         arr[i] = arr[j];
                         emit numSwap(j,i,1,1);
+                        arr[j] = temp;
+                        emit numSwap(temp,j,0,1);
                         i++;
 
                         emit setColor(templ,0);
@@ -289,8 +292,11 @@ class Sort : public QObject {
                         QCoreApplication::processEvents();
                     }
                     if (i < j) {
+                        int temp = arr[j];
                         arr[j] = arr[i];
                         emit numSwap(i,j,1,1);
+                        arr[i] = temp;
+                        emit numSwap(temp,i,0,1);
                         j--;
                         emit setColor(temph,0);
                         temph = j;
