@@ -332,7 +332,6 @@ public :
         connect(adjacencylist,&AdjacencyList::setvertexcolor,this,&GraphWidget::setVertexColor);
         connect(adjacencylist,&AdjacencyList::setedgecolor,this,&GraphWidget::setEdgeColor);
 
-        //connect(chooseBox,&QComboBox::currentIndexChanged,this, &GraphWidget::changeEdgeArrow);
 
         connect(this,&GraphWidget::sendDelay,adjacencylist,&AdjacencyList::changeDelay);
 
@@ -378,6 +377,10 @@ public :
         connect(directbuttonGroup, QOverload<QAbstractButton *>::of(&QButtonGroup::buttonClicked),this, &GraphWidget::setDirect);
         connect(this, &GraphWidget::sendDirect, adjacencylist, &AdjacencyList::setDirect);
 
+        //更改边权重
+        connect(this,&GraphWidget::setweight,adjacencylist,&AdjacencyList::setWeight);
+        connect(this,&GraphWidget::setweight,adjacencymatrix,&AdjacencyMatrix::setWeight);
+
     }
 
 
@@ -395,6 +398,7 @@ signals :
     void sendDataDSL(string);
     void sendNatural(string);
     void sendDirect(int);
+    void setweight(QString,QString,int);
 
 
 public slots:
@@ -536,6 +540,7 @@ public slots:
         }
 
 
+
         int v1=-1;
         int v2=-1;
         for (int i = 0; i < vertexList.size(); ++i) {
@@ -548,10 +553,52 @@ public slots:
             }
         }
 
+
         if (v1==-1 || v2==-1) {
             QMessageBox::warning(this, "错误", "未找到边");
             return;
         }
+
+        int ifhaveweight=0;
+        //判断是否已有该边
+        for (int i = 0; i < edgeList.size(); ++i) {
+            if (isdirect==1) {
+                if (edgeList[i]->getStartVertexNumber() == edgeEdit1->toPlainText()  &&  edgeList[i]->getEndVertexNumber() == edgeEdit2->toPlainText()) {
+                    if (QString::number(edgeList[i]->getWeight()) != edgeWeightEdit->text()) {
+                        setWeight(edgeEdit1->toPlainText(),edgeEdit2->toPlainText(),edgeWeightEdit->text().toInt());
+                        edgeList[i]->setWeight(edgeWeightEdit->text().toInt());
+
+                    }else {
+                        QMessageBox::warning(this, "错误", "边已存在");
+                    }
+                    ifhaveweight++;
+                    break;
+                }
+            }else if (isdirect==0) {
+                if (edgeList[i]->getStartVertexNumber() == edgeEdit1->toPlainText()  &&  edgeList[i]->getEndVertexNumber() == edgeEdit2->toPlainText()) {
+                    if (QString::number(edgeList[i]->getWeight()) != edgeWeightEdit->text()) {
+                        setWeight(edgeEdit1->toPlainText(),edgeEdit2->toPlainText(),edgeWeightEdit->text().toInt());
+                        edgeList[i]->setWeight(edgeWeightEdit->text().toInt());
+                    }
+                    ifhaveweight++;
+                }
+
+                if (edgeList[i]->getStartVertexNumber() == edgeEdit2->toPlainText()  &&  edgeList[i]->getEndVertexNumber() == edgeEdit1->toPlainText()) {
+                    if (QString::number(edgeList[i]->getWeight()) != edgeWeightEdit->text()) {
+                        setWeight(edgeEdit2->toPlainText(),edgeEdit1->toPlainText(),edgeWeightEdit->text().toInt());
+                        edgeList[i]->setWeight(edgeWeightEdit->text().toInt());
+
+
+                    }else {
+                        QMessageBox::warning(this, "错误", "边已存在");
+                    }
+                    ifhaveweight++;
+
+                }
+            }
+        }
+
+        if (ifhaveweight!=0) {return;}
 
 
         edge=new Edge(vertexList.operator[](v1), vertexList.operator[](v2), edgeWeightEdit->text().toInt(),hasArrow);
@@ -565,6 +612,16 @@ public slots:
             emit sendEdge(edgeEdit2->toPlainText(),edgeEdit1->toPlainText(),edgeWeightEdit->text().toInt());
         }
 
+
+    }
+
+    void setWeight(QString from,QString to,int weight) {
+        for (int i = 0; i < edgeList.size(); ++i) {
+            if (edgeList[i]->getStartVertexNumber() == from  &&  edgeList[i]->getEndVertexNumber() == to) {
+                edgeList[i]->setWeight(weight);
+                emit setweight(from,to,weight);
+            }
+        }
 
     }
 

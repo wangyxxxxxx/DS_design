@@ -82,6 +82,22 @@ public slots:
         showMatrix();
     }
 
+    void setWeight(QString from,QString to,int weight) {
+        int m,n;
+        for(int i=0;i<vertexList.size();i++) {
+            if(vertexList[i] == from) {
+                m=i;
+            }
+
+            if(vertexList[i] == to) {
+                n=i;
+            }
+        }
+
+        matrix[m][n]=weight;
+        showMatrix();
+    }
+
     void removeEdge(QString from,QString to) {
         int i,j;
         for(i=0;i<vertexList.size()-1;i++) {
@@ -227,6 +243,18 @@ public slots:
 
         edgeList.push_back(edge);
 
+        showList();
+    }
+    void setWeight(QString from,QString to,int weight) {
+
+        for(int i=0;i<edgeList.size();i++) {
+            if (edgeList[i]->from == from && edgeList[i]->adjvex == to) {
+
+                edgeList[i]->weight = weight;
+                break;
+            }
+
+        }
         showList();
     }
     void removeEdge2(QString from,QString to) {
