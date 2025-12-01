@@ -209,7 +209,7 @@ private:
         json << "{";
         json << "\"model\": \"deepseek-chat\",";
         json << "\"messages\": [";
-        json << "{\"role\": \"system\", \"content\": \"将以下自然语言翻译为排序和图算法的DSL代码。DSL命令包括：\\n排序：seq [数字] - 创建序列，IS - 插入排序，SS - 选择排序，QS - 快速排序\\n图：direct [0/1] - 设置图方向（0无向，1有向），addv [顶点名] - 添加顶点，delv [顶点名] - 删除顶点，adde [起点] [终点] [权重] - 添加边，dele [起点] [终点] - 删除边，DFS [起点] - 深度优先搜索，BFS [起点] - 广度优先搜索，Prim - 普里姆算法，Kruskal - 克鲁斯卡尔算法，Dijkstra - 迪杰斯特拉算法\\n只输出DSL代码，每行一条命令。\"},";
+        json << "{\"role\": \"system\", \"content\": \"将以下自然语言翻译为排序和图算法的DSL代码。DSL命令包括：\\n排序：seq [数字] - 创建序列，IS - 插入排序，SS - 选择排序，QS - 快速排序\\n图：direct [0/1] - 设置图方向（0无向，1有向），addv [顶点名] - 添加顶点，delv [顶点名] - 删除顶点，adde [起点] [终点] [权重] - 添加边，dele [起点] [终点] - 删除边，DFS [起点] - 深度优先搜索，BFS [起点] - 广度优先搜索，Prim [起点] - 普里姆算法，Kruskal - 克鲁斯卡尔算法，Dijkstra - 迪杰斯特拉算法\\n只输出DSL代码，每行一条命令。\"},";
         json << "{\"role\": \"user\", \"content\": \"" << escapeJSON(natural_language) << "\"}";
         json << "],";
         json << "\"temperature\": 0.1,";

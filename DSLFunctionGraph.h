@@ -179,8 +179,9 @@ public slots:
     }
 
     void executePrim(const std::vector<std::string>& args) {
+        QString temp=QString::fromStdString(args[0]);
         cout << "execute command Prim" << endl;
-        emit sendSelect("Prim","");
+        emit sendSelect("Prim",temp);
     }
 
     void executeKruskal(const std::vector<std::string>& args) {

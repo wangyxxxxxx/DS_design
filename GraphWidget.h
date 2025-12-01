@@ -417,7 +417,22 @@ public slots:
     }
 
     void executeNatural() {
-        emit sendNatural(naturalEdit->toPlainText().toStdString());
+        string str="";
+        if (vertexList.size()!=0){str += "当前已有的顶点为 ";}
+
+        for (int i=0;i<vertexList.size();i++) {
+            str += vertexList[i]->getNumber().toStdString() + " ";
+        }
+
+        if (vertexList.size()!=0){str += "现在是";}
+        if (vertexList.size()!=0&&isdirect==1) {str+="有向图";}
+        if (vertexList.size()!=0&&isdirect==0) {str+="无向图";}
+
+        if (vertexList.size()!=0){str += "(在需要让你创建顶点时注意以下要求如果未指定顶点编号时让你创建顶点，你创建的定点编号要接在已有的编号后；若指定编号则生成指定编号的顶点。严重注意！！！若没有让你创建顶点，那你千万不要创建顶点，就当我刚刚的那些要求没说过）。";}
+
+        str += naturalEdit->toPlainText().toStdString();
+
+        emit sendNatural(str);
 
     }
 
