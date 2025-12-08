@@ -805,6 +805,117 @@ public slots:
         }
     }
 
+        // Dijkstra 最短路径（适用于有向 / 无向图）
+    void Dijkstra(QString startVertex) {
+        if (vertexList.empty()) {
+            emit showresult("图为空！");
+            return;
+        }
+
+        int n = vertexList.size();
+        int start = findVertexIndex(startVertex);
+        if (start >= n) {
+            emit showresult("起始顶点不存在！");
+            return;
+        }
+
+        emit resetcolor();
+
+        const int INF = INT_MAX / 2;
+        vector<int> dist(n, INF);
+        vector<int> pre(n, -1);
+        vector<bool> used(n, false);
+
+        dist[start] = 0;
+        pre[start]  = start;
+
+        // ---------- 构造过程表字符串 ----------
+        // 约定格式：
+        // 第一段：列标题（所有顶点名），用逗号分隔，以 '@' 结束
+        // 后面每一段：行标题 + "#" + 每列内容（逗号分隔），再以 '@' 结束
+        // 例： "v1,v2,v3@初始状态#length:0 pre:v1,length:∞ pre:-,...@v1进入第一组#..."
+        QString table;
+
+        // 第一行：列标题（所有顶点名）
+        for (int i = 0; i < n; ++i) {
+            table += vertexList[i].data;
+            if (i != n - 1) table += ",";
+        }
+        table += "@";
+
+        auto appendRow = [&](const QString& rowTitle) {
+            table += rowTitle + "#";
+            for (int i = 0; i < n; ++i) {
+                QString cell;
+                if (dist[i] >= INF/2) {
+                    cell = "length:∞ pre:-";
+                } else {
+                    QString preName = (pre[i] == -1 ? "-" : vertexList[pre[i]].data);
+                    cell = QString("length:%1 pre:%2").arg(dist[i]).arg(preName);
+                }
+                table += cell;
+                if (i != n - 1) table += ",";
+            }
+            table += "@";
+        };
+
+        // 初始状态
+        appendRow("初始状态");
+
+        for (int step = 0; step < n; ++step) {
+            // 1. 选出未确定顶点中 dist 最小的顶点 u
+            int u = -1;
+            int best = INF;
+            for (int i = 0; i < n; ++i) {
+                if (!used[i] && dist[i] < best) {
+                    best = dist[i];
+                    u = i;
+                }
+            }
+            if (u == -1) break;   // 剩余顶点不可达
+
+            used[u] = true;
+
+            // 2. 以 u 为中介点松弛所有邻接点
+            EdgeBackend* e = vertexList[u].firstarc;
+            while (e != nullptr) {
+                int v = findVertexIndex(e->adjvex);
+                if (v < n && !used[v] && dist[u] < INF/2) {
+                    if (dist[u] + e->weight < dist[v]) {
+                        dist[v] = dist[u] + e->weight;
+                        pre[v]  = u;
+                    }
+                }
+                e = e->nextarc;
+            }
+
+            // 3. 记录这一轮进入“第一组”的顶点（即 u）
+            QString rowTitle = vertexList[u].data + " 进入第一组";
+            appendRow(rowTitle);
+
+            // 4. 可视化高亮当前确定的顶点
+            emit setvertexcolor(vertexList[u].data, "yellow");
+            QEventLoop loop;
+            QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+            loop.exec();
+            QCoreApplication::processEvents();
+        }
+
+        // 把过程表发给前端弹窗
+        emit showDijkstraProcess(table);
+
+        // 输出最终从起点到各点的最短距离
+        QString result = "Dijkstra 最短路径长度:\n";
+        for (int i = 0; i < n; ++i) {
+            result += vertexList[i].data + ": ";
+            if (dist[i] >= INF/2) result += "∞";
+            else result += QString::number(dist[i]);
+            result += "\n";
+        }
+        emit showresult(result);
+    }
+
+
     int findVertexIndex(QString id) {
         int i;
         for (i=0; i < vertexList.size(); i++) {
@@ -824,6 +935,7 @@ signals:
     void resetcolor();
     void setvertexcolor(QString,QString);
     void setedgecolor(QString,QString,const QColor&);
+    void showDijkstraProcess(QString);
 
 };
 

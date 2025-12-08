@@ -56,6 +56,7 @@ static constexpr auto qt_meta_stringdata_CLASSGraphWidgetENDCLASS = QtMocHelpers
     "sendNatural",
     "sendDirect",
     "setweight",
+    "sendDijkstra",
     "setDirect",
     "setAPI",
     "getapi",
@@ -92,6 +93,8 @@ static constexpr auto qt_meta_stringdata_CLASSGraphWidgetENDCLASS = QtMocHelpers
     "vertex",
     "color",
     "setEdgeColor",
+    "showDijkstraTable",
+    "tableStr",
     "saveData",
     "fileName",
     "saveFile",
@@ -104,7 +107,7 @@ static constexpr auto qt_meta_stringdata_CLASSGraphWidgetENDCLASS = QtMocHelpers
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSGraphWidgetENDCLASS_t {
-    uint offsetsAndSizes[124];
+    uint offsetsAndSizes[130];
     char stringdata0[12];
     char stringdata1[11];
     char stringdata2[1];
@@ -122,51 +125,54 @@ struct qt_meta_stringdata_CLASSGraphWidgetENDCLASS_t {
     char stringdata14[12];
     char stringdata15[11];
     char stringdata16[10];
-    char stringdata17[10];
-    char stringdata18[7];
+    char stringdata17[13];
+    char stringdata18[10];
     char stringdata19[7];
-    char stringdata20[15];
-    char stringdata21[17];
-    char stringdata22[4];
-    char stringdata23[13];
-    char stringdata24[2];
-    char stringdata25[11];
-    char stringdata26[13];
-    char stringdata27[2];
-    char stringdata28[13];
-    char stringdata29[11];
-    char stringdata30[5];
-    char stringdata31[3];
-    char stringdata32[7];
-    char stringdata33[11];
-    char stringdata34[10];
-    char stringdata35[2];
-    char stringdata36[10];
-    char stringdata37[13];
-    char stringdata38[8];
-    char stringdata39[10];
-    char stringdata40[12];
+    char stringdata20[7];
+    char stringdata21[15];
+    char stringdata22[17];
+    char stringdata23[4];
+    char stringdata24[13];
+    char stringdata25[2];
+    char stringdata26[11];
+    char stringdata27[13];
+    char stringdata28[2];
+    char stringdata29[13];
+    char stringdata30[11];
+    char stringdata31[5];
+    char stringdata32[3];
+    char stringdata33[7];
+    char stringdata34[11];
+    char stringdata35[10];
+    char stringdata36[2];
+    char stringdata37[10];
+    char stringdata38[13];
+    char stringdata39[8];
+    char stringdata40[10];
     char stringdata41[12];
-    char stringdata42[9];
-    char stringdata43[14];
-    char stringdata44[11];
+    char stringdata42[12];
+    char stringdata43[9];
+    char stringdata44[14];
     char stringdata45[11];
     char stringdata46[11];
-    char stringdata47[7];
-    char stringdata48[11];
-    char stringdata49[15];
-    char stringdata50[7];
-    char stringdata51[6];
-    char stringdata52[13];
-    char stringdata53[9];
-    char stringdata54[9];
+    char stringdata47[11];
+    char stringdata48[7];
+    char stringdata49[11];
+    char stringdata50[15];
+    char stringdata51[7];
+    char stringdata52[6];
+    char stringdata53[13];
+    char stringdata54[18];
     char stringdata55[9];
-    char stringdata56[19];
-    char stringdata57[8];
-    char stringdata58[7];
-    char stringdata59[9];
-    char stringdata60[9];
-    char stringdata61[14];
+    char stringdata56[9];
+    char stringdata57[9];
+    char stringdata58[9];
+    char stringdata59[19];
+    char stringdata60[8];
+    char stringdata61[7];
+    char stringdata62[9];
+    char stringdata63[9];
+    char stringdata64[14];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSGraphWidgetENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -189,51 +195,54 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSGraphWidgetENDCLASS_t qt_meta_s
         QT_MOC_LITERAL(137, 11),  // "sendNatural"
         QT_MOC_LITERAL(149, 10),  // "sendDirect"
         QT_MOC_LITERAL(160, 9),  // "setweight"
-        QT_MOC_LITERAL(170, 9),  // "setDirect"
-        QT_MOC_LITERAL(180, 6),  // "setAPI"
-        QT_MOC_LITERAL(187, 6),  // "getapi"
-        QT_MOC_LITERAL(194, 14),  // "executeNatural"
-        QT_MOC_LITERAL(209, 16),  // "showNaturalToDSL"
-        QT_MOC_LITERAL(226, 3),  // "str"
-        QT_MOC_LITERAL(230, 12),  // "DSLsetdirect"
-        QT_MOC_LITERAL(243, 1),  // "d"
-        QT_MOC_LITERAL(245, 10),  // "executeDSL"
-        QT_MOC_LITERAL(256, 12),  // "DSLaddVertex"
-        QT_MOC_LITERAL(269, 1),  // "v"
-        QT_MOC_LITERAL(271, 12),  // "DSLdelVertex"
-        QT_MOC_LITERAL(284, 10),  // "DSLaddEdge"
-        QT_MOC_LITERAL(295, 4),  // "from"
-        QT_MOC_LITERAL(300, 2),  // "to"
-        QT_MOC_LITERAL(303, 6),  // "weight"
-        QT_MOC_LITERAL(310, 10),  // "DSLdelEdge"
-        QT_MOC_LITERAL(321, 9),  // "DSLSelect"
-        QT_MOC_LITERAL(331, 1),  // "s"
-        QT_MOC_LITERAL(333, 9),  // "addVertex"
-        QT_MOC_LITERAL(343, 12),  // "removeVertex"
-        QT_MOC_LITERAL(356, 7),  // "addEdge"
-        QT_MOC_LITERAL(364, 9),  // "setWeight"
-        QT_MOC_LITERAL(374, 11),  // "removeEdge1"
-        QT_MOC_LITERAL(386, 11),  // "removeEdge2"
-        QT_MOC_LITERAL(398, 8),  // "clearall"
-        QT_MOC_LITERAL(407, 13),  // "traverseGraph"
-        QT_MOC_LITERAL(421, 10),  // "showStruct"
-        QT_MOC_LITERAL(432, 10),  // "showMatrix"
-        QT_MOC_LITERAL(443, 10),  // "showResult"
-        QT_MOC_LITERAL(454, 6),  // "result"
-        QT_MOC_LITERAL(461, 10),  // "resetColor"
-        QT_MOC_LITERAL(472, 14),  // "setVertexColor"
-        QT_MOC_LITERAL(487, 6),  // "vertex"
-        QT_MOC_LITERAL(494, 5),  // "color"
-        QT_MOC_LITERAL(500, 12),  // "setEdgeColor"
-        QT_MOC_LITERAL(513, 8),  // "saveData"
-        QT_MOC_LITERAL(522, 8),  // "fileName"
-        QT_MOC_LITERAL(531, 8),  // "saveFile"
-        QT_MOC_LITERAL(540, 18),  // "findVertexByNumber"
-        QT_MOC_LITERAL(559, 7),  // "Vertex*"
-        QT_MOC_LITERAL(567, 6),  // "number"
-        QT_MOC_LITERAL(574, 8),  // "loadData"
-        QT_MOC_LITERAL(583, 8),  // "openFile"
-        QT_MOC_LITERAL(592, 13)   // "updateDisplay"
+        QT_MOC_LITERAL(170, 12),  // "sendDijkstra"
+        QT_MOC_LITERAL(183, 9),  // "setDirect"
+        QT_MOC_LITERAL(193, 6),  // "setAPI"
+        QT_MOC_LITERAL(200, 6),  // "getapi"
+        QT_MOC_LITERAL(207, 14),  // "executeNatural"
+        QT_MOC_LITERAL(222, 16),  // "showNaturalToDSL"
+        QT_MOC_LITERAL(239, 3),  // "str"
+        QT_MOC_LITERAL(243, 12),  // "DSLsetdirect"
+        QT_MOC_LITERAL(256, 1),  // "d"
+        QT_MOC_LITERAL(258, 10),  // "executeDSL"
+        QT_MOC_LITERAL(269, 12),  // "DSLaddVertex"
+        QT_MOC_LITERAL(282, 1),  // "v"
+        QT_MOC_LITERAL(284, 12),  // "DSLdelVertex"
+        QT_MOC_LITERAL(297, 10),  // "DSLaddEdge"
+        QT_MOC_LITERAL(308, 4),  // "from"
+        QT_MOC_LITERAL(313, 2),  // "to"
+        QT_MOC_LITERAL(316, 6),  // "weight"
+        QT_MOC_LITERAL(323, 10),  // "DSLdelEdge"
+        QT_MOC_LITERAL(334, 9),  // "DSLSelect"
+        QT_MOC_LITERAL(344, 1),  // "s"
+        QT_MOC_LITERAL(346, 9),  // "addVertex"
+        QT_MOC_LITERAL(356, 12),  // "removeVertex"
+        QT_MOC_LITERAL(369, 7),  // "addEdge"
+        QT_MOC_LITERAL(377, 9),  // "setWeight"
+        QT_MOC_LITERAL(387, 11),  // "removeEdge1"
+        QT_MOC_LITERAL(399, 11),  // "removeEdge2"
+        QT_MOC_LITERAL(411, 8),  // "clearall"
+        QT_MOC_LITERAL(420, 13),  // "traverseGraph"
+        QT_MOC_LITERAL(434, 10),  // "showStruct"
+        QT_MOC_LITERAL(445, 10),  // "showMatrix"
+        QT_MOC_LITERAL(456, 10),  // "showResult"
+        QT_MOC_LITERAL(467, 6),  // "result"
+        QT_MOC_LITERAL(474, 10),  // "resetColor"
+        QT_MOC_LITERAL(485, 14),  // "setVertexColor"
+        QT_MOC_LITERAL(500, 6),  // "vertex"
+        QT_MOC_LITERAL(507, 5),  // "color"
+        QT_MOC_LITERAL(513, 12),  // "setEdgeColor"
+        QT_MOC_LITERAL(526, 17),  // "showDijkstraTable"
+        QT_MOC_LITERAL(544, 8),  // "tableStr"
+        QT_MOC_LITERAL(553, 8),  // "saveData"
+        QT_MOC_LITERAL(562, 8),  // "fileName"
+        QT_MOC_LITERAL(571, 8),  // "saveFile"
+        QT_MOC_LITERAL(580, 18),  // "findVertexByNumber"
+        QT_MOC_LITERAL(599, 7),  // "Vertex*"
+        QT_MOC_LITERAL(607, 6),  // "number"
+        QT_MOC_LITERAL(614, 8),  // "loadData"
+        QT_MOC_LITERAL(623, 8),  // "openFile"
+        QT_MOC_LITERAL(632, 13)   // "updateDisplay"
     },
     "GraphWidget",
     "sendVertex",
@@ -252,6 +261,7 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSGraphWidgetENDCLASS_t qt_meta_s
     "sendNatural",
     "sendDirect",
     "setweight",
+    "sendDijkstra",
     "setDirect",
     "setAPI",
     "getapi",
@@ -288,6 +298,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSGraphWidgetENDCLASS_t qt_meta_s
     "vertex",
     "color",
     "setEdgeColor",
+    "showDijkstraTable",
+    "tableStr",
     "saveData",
     "fileName",
     "saveFile",
@@ -308,61 +320,63 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSGraphWidgetENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-      45,   14, // methods
+      47,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-      14,       // signalCount
+      15,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,  284,    2, 0x06,    1 /* Public */,
-       3,    3,  287,    2, 0x06,    3 /* Public */,
-       4,    1,  294,    2, 0x06,    7 /* Public */,
-       5,    1,  297,    2, 0x06,    9 /* Public */,
-       6,    1,  300,    2, 0x06,   11 /* Public */,
-       7,    1,  303,    2, 0x06,   13 /* Public */,
-       8,    1,  306,    2, 0x06,   15 /* Public */,
-       9,    1,  309,    2, 0x06,   17 /* Public */,
-      10,    2,  312,    2, 0x06,   19 /* Public */,
-      11,    0,  317,    2, 0x06,   22 /* Public */,
-      12,    1,  318,    2, 0x06,   23 /* Public */,
-      14,    1,  321,    2, 0x06,   25 /* Public */,
-      15,    1,  324,    2, 0x06,   27 /* Public */,
-      16,    3,  327,    2, 0x06,   29 /* Public */,
+       1,    1,  296,    2, 0x06,    1 /* Public */,
+       3,    3,  299,    2, 0x06,    3 /* Public */,
+       4,    1,  306,    2, 0x06,    7 /* Public */,
+       5,    1,  309,    2, 0x06,    9 /* Public */,
+       6,    1,  312,    2, 0x06,   11 /* Public */,
+       7,    1,  315,    2, 0x06,   13 /* Public */,
+       8,    1,  318,    2, 0x06,   15 /* Public */,
+       9,    1,  321,    2, 0x06,   17 /* Public */,
+      10,    2,  324,    2, 0x06,   19 /* Public */,
+      11,    0,  329,    2, 0x06,   22 /* Public */,
+      12,    1,  330,    2, 0x06,   23 /* Public */,
+      14,    1,  333,    2, 0x06,   25 /* Public */,
+      15,    1,  336,    2, 0x06,   27 /* Public */,
+      16,    3,  339,    2, 0x06,   29 /* Public */,
+      17,    1,  346,    2, 0x06,   33 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-      17,    0,  334,    2, 0x0a,   33 /* Public */,
-      18,    1,  335,    2, 0x0a,   34 /* Public */,
-      20,    0,  338,    2, 0x0a,   36 /* Public */,
-      21,    1,  339,    2, 0x0a,   37 /* Public */,
-      23,    1,  342,    2, 0x0a,   39 /* Public */,
-      25,    0,  345,    2, 0x0a,   41 /* Public */,
-      26,    1,  346,    2, 0x0a,   42 /* Public */,
-      28,    1,  349,    2, 0x0a,   44 /* Public */,
-      29,    3,  352,    2, 0x0a,   46 /* Public */,
-      33,    2,  359,    2, 0x0a,   50 /* Public */,
-      34,    2,  364,    2, 0x0a,   53 /* Public */,
-      36,    0,  369,    2, 0x0a,   56 /* Public */,
-      37,    0,  370,    2, 0x0a,   57 /* Public */,
-      38,    0,  371,    2, 0x0a,   58 /* Public */,
-      39,    3,  372,    2, 0x0a,   59 /* Public */,
-      40,    1,  379,    2, 0x0a,   63 /* Public */,
-      41,    0,  382,    2, 0x0a,   65 /* Public */,
-      42,    0,  383,    2, 0x0a,   66 /* Public */,
-      43,    0,  384,    2, 0x0a,   67 /* Public */,
-      44,    1,  385,    2, 0x0a,   68 /* Public */,
-      45,    1,  388,    2, 0x0a,   70 /* Public */,
-      46,    1,  391,    2, 0x0a,   72 /* Public */,
-      48,    0,  394,    2, 0x0a,   74 /* Public */,
-      49,    2,  395,    2, 0x0a,   75 /* Public */,
-      52,    3,  400,    2, 0x0a,   78 /* Public */,
-      53,    1,  407,    2, 0x0a,   82 /* Public */,
-      55,    0,  410,    2, 0x0a,   84 /* Public */,
-      56,    1,  411,    2, 0x0a,   85 /* Public */,
-      59,    1,  414,    2, 0x0a,   87 /* Public */,
-      60,    0,  417,    2, 0x0a,   89 /* Public */,
-      61,    0,  418,    2, 0x0a,   90 /* Public */,
+      18,    0,  349,    2, 0x0a,   35 /* Public */,
+      19,    1,  350,    2, 0x0a,   36 /* Public */,
+      21,    0,  353,    2, 0x0a,   38 /* Public */,
+      22,    1,  354,    2, 0x0a,   39 /* Public */,
+      24,    1,  357,    2, 0x0a,   41 /* Public */,
+      26,    0,  360,    2, 0x0a,   43 /* Public */,
+      27,    1,  361,    2, 0x0a,   44 /* Public */,
+      29,    1,  364,    2, 0x0a,   46 /* Public */,
+      30,    3,  367,    2, 0x0a,   48 /* Public */,
+      34,    2,  374,    2, 0x0a,   52 /* Public */,
+      35,    2,  379,    2, 0x0a,   55 /* Public */,
+      37,    0,  384,    2, 0x0a,   58 /* Public */,
+      38,    0,  385,    2, 0x0a,   59 /* Public */,
+      39,    0,  386,    2, 0x0a,   60 /* Public */,
+      40,    3,  387,    2, 0x0a,   61 /* Public */,
+      41,    1,  394,    2, 0x0a,   65 /* Public */,
+      42,    0,  397,    2, 0x0a,   67 /* Public */,
+      43,    0,  398,    2, 0x0a,   68 /* Public */,
+      44,    0,  399,    2, 0x0a,   69 /* Public */,
+      45,    1,  400,    2, 0x0a,   70 /* Public */,
+      46,    1,  403,    2, 0x0a,   72 /* Public */,
+      47,    1,  406,    2, 0x0a,   74 /* Public */,
+      49,    0,  409,    2, 0x0a,   76 /* Public */,
+      50,    2,  410,    2, 0x0a,   77 /* Public */,
+      53,    3,  415,    2, 0x0a,   80 /* Public */,
+      54,    1,  422,    2, 0x0a,   84 /* Public */,
+      56,    1,  425,    2, 0x0a,   86 /* Public */,
+      58,    0,  428,    2, 0x0a,   88 /* Public */,
+      59,    1,  429,    2, 0x0a,   89 /* Public */,
+      62,    1,  432,    2, 0x0a,   91 /* Public */,
+      63,    0,  435,    2, 0x0a,   93 /* Public */,
+      64,    0,  436,    2, 0x0a,   94 /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    2,
@@ -379,37 +393,39 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSGraphWidgetENDCLASS[] = {
     QMetaType::Void, 0x80000000 | 13,    2,
     QMetaType::Void, QMetaType::Int,    2,
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Int,    2,    2,    2,
+    QMetaType::Void, QMetaType::QString,    2,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   19,
+    QMetaType::Void, QMetaType::QString,   20,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   22,
-    QMetaType::Void, QMetaType::Int,   24,
+    QMetaType::Void, QMetaType::QString,   23,
+    QMetaType::Void, QMetaType::Int,   25,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   27,
-    QMetaType::Void, QMetaType::QString,   27,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString,   30,   31,   32,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString,   30,   31,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString,   35,   27,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Int,   30,   31,   32,
-    QMetaType::Void, QMetaType::QString,   27,
+    QMetaType::Void, QMetaType::QString,   28,
+    QMetaType::Void, QMetaType::QString,   28,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString,   31,   32,   33,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,   31,   32,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,   36,   28,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 13,   22,
-    QMetaType::Void, 0x80000000 | 13,   22,
-    QMetaType::Void, QMetaType::QString,   47,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Int,   31,   32,   33,
+    QMetaType::Void, QMetaType::QString,   28,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString,   50,   51,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QColor,   30,   31,   51,
-    QMetaType::Bool, QMetaType::QString,   54,
     QMetaType::Void,
-    0x80000000 | 57, QMetaType::QString,   58,
-    QMetaType::Bool, QMetaType::QString,   54,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 13,   23,
+    QMetaType::Void, 0x80000000 | 13,   23,
+    QMetaType::Void, QMetaType::QString,   48,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,   51,   52,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QColor,   31,   32,   52,
+    QMetaType::Void, QMetaType::QString,   55,
+    QMetaType::Bool, QMetaType::QString,   57,
+    QMetaType::Void,
+    0x80000000 | 60, QMetaType::QString,   61,
+    QMetaType::Bool, QMetaType::QString,   57,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -471,6 +487,9 @@ Q_CONSTINIT const QMetaObject GraphWidget::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'sendDijkstra'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         // method 'setDirect'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'setAPI'
@@ -545,6 +564,9 @@ Q_CONSTINIT const QMetaObject GraphWidget::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QColor &, std::false_type>,
+        // method 'showDijkstraTable'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         // method 'saveData'
         QtPrivate::TypeAndForceComplete<bool, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
@@ -584,40 +606,42 @@ void GraphWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 11: _t->sendNatural((*reinterpret_cast< std::add_pointer_t<string>>(_a[1]))); break;
         case 12: _t->sendDirect((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         case 13: _t->setweight((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
-        case 14: _t->setDirect(); break;
-        case 15: _t->setAPI((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 16: _t->executeNatural(); break;
-        case 17: _t->showNaturalToDSL((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 18: _t->DSLsetdirect((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 19: _t->executeDSL(); break;
-        case 20: _t->DSLaddVertex((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 21: _t->DSLdelVertex((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 22: _t->DSLaddEdge((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3]))); break;
-        case 23: _t->DSLdelEdge((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
-        case 24: _t->DSLSelect((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
-        case 25: _t->addVertex(); break;
-        case 26: _t->removeVertex(); break;
-        case 27: _t->addEdge(); break;
-        case 28: _t->setWeight((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
-        case 29: _t->removeEdge1((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 30: _t->removeEdge2(); break;
-        case 31: _t->clearall(); break;
-        case 32: _t->traverseGraph(); break;
-        case 33: _t->showStruct((*reinterpret_cast< std::add_pointer_t<string>>(_a[1]))); break;
-        case 34: _t->showMatrix((*reinterpret_cast< std::add_pointer_t<string>>(_a[1]))); break;
-        case 35: _t->showResult((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 36: _t->resetColor(); break;
-        case 37: _t->setVertexColor((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
-        case 38: _t->setEdgeColor((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QColor>>(_a[3]))); break;
-        case 39: { bool _r = _t->saveData((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
+        case 14: _t->sendDijkstra((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 15: _t->setDirect(); break;
+        case 16: _t->setAPI((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 17: _t->executeNatural(); break;
+        case 18: _t->showNaturalToDSL((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 19: _t->DSLsetdirect((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 20: _t->executeDSL(); break;
+        case 21: _t->DSLaddVertex((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 22: _t->DSLdelVertex((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 23: _t->DSLaddEdge((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3]))); break;
+        case 24: _t->DSLdelEdge((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 25: _t->DSLSelect((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 26: _t->addVertex(); break;
+        case 27: _t->removeVertex(); break;
+        case 28: _t->addEdge(); break;
+        case 29: _t->setWeight((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
+        case 30: _t->removeEdge1((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 31: _t->removeEdge2(); break;
+        case 32: _t->clearall(); break;
+        case 33: _t->traverseGraph(); break;
+        case 34: _t->showStruct((*reinterpret_cast< std::add_pointer_t<string>>(_a[1]))); break;
+        case 35: _t->showMatrix((*reinterpret_cast< std::add_pointer_t<string>>(_a[1]))); break;
+        case 36: _t->showResult((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 37: _t->resetColor(); break;
+        case 38: _t->setVertexColor((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 39: _t->setEdgeColor((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QColor>>(_a[3]))); break;
+        case 40: _t->showDijkstraTable((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 41: { bool _r = _t->saveData((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 40: _t->saveFile(); break;
-        case 41: { Vertex* _r = _t->findVertexByNumber((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
+        case 42: _t->saveFile(); break;
+        case 43: { Vertex* _r = _t->findVertexByNumber((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
             if (_a[0]) *reinterpret_cast< Vertex**>(_a[0]) = std::move(_r); }  break;
-        case 42: { bool _r = _t->loadData((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
+        case 44: { bool _r = _t->loadData((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 43: _t->openFile(); break;
-        case 44: _t->updateDisplay(); break;
+        case 45: _t->openFile(); break;
+        case 46: _t->updateDisplay(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -720,6 +744,13 @@ void GraphWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
                 return;
             }
         }
+        {
+            using _t = void (GraphWidget::*)(QString );
+            if (_t _q_method = &GraphWidget::sendDijkstra; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+                *result = 14;
+                return;
+            }
+        }
     }
 }
 
@@ -742,13 +773,13 @@ int GraphWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 45)
+        if (_id < 47)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 45;
+        _id -= 47;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 45)
+        if (_id < 47)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 45;
+        _id -= 47;
     }
     return _id;
 }
@@ -848,5 +879,12 @@ void GraphWidget::setweight(QString _t1, QString _t2, int _t3)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
     QMetaObject::activate(this, &staticMetaObject, 13, _a);
+}
+
+// SIGNAL 14
+void GraphWidget::sendDijkstra(QString _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    QMetaObject::activate(this, &staticMetaObject, 14, _a);
 }
 QT_WARNING_POP

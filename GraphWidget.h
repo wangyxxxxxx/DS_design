@@ -50,6 +50,10 @@
 #include <QBrush>
 #include <cmath>
 #include <sstream>
+#include <QDialog>
+#include <QTableWidget>
+#include <QHeaderView>
+
 #include "GraphStruct.h"
 #include "DSLFunctionGraph.h"
 #include "NaturalLanguageToDSL.h"
@@ -144,6 +148,7 @@ public :
         chooseBox->addItem("广度优先遍历");
         chooseBox->addItem("Kruskal");
         chooseBox->addItem("Prim");
+        chooseBox->addItem("Dijkstra");
         chooseBox->setFixedHeight(30);
         chooseBox->setFixedWidth(210);
 
@@ -381,6 +386,10 @@ public :
         connect(this,&GraphWidget::setweight,adjacencylist,&AdjacencyList::setWeight);
         connect(this,&GraphWidget::setweight,adjacencymatrix,&AdjacencyMatrix::setWeight);
 
+        //迪杰斯特拉
+        connect(this,&GraphWidget::sendDijkstra,adjacencylist,&AdjacencyList::Dijkstra);
+        connect(adjacencylist,&AdjacencyList::showDijkstraProcess,this,&GraphWidget::showDijkstraTable);
+
     }
 
 
@@ -399,6 +408,8 @@ signals :
     void sendNatural(string);
     void sendDirect(int);
     void setweight(QString,QString,int);
+    void sendDijkstra(QString);
+
 
 
 public slots:
@@ -492,6 +503,8 @@ public slots:
             chooseBox->setCurrentIndex(3);
         }else if (s=="Prim") {
             chooseBox->setCurrentIndex(4);
+        }else if (s=="Dijkstra") {
+            chooseBox->setCurrentIndex(5);
         }
 
         startEdit->setText(v);
@@ -714,6 +727,7 @@ public slots:
         else if (chooseBox->currentText() == "广度优先遍历"){emit sendBFT(startEdit->toPlainText());}
         else if (chooseBox->currentText() == "Kruskal") {emit sendKruskal(startEdit->toPlainText());}
         else if (chooseBox->currentText() == "Prim") {emit sendPrim(startEdit->toPlainText());}
+        else if (chooseBox->currentText() == "Dijkstra") {emit sendDijkstra(startEdit->toPlainText());}
 
     }
 
@@ -924,6 +938,65 @@ public slots:
         edgeList[i]->setLineColor(color);
 
     }
+
+    //迪杰斯特拉
+        void showDijkstraTable(QString tableStr) {
+        // tableStr 结构：
+        // 第一段：列标题（所有顶点名），用逗号分隔，以 '@' 结束
+        // 后面每段： 行标题 + "#" + 每列内容（逗号分隔），再以 '@' 结束
+        // 例如：
+        // "v1,v2,v3@初始状态#length:0 pre:v1,length:∞ pre:-,...@v1进入第一组#..."
+
+        QStringList blocks = tableStr.split("@", Qt::SkipEmptyParts);
+        if (blocks.isEmpty()) return;
+
+        // 列标题（各个顶点名）
+        QStringList headers = blocks[0].split(",", Qt::SkipEmptyParts);
+
+        int rowCount = blocks.size() - 1;           // 除标题以外的块数
+        int colCount = headers.size();
+
+        // 创建对话框和表格
+        QDialog* dlg = new QDialog(this);
+        dlg->setWindowTitle("Dijkstra 过程表");
+        dlg->resize(800, 400);
+
+        QVBoxLayout* layout = new QVBoxLayout(dlg);
+        QTableWidget* table = new QTableWidget(dlg);
+        table->setRowCount(rowCount);
+        table->setColumnCount(colCount);
+        table->setHorizontalHeaderLabels(headers);
+        table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        table->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+
+        // 填充每一行
+        for (int i = 0; i < rowCount; ++i) {
+            QString block = blocks[i + 1];      // 从第 1 个块开始
+            QStringList parts = block.split("#");
+            if (parts.isEmpty()) continue;
+
+            QString rowTitle = parts[0];        // 行标题，如“初始状态”“v1 进入第一组”
+            QStringList cells;
+            if (parts.size() > 1) {
+                cells = parts[1].split(",", Qt::SkipEmptyParts);
+            }
+
+            // 行头显示步骤名
+            QTableWidgetItem* headerItem = new QTableWidgetItem(rowTitle);
+            table->setVerticalHeaderItem(i, headerItem);
+
+            // 每列单元格
+            for (int j = 0; j < qMin(colCount, cells.size()); ++j) {
+                QTableWidgetItem* item = new QTableWidgetItem(cells[j]);
+                table->setItem(i, j, item);
+            }
+        }
+
+        layout->addWidget(table);
+        dlg->setLayout(layout);
+        dlg->exec();   // 模态弹窗
+    }
+
 
 
     ////////////////文件

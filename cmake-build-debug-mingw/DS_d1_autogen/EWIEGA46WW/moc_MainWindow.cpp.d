@@ -81,6 +81,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qhashfunctions.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qiodevice.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qiodevicebase.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qitemselectionmodel.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qiterable.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qiterator.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qline.h \
@@ -214,6 +215,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QApplication \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QButtonGroup \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QComboBox \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QDialog \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QFileDialog \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsEllipseItem \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsItem \
@@ -227,6 +229,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsWidget \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGroupBox \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QHBoxLayout \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QHeaderView \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QLabel \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QLineEdit \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QMainWindow \
@@ -234,11 +237,13 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QMessageBox \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QPushButton \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QRadioButton \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QTableWidget \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QTextEdit \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QVBoxLayout \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QWidget \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractbutton.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractitemview.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractscrollarea.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractslider.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractspinbox.h \
@@ -257,6 +262,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgraphicswidget.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgridlayout.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgroupbox.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qheaderview.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qlabel.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qlayout.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qlayoutitem.h \
@@ -273,6 +279,8 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qstyle.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qstyleoption.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtabbar.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtableview.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtablewidget.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtabwidget.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtextedit.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtwidgets-config.h \
