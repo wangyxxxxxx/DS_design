@@ -96,6 +96,9 @@ public:
         }else if (color == "red") {
             circle->setBrush(QBrush(Qt::red));
             color="red";
+        }else if (color == "yellow") {
+            circle->setBrush(QBrush(Qt::yellow));
+            color="yellow";
         }
 
     }

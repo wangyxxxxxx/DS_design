@@ -940,62 +940,101 @@ public slots:
     }
 
     //迪杰斯特拉
-        void showDijkstraTable(QString tableStr) {
-        // tableStr 结构：
-        // 第一段：列标题（所有顶点名），用逗号分隔，以 '@' 结束
-        // 后面每段： 行标题 + "#" + 每列内容（逗号分隔），再以 '@' 结束
-        // 例如：
-        // "v1,v2,v3@初始状态#length:0 pre:v1,length:∞ pre:-,...@v1进入第一组#..."
-
+    // 迪杰斯特拉：只弹出一个窗口，运行中不断更新
+    void showDijkstraTable(QString tableStr) {
         QStringList blocks = tableStr.split("@", Qt::SkipEmptyParts);
         if (blocks.isEmpty()) return;
 
         // 列标题（各个顶点名）
         QStringList headers = blocks[0].split(",", Qt::SkipEmptyParts);
-
-        int rowCount = blocks.size() - 1;           // 除标题以外的块数
+        int rowCount = blocks.size() - 1;
         int colCount = headers.size();
 
-        // 创建对话框和表格
-        QDialog* dlg = new QDialog(this);
-        dlg->setWindowTitle("Dijkstra 过程表");
-        dlg->resize(800, 400);
+        // 1) 第一次收到数据：创建并显示非模态窗口（只创建一次）
+        if (!dijkstraDlg) {
+            dijkstraDlg = new QDialog(this);
+            dijkstraDlg->setWindowTitle("Dijkstra 过程表");
+            dijkstraDlg->resize(800, 400);
+            dijkstraDlg->setModal(false);
+            dijkstraDlg->setAttribute(Qt::WA_DeleteOnClose);
 
-        QVBoxLayout* layout = new QVBoxLayout(dlg);
-        QTableWidget* table = new QTableWidget(dlg);
-        table->setRowCount(rowCount);
-        table->setColumnCount(colCount);
-        table->setHorizontalHeaderLabels(headers);
-        table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-        table->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+            QVBoxLayout* layout = new QVBoxLayout(dijkstraDlg);
+            dijkstraTable = new QTableWidget(dijkstraDlg);
+            layout->addWidget(dijkstraTable);
+            dijkstraDlg->setLayout(layout);
 
-        // 填充每一行
-        for (int i = 0; i < rowCount; ++i) {
-            QString block = blocks[i + 1];      // 从第 1 个块开始
+            // 窗口被关掉后，把指针清空，防止悬空
+            connect(dijkstraDlg, &QObject::destroyed, this, [this]() {
+                dijkstraDlg = nullptr;
+                dijkstraTable = nullptr;
+                dijkstraHeaders.clear();
+                dijkstraLastRowCount = 0;
+            });
+        }
+
+        // 2) 如果是新一轮Dijkstra（行数回到更小），清空旧表
+        if (rowCount < dijkstraLastRowCount && dijkstraTable) {
+            dijkstraTable->clear();
+            dijkstraTable->setRowCount(0);
+            dijkstraLastRowCount = 0;
+        }
+
+        // 3) 如果表头变化（一般是新图/新顶点集），重建表结构
+        if (dijkstraHeaders != headers && dijkstraTable) {
+            dijkstraHeaders = headers;
+
+
+            dijkstraTable->clear();
+            dijkstraTable->setRowCount(0);
+            dijkstraTable->setColumnCount(colCount);
+            dijkstraTable->setHorizontalHeaderLabels(headers);
+            dijkstraTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+            dijkstraTable->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+
+            dijkstraLastRowCount = 0;
+        }
+
+        if (!dijkstraTable) return;
+
+        // 4) 扩展行数
+        if (rowCount > dijkstraTable->rowCount()) {
+            dijkstraTable->setRowCount(rowCount);
+        }
+
+        // 5) 只增量填充“新增的行”（每确定一个顶点就会多一行）
+        for (int i = dijkstraLastRowCount; i < rowCount; ++i) {
+            QString block = blocks[i + 1];
             QStringList parts = block.split("#");
             if (parts.isEmpty()) continue;
 
-            QString rowTitle = parts[0];        // 行标题，如“初始状态”“v1 进入第一组”
+            QString rowTitle = parts[0];
             QStringList cells;
             if (parts.size() > 1) {
                 cells = parts[1].split(",", Qt::SkipEmptyParts);
             }
 
-            // 行头显示步骤名
-            QTableWidgetItem* headerItem = new QTableWidgetItem(rowTitle);
-            table->setVerticalHeaderItem(i, headerItem);
+            dijkstraTable->setVerticalHeaderItem(i, new QTableWidgetItem(rowTitle));
 
-            // 每列单元格
             for (int j = 0; j < qMin(colCount, cells.size()); ++j) {
-                QTableWidgetItem* item = new QTableWidgetItem(cells[j]);
-                table->setItem(i, j, item);
+                QTableWidgetItem* item = dijkstraTable->item(i, j);
+                if (!item) {
+                    item = new QTableWidgetItem();
+                    dijkstraTable->setItem(i, j, item);
+                }
+                item->setText(cells[j]);
             }
         }
+        dijkstraLastRowCount = rowCount;
 
-        layout->addWidget(table);
-        dlg->setLayout(layout);
-        dlg->exec();   // 模态弹窗
+        // 6) 保证窗口可见且置前（不会重复弹出新窗口）
+        if (!dijkstraDlg->isVisible()) dijkstraDlg->show();
+        dijkstraDlg->raise();
+        dijkstraDlg->activateWindow();
+        dijkstraTable->scrollToBottom();
+
+        QCoreApplication::processEvents();
     }
+
 
 
 
@@ -1326,6 +1365,13 @@ private:
     QRadioButton *optionundirect;
 
     int isdirect;
+
+    //Dijkstra过程表窗口
+    QDialog* dijkstraDlg = nullptr;
+    QTableWidget* dijkstraTable = nullptr;
+    QStringList dijkstraHeaders;
+    int dijkstraLastRowCount = 0;
+
 
 };
 

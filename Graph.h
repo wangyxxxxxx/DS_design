@@ -805,7 +805,7 @@ public slots:
         }
     }
 
-        // Dijkstra 最短路径（适用于有向 / 无向图）
+    // Dijkstra 最短路径（适用于有向 / 无向图）
     void Dijkstra(QString startVertex) {
         if (vertexList.empty()) {
             emit showresult("图为空！");
@@ -861,6 +861,9 @@ public slots:
 
         // 初始状态
         appendRow("初始状态");
+        emit showDijkstraProcess(table);          // 【新增】一开始就发，前端立即弹窗并显示初始状态
+        QCoreApplication::processEvents();        // 【新增】确保UI及时刷新
+
 
         for (int step = 0; step < n; ++step) {
             // 1. 选出未确定顶点中 dist 最小的顶点 u
@@ -892,6 +895,9 @@ public slots:
             // 3. 记录这一轮进入“第一组”的顶点（即 u）
             QString rowTitle = vertexList[u].data + " 进入第一组";
             appendRow(rowTitle);
+            emit showDijkstraProcess(table);          // 【新增】每确定一个顶点就更新一次过程表
+            QCoreApplication::processEvents();        // 【新增】确保窗口里的表格实时刷新
+
 
             // 4. 可视化高亮当前确定的顶点
             emit setvertexcolor(vertexList[u].data, "yellow");
@@ -902,7 +908,7 @@ public slots:
         }
 
         // 把过程表发给前端弹窗
-        emit showDijkstraProcess(table);
+        //emit showDijkstraProcess(table);
 
         // 输出最终从起点到各点的最短距离
         QString result = "Dijkstra 最短路径长度:\n";
@@ -914,6 +920,8 @@ public slots:
         }
         emit showresult(result);
     }
+
+
 
 
     int findVertexIndex(QString id) {
