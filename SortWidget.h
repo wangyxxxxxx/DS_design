@@ -25,10 +25,12 @@
 #include <iostream>
 #include <QFileDialog>
 #include <QDataStream>
+#include "SpeechInput.h"
 #include "Sort.h"
 #include "Tool.h"
 #include "DSLFunctionSort.h"
 #include "NaturalLanguageToDSL.h"
+
 using namespace std;
 
 
@@ -117,6 +119,10 @@ public:
         DSLLayout->addLayout(DSLInputLayout);
         DSLLayout->addWidget(DSLButton);
 
+        //语音
+        voiceButton = new QPushButton("按住说话");
+        voiceButton->setToolTip("按住开始说，松开停止并转文字");
+
         //自然语言
         QLabel *naturalLabel = new QLabel("自然语言");
         naturalEdit = new QTextEdit();
@@ -141,6 +147,7 @@ public:
         QHBoxLayout * ButtonLayout = new QHBoxLayout();
         ButtonLayout->addWidget(sortButton);
         ButtonLayout->addWidget(clearButton);
+        ButtonLayout->addWidget(voiceButton);
 
 
         //左边总布局
@@ -231,6 +238,12 @@ public:
         connect(naturalButton, QPushButton::clicked, this, &SortWidget::executeNatural);
         connect(this, &SortWidget::sendNatural, ntod, &NaturalLanguageToDSL::execute);
         connect(ntod, NaturalLanguageToDSL::sendDSL, this, &SortWidget::showNaturalToDSL);
+
+        //语音输入
+        connect(voiceButton, QPushButton::pressed,  this, &SortWidget::onVoicePressed);
+        connect(voiceButton, QPushButton::released, this, &SortWidget::onVoiceReleased);
+
+
     }
 
 
@@ -242,6 +255,33 @@ signals:
 
 
 public slots:
+
+    //语音输入
+    void onVoicePressed() {
+        voiceButton->setText("松开结束");
+
+        // 开始持续听写（按住期间不断累积片段）
+        speech.startHold(
+            this,
+            [this](const QString& text) {
+                // 松开后的最终文字写入自然语言输入框
+                naturalEdit->setText(text);
+                voiceButton->setText("按住说话");
+            },
+            [this](const QString& err) {
+                voiceButton->setText("按住说话");
+                QMessageBox::warning(this, "语音识别失败", err);
+            }
+        );
+    }
+
+
+    void onVoiceReleased() {
+        voiceButton->setText("按住说话");
+        speech.stop(true); // 停止并输出最终文本
+    }
+
+
 
     //自然语言相关
     void setAPI(QString getapi) {
@@ -544,6 +584,11 @@ private:
 
     NaturalLanguageToDSL* ntod;
     QString APIkey;
+
+    // 语音输入
+    SpeechInput speech;
+    QPushButton* voiceButton = nullptr;
+
 };
 
 #include "main.moc"

@@ -28,6 +28,7 @@ add_executable(DS_d1 main.cpp
         DSLFunctionSort.h
         DSLFunctionGraph.h
         NaturalLanguageToDSL.h
+        SpeechInput.h
 )
 target_link_libraries(DS_d1
   Qt::Core
@@ -35,6 +36,9 @@ target_link_libraries(DS_d1
   Qt::Widgets
   winhttp
   ws2_32
+  ole32
+  uuid
+  sapi
 )
 
 

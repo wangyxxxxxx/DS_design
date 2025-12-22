@@ -57,6 +57,8 @@
 #include "GraphStruct.h"
 #include "DSLFunctionGraph.h"
 #include "NaturalLanguageToDSL.h"
+#include "SpeechInput.h"
+
 using namespace std;
 
 
@@ -202,6 +204,10 @@ public :
         DSLLayout->addLayout(DSLInputLayout);
         DSLLayout->addWidget(DSLButton);
 
+        //语音
+        voiceButton = new QPushButton("按住说话");
+        voiceButton->setToolTip("按住开始说，松开停止并转文字");
+
         //自然语言
         QLabel *naturalLabel = new QLabel("自然语言");
         naturalEdit = new QTextEdit();
@@ -224,6 +230,7 @@ public :
         QHBoxLayout * ButtonLayout = new QHBoxLayout();
         ButtonLayout->addWidget(traverseButton);
         ButtonLayout->addWidget(clearButton);
+        ButtonLayout->addWidget(voiceButton);
 
         //////////////控制区总布局
         QVBoxLayout *controlLayout = new QVBoxLayout();
@@ -390,6 +397,11 @@ public :
         connect(this,&GraphWidget::sendDijkstra,adjacencylist,&AdjacencyList::Dijkstra);
         connect(adjacencylist,&AdjacencyList::showDijkstraProcess,this,&GraphWidget::showDijkstraTable);
 
+        //语音
+        connect(voiceButton, &QPushButton::pressed,  this, &GraphWidget::onVoicePressed);
+        connect(voiceButton, &QPushButton::released, this, &GraphWidget::onVoiceReleased);
+
+
     }
 
 
@@ -413,6 +425,30 @@ signals :
 
 
 public slots:
+
+    //语音
+    void onVoicePressed() {
+        voiceButton->setText("松开结束");
+
+        speech.startHold(
+            this,
+            [this](const QString& text) {
+                naturalEdit->setText(text);       // 松开后填入自然语言输入框
+                voiceButton->setText("按住说话");
+            },
+            [this](const QString& err) {
+                voiceButton->setText("按住说话");
+                QMessageBox::warning(this, "语音识别失败", err);
+            }
+        );
+    }
+
+    void onVoiceReleased() {
+        voiceButton->setText("按住说话");
+        speech.stop(true);  // 停止并输出最终文字
+    }
+
+
     //方向
     void setDirect() {
         if (optiondirect->isChecked()) {
@@ -1371,6 +1407,9 @@ private:
     QTableWidget* dijkstraTable = nullptr;
     QStringList dijkstraHeaders;
     int dijkstraLastRowCount = 0;
+
+    QPushButton *voiceButton;
+    SpeechInput speech;
 
 
 };
