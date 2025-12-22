@@ -3,6 +3,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/DSLFunctionGraph.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/DSLFunctionSort.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Edge.h \
+  D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/GifRecorder.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Graph.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/GraphStruct.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/GraphWidget.h \
@@ -12,10 +13,14 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/SpeechInput.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Tool.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Vertex.h \
+  D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/gif.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QChar \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDataStream \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDateTime \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDebug \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDir \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QEventLoop \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QFile \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QList \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QMetaObject \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QObject \
@@ -28,6 +33,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QString \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QTimer \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QVector \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QtGlobal \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/q20memory.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/q20type_traits.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qabstractanimation.h \
@@ -167,7 +173,10 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QColor \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QDoubleValidator \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QFont \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QImage \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QPainter \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QPainterPath \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QPalette \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QPen \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QTransform \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qaction.h \

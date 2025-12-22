@@ -30,6 +30,8 @@
 #include "Tool.h"
 #include "DSLFunctionSort.h"
 #include "NaturalLanguageToDSL.h"
+#include "GifRecorder.h"
+
 
 using namespace std;
 
@@ -45,6 +47,9 @@ public:
         ///////////////初始化
         ItemX=50;
         ItemY=50;
+
+
+
 
 
         /////////////////////////////////////////////////////////////左侧控制区
@@ -243,7 +248,17 @@ public:
         connect(voiceButton, QPushButton::pressed,  this, &SortWidget::onVoicePressed);
         connect(voiceButton, QPushButton::released, this, &SortWidget::onVoiceReleased);
 
+        //gif
+        gifRecorder = new GifRecorder(this);
+        gifRecorder->setTarget(graphView);
+        connect(sort, &Sort::usingTime, this, &SortWidget::onSortFinishedAskSaveGif);
 
+
+
+
+    }
+    ~SortWidget() {
+        speech.stop();
     }
 
 
@@ -255,6 +270,50 @@ signals:
 
 
 public slots:
+
+    //gif
+    void onSortFinishedAskSaveGif(QString /*usingtime*/) {
+        if (!demoRunning) return;
+        demoRunning = false;
+
+        if (!gifRecorder) return;
+
+        gifRecorder->stop();
+
+        if (gifRecorder->tempFilePath().isEmpty()) {
+            // 没录到/没生成临时文件
+            return;
+        }
+
+        auto ret = QMessageBox::question(
+            this,
+            "保存动画",
+            "演示已结束，是否保存为 GIF 动画？",
+            QMessageBox::Yes | QMessageBox::No
+        );
+
+        if (ret == QMessageBox::Yes) {
+            QString dst = QFileDialog::getSaveFileName(
+                this,
+                "保存GIF动画",
+                "",
+                "GIF 动画 (*.gif)"
+            );
+
+            if (!dst.isEmpty()) {
+                if (!dst.endsWith(".gif", Qt::CaseInsensitive)) dst += ".gif";
+
+                bool ok = gifRecorder->saveAs(dst);
+                if (ok) QMessageBox::information(this, "成功", "GIF 动画保存成功！");
+                else    QMessageBox::warning(this, "失败", "GIF 动画保存失败！");
+            }
+        }
+
+        gifRecorder->discardTemp();
+    }
+
+
+
 
     //语音输入
     void onVoicePressed() {
@@ -340,6 +399,18 @@ public slots:
         }else if (chooseType == "快速排序") {
             sortType = 3;
         }
+
+
+        if (sortType != 0) {
+            demoRunning = true;
+            if (gifRecorder && graphView && graphView->viewport()) {
+                int interval = qBound(30, delay / 10, 120);
+                gifRecorder->setTarget(graphView);
+                gifRecorder->start(interval);
+            }
+        }
+
+
         emit sendData(numstring,sortType,delay);
 
 
@@ -406,6 +477,11 @@ public slots:
     }
 
     void ClearAll() {
+
+        demoRunning = false;
+        if (gifRecorder && gifRecorder->isRecording()) gifRecorder->stop();
+        if (gifRecorder) gifRecorder->discardTemp();
+
 
             while (!rectList.isEmpty()) {
                 delete rectList.takeAt(0);
@@ -588,6 +664,11 @@ private:
     // 语音输入
     SpeechInput speech;
     QPushButton* voiceButton = nullptr;
+
+    GifRecorder* gifRecorder = nullptr;
+    bool demoRunning = false;
+
+
 
 };
 

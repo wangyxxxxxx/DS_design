@@ -241,6 +241,12 @@
 			null
 		],
 		[
+			"D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/GifRecorder.h",
+			"MU",
+			"EWIEGA46WW/moc_GifRecorder.cpp",
+			null
+		],
+		[
 			"D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Graph.h",
 			"MU",
 			"EWIEGA46WW/moc_Graph.cpp",
@@ -283,6 +289,12 @@
 			null
 		],
 		[
+			"D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/SpeechInput.h",
+			"MU",
+			"EWIEGA46WW/moc_SpeechInput.cpp",
+			null
+		],
+		[
 			"D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Tool.h",
 			"MU",
 			"EWIEGA46WW/moc_Tool.cpp",
@@ -292,6 +304,12 @@
 			"D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Vertex.h",
 			"MU",
 			"EWIEGA46WW/moc_Vertex.cpp",
+			null
+		],
+		[
+			"D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/gif.h",
+			"MU",
+			"EWIEGA46WW/moc_gif.cpp",
 			null
 		]
 	],

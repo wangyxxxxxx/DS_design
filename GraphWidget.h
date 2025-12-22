@@ -403,6 +403,9 @@ public :
 
 
     }
+    ~GraphWidget() {
+        speech.stop();
+    }
 
 
 signals :

@@ -29,6 +29,8 @@ add_executable(DS_d1 main.cpp
         DSLFunctionGraph.h
         NaturalLanguageToDSL.h
         SpeechInput.h
+        gif.h
+        GifRecorder.h
 )
 target_link_libraries(DS_d1
   Qt::Core

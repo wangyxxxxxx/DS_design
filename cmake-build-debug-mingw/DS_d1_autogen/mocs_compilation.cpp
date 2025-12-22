@@ -2,6 +2,7 @@
 #include "EWIEGA46WW/moc_DSLFunctionGraph.cpp"
 #include "EWIEGA46WW/moc_DSLFunctionSort.cpp"
 #include "EWIEGA46WW/moc_Edge.cpp"
+#include "EWIEGA46WW/moc_GifRecorder.cpp"
 #include "EWIEGA46WW/moc_Graph.cpp"
 #include "EWIEGA46WW/moc_GraphStruct.cpp"
 #include "EWIEGA46WW/moc_GraphWidget.cpp"
