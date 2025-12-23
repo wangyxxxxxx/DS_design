@@ -19,6 +19,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDateTime \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDebug \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDir \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QEvent \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QEventLoop \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QFile \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QJsonDocument \
@@ -182,6 +183,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QAction \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QBrush \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QColor \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QCursor \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QDoubleValidator \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QFont \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/QImage \
@@ -257,6 +259,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsLineItem \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsRectItem \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsScene \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsSceneHoverEvent \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsSceneMouseEvent \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsTextItem \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsView \
@@ -273,6 +276,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QRadioButton \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QTableWidget \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QTextEdit \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QToolTip \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QVBoxLayout \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QWidget \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qabstractbutton.h \
@@ -317,6 +321,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtablewidget.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtabwidget.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtextedit.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtooltip.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtwidgets-config.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtwidgetsexports.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \

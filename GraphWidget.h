@@ -53,6 +53,10 @@
 #include <QDialog>
 #include <QTableWidget>
 #include <QHeaderView>
+#include <QToolTip>
+#include <QCursor>
+#include <QLabel>
+#include <QEvent>
 
 #include "GraphStruct.h"
 #include "DSLFunctionGraph.h"
@@ -263,6 +267,8 @@ public :
         graphView->setScene(scene);
         graphView->setRenderHint(QPainter::Antialiasing);
 
+
+
         //邻接表结构展示
         structView = new QGraphicsView();
         scene2= new QGraphicsScene(this);
@@ -403,15 +409,45 @@ public :
         connect(voiceButton, &QPushButton::released, this, &GraphWidget::onVoiceReleased);
 
 
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////初始化
+
         // ===== GIF录制：图演示（复用排序的 GifRecorder）=====
         gifRecorder = new GifRecorder(this);
         // 录制右侧演示区域：包含 Tab 和画布（更直观）
         gifRecorder->setTarget(tabWidget);
 
 
+        // 悬浮信息窗（自己控制，不会自动消失）
+        hoverInfoLabel = new QLabel(nullptr); // 顶层窗体
+        hoverInfoLabel->setWindowFlags(Qt::FramelessWindowHint | Qt::Tool | Qt::WindowStaysOnTopHint);
+        hoverInfoLabel->setAttribute(Qt::WA_ShowWithoutActivating);
+        hoverInfoLabel->setAttribute(Qt::WA_TransparentForMouseEvents); // 不抢鼠标，否则 hoverLeave/Enter 会抖
+        hoverInfoLabel->setTextFormat(Qt::PlainText);
+        hoverInfoLabel->setStyleSheet(
+            "QLabel{"
+            "color:#000000;"            // ★强制黑字
+            "background-color:#ffffe1;"
+            "border:1px solid #808080;"
+            "padding:6px;"
+            "}"
+        );
+
+        hoverInfoLabel->hide();
+
+        // 让 viewport 能收到 MouseMove（用于跟随鼠标位置，可选但建议）
+        graphView->setMouseTracking(true);
+        graphView->viewport()->setMouseTracking(true);
+        graphView->viewport()->installEventFilter(this);
+
+
+
     }
     ~GraphWidget() {
         speech.stop();
+        if (hoverInfoLabel) { delete hoverInfoLabel; hoverInfoLabel = nullptr; }
+
     }
 
 
@@ -435,6 +471,102 @@ signals :
 
 
 public slots:
+
+    //悬停
+    void onVertexHovered(Vertex* v) {
+        if (!v) return;
+        hoveredVertex = v;
+
+        hoverInfoLabel->setText(buildVertexInfo(v));
+        hoverInfoLabel->adjustSize();
+
+        // 显示在鼠标旁边一点的位置
+        QPoint pos = QCursor::pos() + QPoint(12, 12);
+        hoverInfoLabel->move(pos);
+        hoverInfoLabel->show();
+        hoverInfoLabel->raise();
+    }
+
+    void onVertexUnhovered(Vertex* v) {
+        // 只在离开当前悬停节点时隐藏
+        if (v && v != hoveredVertex) return;
+        hoveredVertex = nullptr;
+        if (hoverInfoLabel) hoverInfoLabel->hide();
+    }
+
+
+    bool eventFilter(QObject* obj, QEvent* event) override {
+        if (obj == graphView->viewport() && hoverInfoLabel && hoverInfoLabel->isVisible()) {
+            if (event->type() == QEvent::MouseMove) {
+                // 跟随鼠标（不是必须，但体验更好）
+                hoverInfoLabel->move(QCursor::pos() + QPoint(12, 12));
+            }
+        }
+        return QWidget::eventFilter(obj, event);
+    }
+
+
+
+    void hookVertex(Vertex* v) {
+        if (!v) return;
+        disconnect(v, nullptr, this, nullptr); // 防止重复连接
+        connect(v, &Vertex::hovered, this, &GraphWidget::onVertexHovered);
+        connect(v, &Vertex::unhovered, this, &GraphWidget::onVertexUnhovered);
+    }
+
+    QString buildVertexInfo(Vertex* v) const {
+        if (!v) return {};
+
+        int outDeg = 0, inDeg = 0, deg = 0;
+        QStringList outNeighbors, inNeighbors, neighbors;
+
+        for (Edge* e : edgeList) {
+            if (!e || !e->getStartVertex() || !e->getEndVertex()) continue;
+
+            const QString s = e->getStartVertex()->getNumber();
+            const QString t = e->getEndVertex()->getNumber();
+
+            if (isdirect == 1) {
+                if (e->getStartVertex() == v) {
+                    outDeg++;
+                    outNeighbors << QString("%1(w=%2)").arg(t).arg(e->getWeight());
+                }
+                if (e->getEndVertex() == v) {
+                    inDeg++;
+                    inNeighbors << QString("%1(w=%2)").arg(s).arg(e->getWeight());
+                }
+            } else {
+                // 无向图：边只存一条，自环按常规定义算2
+                if (e->getStartVertex() == v && e->getEndVertex() == v) {
+                    deg += 2;
+                    neighbors << QString("%1(w=%2)").arg(t).arg(e->getWeight());
+                } else if (e->getStartVertex() == v) {
+                    deg += 1;
+                    neighbors << QString("%1(w=%2)").arg(t).arg(e->getWeight());
+                } else if (e->getEndVertex() == v) {
+                    deg += 1;
+                    neighbors << QString("%1(w=%2)").arg(s).arg(e->getWeight());
+                }
+            }
+        }
+
+        QString info;
+        info += QString("节点：%1\n").arg(v->getNumber());
+
+        if (isdirect == 1) {
+            const int total = outDeg + inDeg;
+            info += QString("出度：%1\n入度：%2\n总度：%3").arg(outDeg).arg(inDeg).arg(total);
+            if (!outNeighbors.isEmpty()) info += QString("\n出边：%1").arg(outNeighbors.join(", "));
+            if (!inNeighbors.isEmpty())  info += QString("\n入边：%1").arg(inNeighbors.join(", "));
+        } else {
+            info += QString("度：%1").arg(deg);
+            if (!neighbors.isEmpty()) info += QString("\n相邻：%1").arg(neighbors.join(", "));
+        }
+
+        return info;
+    }
+
+
 
     //语音
     void setSpeechCred(QString appid, QString token) {
@@ -567,6 +699,7 @@ public slots:
         int x = QRandomGenerator::global()->bounded(100, 600);
         int y = QRandomGenerator::global()->bounded(100, 400);
         vertex = new Vertex(vertexEdit->text(), x, y);
+        hookVertex(vertex);   // ←加这行
         scene->addItem(vertex);
         vertexList.append(vertex);
 
@@ -1282,6 +1415,8 @@ public slots:
             return false;
         }
 
+        hookVertex(vertex);
+
         vertexList.append(vertex);
 
         //后端
@@ -1488,6 +1623,10 @@ private:
     SpeechInput speech;
 
     GifRecorder* gifRecorder = nullptr;
+
+    //悬停
+    QLabel* hoverInfoLabel = nullptr;
+    Vertex* hoveredVertex = nullptr;
 
 
 

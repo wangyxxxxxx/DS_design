@@ -21,6 +21,8 @@
 #include <QColor>
 #include <QRandomGenerator>
 #include <QFont>
+#include <QGraphicsSceneHoverEvent>
+
 
 class Vertex : public QObject, public QGraphicsItemGroup
 {
@@ -58,6 +60,10 @@ public:
 
         //监听
         setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+
+
+        setAcceptHoverEvents(true);
+
     }
 
     friend QDataStream &operator<<(QDataStream &out, const Vertex &vertex);
@@ -66,8 +72,26 @@ public:
 
 signals:
     void positionChanged(Vertex* vertex, QPointF newPosition);
+    void hovered(Vertex* vertex);
+    void unhovered(Vertex* vertex);
+
 //监听顶点是否移动
 protected:
+
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override
+    {
+        emit hovered(this);
+        QGraphicsItemGroup::hoverEnterEvent(event);
+    }
+
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override
+    {
+        emit unhovered(this);
+        QGraphicsItemGroup::hoverLeaveEvent(event);
+    }
+
+
+
     QVariant itemChange(GraphicsItemChange change, const QVariant &value) override
     {
         if (change == ItemPositionHasChanged) {
@@ -166,6 +190,9 @@ inline QDataStream &operator>>(QDataStream &in, Vertex &vertex) {
     vertex.setFlag(QGraphicsItem::ItemIsMovable, true);
     vertex.setFlag(QGraphicsItem::ItemIsSelectable, true);
     vertex.setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+
+    vertex.setAcceptHoverEvents(true);
+
 
     return in;
 }
