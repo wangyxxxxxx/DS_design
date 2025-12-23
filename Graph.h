@@ -18,6 +18,10 @@
 #include <QFont>
 #include <QDataStream>
 #include <QDebug>
+#include <functional>
+#include <QEventLoop>
+#include <QCoreApplication>
+
 using namespace std;
 
 
@@ -935,6 +939,137 @@ public slots:
     void changeDelay(int d) {
         delay=d;
     }
+
+    // ========== 连通分支（无向图：连通分量；有向图：强连通分支）==========
+
+    void ConnectedComponents() {
+        emit resetcolor();
+
+        int n = (int)vertexList.size();
+        if (n == 0) {
+            emit showresult("图为空！");
+            return;
+        }
+
+        // 颜色池（你 Vertex 目前只支持 white/green/red/yellow 也能跑，只是颜色会受限）
+        vector<QString> colors = {"green","red","yellow","cyan","magenta","blue","orange","purple"};
+
+        vector<vector<int>> comps;          // 每个 SCC 的顶点下标集合
+
+        // ---------- 无向图：直接按连通分支做 ----------
+        if (isdirect == 0) {
+            vector<int> vis(n, 0);
+            for (int i = 0; i < n; ++i) {
+                if (vis[i]) continue;
+                queue<int> q;
+                q.push(i);
+                vis[i] = 1;
+                comps.push_back({});
+                while (!q.empty()) {
+                    int u = q.front(); q.pop();
+                    comps.back().push_back(u);
+
+                    EdgeBackend* e = vertexList[u].firstarc;
+                    while (e) {
+                        int v = findVertexIndex(e->adjvex);
+                        if (v < n && !vis[v]) {
+                            vis[v] = 1;
+                            q.push(v);
+                        }
+                        e = e->nextarc;
+                    }
+                }
+            }
+        }
+        // ---------- 有向图：Tarjan SCC ----------
+        else {
+            vector<int> idx(n, -1), low(n, 0);
+            vector<char> onStack(n, 0);
+            stack<int> st;
+            int cur = 0;
+
+            function<void(int)> dfs = [&](int u) {
+                idx[u] = low[u] = cur++;
+                st.push(u);
+                onStack[u] = 1;
+
+                for (EdgeBackend* e = vertexList[u].firstarc; e != nullptr; e = e->nextarc) {
+                    int v = findVertexIndex(e->adjvex);
+                    if (v >= n) continue;
+
+                    if (idx[v] == -1) {
+                        dfs(v);
+                        low[u] = min(low[u], low[v]);
+                    } else if (onStack[v]) {
+                        low[u] = min(low[u], idx[v]);
+                    }
+                }
+
+                // u 是一个 SCC 的根
+                if (low[u] == idx[u]) {
+                    comps.push_back({});
+                    while (true) {
+                        int x = st.top(); st.pop();
+                        onStack[x] = 0;
+                        comps.back().push_back(x);
+                        if (x == u) break;
+                    }
+                }
+            };
+
+            for (int i = 0; i < n; ++i) {
+                if (idx[i] == -1) dfs(i);
+            }
+        }
+
+        // compId：每个点属于哪个 SCC
+        vector<int> compId(n, -1);
+        for (int c = 0; c < (int)comps.size(); ++c) {
+            for (int v : comps[c]) compId[v] = c;
+        }
+
+        // 可视化：逐个 SCC 上色
+        for (int c = 0; c < (int)comps.size(); ++c) {
+            QString col = colors[c % (int)colors.size()];
+
+            // 顶点上色
+            for (int v : comps[c]) {
+                emit setvertexcolor(vertexList[v].data, col);
+
+                QEventLoop loop;
+                QTimer::singleShot(delay, &loop, &QEventLoop::quit);
+                loop.exec();
+                QCoreApplication::processEvents();
+            }
+
+            // SCC 内的边上色（只给 from->to 都在同一个 SCC 的边上色）
+            for (auto* ed : edgeList) {
+                if (!ed) continue;
+                int a = findVertexIndex(ed->from);
+                int b = findVertexIndex(ed->adjvex);
+                if (a < n && b < n && compId[a] == c && compId[b] == c) {
+                    emit setedgecolor(ed->from, ed->adjvex, QColor(col));
+                }
+            }
+
+            QCoreApplication::processEvents();
+        }
+
+        // 输出结果
+        QString res = "强连通分支数: " + QString::number((int)comps.size()) + "  ";
+        for (int c = 0; c < (int)comps.size(); ++c) {
+            res += "{";
+            for (int k = 0; k < (int)comps[c].size(); ++k) {
+                int v = comps[c][k];
+                res += vertexList[v].data;
+                if (k != (int)comps[c].size() - 1) res += " ";
+            }
+            res += "}";
+            if (c != (int)comps.size() - 1) res += " | ";
+        }
+        emit showresult(res);
+    }
+
 
 
 signals:

@@ -16,6 +16,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QBuffer \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QByteArray \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QChar \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QCoreApplication \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDataStream \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDateTime \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDebug \

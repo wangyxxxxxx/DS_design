@@ -62,6 +62,7 @@ DS_d1_autogen/timestamp: \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QBuffer \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QByteArray \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QChar \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QCoreApplication \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDataStream \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDateTime \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDebug \

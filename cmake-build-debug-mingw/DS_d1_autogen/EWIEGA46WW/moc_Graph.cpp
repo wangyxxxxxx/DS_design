@@ -303,11 +303,12 @@ static constexpr auto qt_meta_stringdata_CLASSAdjacencyListENDCLASS = QtMocHelpe
     "Dijkstra",
     "findVertexIndex",
     "id",
-    "changeDelay"
+    "changeDelay",
+    "ConnectedComponents"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSAdjacencyListENDCLASS_t {
-    uint offsetsAndSizes[76];
+    uint offsetsAndSizes[78];
     char stringdata0[14];
     char stringdata1[11];
     char stringdata2[1];
@@ -346,6 +347,7 @@ struct qt_meta_stringdata_CLASSAdjacencyListENDCLASS_t {
     char stringdata35[16];
     char stringdata36[3];
     char stringdata37[12];
+    char stringdata38[20];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSAdjacencyListENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -388,7 +390,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSAdjacencyListENDCLASS_t qt_meta
         QT_MOC_LITERAL(322, 8),  // "Dijkstra"
         QT_MOC_LITERAL(331, 15),  // "findVertexIndex"
         QT_MOC_LITERAL(347, 2),  // "id"
-        QT_MOC_LITERAL(350, 11)   // "changeDelay"
+        QT_MOC_LITERAL(350, 11),  // "changeDelay"
+        QT_MOC_LITERAL(362, 19)   // "ConnectedComponents"
     },
     "AdjacencyList",
     "showresult",
@@ -427,7 +430,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSAdjacencyListENDCLASS_t qt_meta
     "Dijkstra",
     "findVertexIndex",
     "id",
-    "changeDelay"
+    "changeDelay",
+    "ConnectedComponents"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -439,7 +443,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSAdjacencyListENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-      24,   14, // methods
+      25,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -447,32 +451,33 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSAdjacencyListENDCLASS[] = {
        6,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,  158,    2, 0x06,    1 /* Public */,
-       3,    1,  161,    2, 0x06,    3 /* Public */,
-       5,    0,  164,    2, 0x06,    5 /* Public */,
-       6,    2,  165,    2, 0x06,    6 /* Public */,
-       7,    3,  170,    2, 0x06,    9 /* Public */,
-       8,    1,  177,    2, 0x06,   13 /* Public */,
+       1,    1,  164,    2, 0x06,    1 /* Public */,
+       3,    1,  167,    2, 0x06,    3 /* Public */,
+       5,    0,  170,    2, 0x06,    5 /* Public */,
+       6,    2,  171,    2, 0x06,    6 /* Public */,
+       7,    3,  176,    2, 0x06,    9 /* Public */,
+       8,    1,  183,    2, 0x06,   13 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       9,    1,  180,    2, 0x0a,   15 /* Public */,
-      11,    1,  183,    2, 0x0a,   17 /* Public */,
-      13,    1,  186,    2, 0x0a,   19 /* Public */,
-      15,    3,  189,    2, 0x0a,   21 /* Public */,
-      19,    3,  196,    2, 0x0a,   25 /* Public */,
-      20,    2,  203,    2, 0x0a,   29 /* Public */,
-      21,    1,  208,    2, 0x0a,   32 /* Public */,
-      22,    0,  211,    2, 0x0a,   34 /* Public */,
-      23,    0,  212,    2, 0x0a,   35 /* Public */,
-      24,    1,  213,    2, 0x0a,   36 /* Public */,
-      26,    2,  216,    2, 0x0a,   38 /* Public */,
-      30,    2,  221,    2, 0x0a,   41 /* Public */,
-      31,    1,  226,    2, 0x0a,   44 /* Public */,
-      32,    1,  229,    2, 0x0a,   46 /* Public */,
-      33,    1,  232,    2, 0x0a,   48 /* Public */,
-      34,    1,  235,    2, 0x0a,   50 /* Public */,
-      35,    1,  238,    2, 0x0a,   52 /* Public */,
-      37,    1,  241,    2, 0x0a,   54 /* Public */,
+       9,    1,  186,    2, 0x0a,   15 /* Public */,
+      11,    1,  189,    2, 0x0a,   17 /* Public */,
+      13,    1,  192,    2, 0x0a,   19 /* Public */,
+      15,    3,  195,    2, 0x0a,   21 /* Public */,
+      19,    3,  202,    2, 0x0a,   25 /* Public */,
+      20,    2,  209,    2, 0x0a,   29 /* Public */,
+      21,    1,  214,    2, 0x0a,   32 /* Public */,
+      22,    0,  217,    2, 0x0a,   34 /* Public */,
+      23,    0,  218,    2, 0x0a,   35 /* Public */,
+      24,    1,  219,    2, 0x0a,   36 /* Public */,
+      26,    2,  222,    2, 0x0a,   38 /* Public */,
+      30,    2,  227,    2, 0x0a,   41 /* Public */,
+      31,    1,  232,    2, 0x0a,   44 /* Public */,
+      32,    1,  235,    2, 0x0a,   46 /* Public */,
+      33,    1,  238,    2, 0x0a,   48 /* Public */,
+      34,    1,  241,    2, 0x0a,   50 /* Public */,
+      35,    1,  244,    2, 0x0a,   52 /* Public */,
+      37,    1,  247,    2, 0x0a,   54 /* Public */,
+      38,    0,  250,    2, 0x0a,   56 /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    2,
@@ -501,6 +506,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSAdjacencyListENDCLASS[] = {
     QMetaType::Void, QMetaType::QString,   25,
     QMetaType::Int, QMetaType::QString,   36,
     QMetaType::Void, QMetaType::Int,   10,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -592,7 +598,9 @@ Q_CONSTINIT const QMetaObject AdjacencyList::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         // method 'changeDelay'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<int, std::false_type>
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'ConnectedComponents'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
 } };
@@ -628,6 +636,7 @@ void AdjacencyList::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 22: { int _r = _t->findVertexIndex((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 23: _t->changeDelay((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 24: _t->ConnectedComponents(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -696,13 +705,13 @@ int AdjacencyList::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 24)
+        if (_id < 25)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 24;
+        _id -= 25;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 24)
+        if (_id < 25)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 24;
+        _id -= 25;
     }
     return _id;
 }

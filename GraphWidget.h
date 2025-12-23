@@ -157,6 +157,7 @@ public :
         chooseBox->addItem("Kruskal");
         chooseBox->addItem("Prim");
         chooseBox->addItem("Dijkstra");
+        chooseBox->addItem("连通分支");
         chooseBox->setFixedHeight(30);
         chooseBox->setFixedWidth(210);
 
@@ -346,6 +347,7 @@ public :
         connect(this,&GraphWidget::sendBFT,adjacencylist,&AdjacencyList::BFT);
         connect(this,&GraphWidget::sendKruskal,adjacencylist,&AdjacencyList::Kruskal);
         connect(this,&GraphWidget::sendPrim,adjacencylist,&AdjacencyList::Prim);
+        connect(this, &GraphWidget::sendConnectedComponents,adjacencylist, &AdjacencyList::ConnectedComponents);
         connect(adjacencylist,&AdjacencyList::showresult,this,&GraphWidget::showResult);
 
         connect(adjacencylist,&AdjacencyList::resetcolor,this,&GraphWidget::resetColor);
@@ -468,6 +470,8 @@ signals :
     void sendDirect(int);
     void setweight(QString,QString,int);
     void sendDijkstra(QString);
+    void sendConnectedComponents();
+
 
 
 
@@ -954,6 +958,8 @@ public slots:
         else if (chooseBox->currentText() == "Kruskal") {emit sendKruskal(startEdit->toPlainText());}
         else if (chooseBox->currentText() == "Prim") {emit sendPrim(startEdit->toPlainText());}
         else if (chooseBox->currentText() == "Dijkstra") {emit sendDijkstra(startEdit->toPlainText());}
+        else if (chooseBox->currentText() == "连通分支") { emit sendConnectedComponents(); }
+
 
     }
 
@@ -1182,9 +1188,7 @@ public slots:
         vertexList[i]->setColor(color);
         scene->update();
 
-        for (int i = 0; i < edgeList.size(); ++i) {
-            edgeList[i]->setLineColor("black");
-        }
+
     }
 
     void setEdgeColor(QString from,QString to,const QColor& color) {
