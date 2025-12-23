@@ -58,13 +58,13 @@ public:
         speechTokenEdit = new QLineEdit("ShIvWC6TZIBEZ9yYW5FEp_pzztYe0cpp");
         speechTokenEdit->setFixedHeight(30);
 
-        QHBoxLayout *speechLayout = new QHBoxLayout();
-        speechLayout->addWidget(speechLabel1);
-        speechLayout->addWidget(speechAppIdEdit);
-        speechLayout->addWidget(speechLabel2);
-        speechLayout->addWidget(speechTokenEdit);
-
         sendapiButton = new QPushButton("设置");
+
+        apilayout->addWidget(speechLabel1);
+        apilayout->addWidget(speechAppIdEdit);
+        apilayout->addWidget(speechLabel2);
+        apilayout->addWidget(speechTokenEdit);
+        apilayout->addWidget(sendapiButton);
 
 
         // 创建选项卡控件
@@ -87,8 +87,6 @@ public:
         QVBoxLayout *mainLayout = new QVBoxLayout(centralWidget);
         mainLayout->addWidget(tabWidget);
         mainLayout->addLayout(apilayout);
-        mainLayout->addLayout(speechLayout);
-        mainLayout->addWidget(sendapiButton);
         centralWidget->setLayout(mainLayout);
 
         connect(sendapiButton, QPushButton::clicked, this, &MainWindow::sendAPI);
