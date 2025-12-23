@@ -110,22 +110,20 @@ public:
     int getY()const {
         return vertexY;
     }
-    void setColor(QString color) {
-        if (color == "white") {
-            circle->setBrush(QBrush(Qt::white));
-            color="white";
-        }else if (color == "green") {
-            circle->setBrush(QBrush(Qt::green));
-            color="green";
-        }else if (color == "red") {
-            circle->setBrush(QBrush(Qt::red));
-            color="red";
-        }else if (color == "yellow") {
-            circle->setBrush(QBrush(Qt::yellow));
-            color="yellow";
-        }
+    void setColor(const QString& newColor) {
+        QColor qc(newColor);
+        if (!qc.isValid()) qc = Qt::white;
 
+        circle->setBrush(QBrush(qc));
+
+        // 规范化保存到成员变量（避免保存无效字符串）
+        if (!QColor(newColor).isValid()) {
+            color = "white";
+        } else {
+            color = newColor;
+        }
     }
+
 
     QString getColor()const {
         return color;
@@ -168,13 +166,9 @@ inline QDataStream &operator>>(QDataStream &in, Vertex &vertex) {
 
     // 重新创建图形项
     vertex.circle = new QGraphicsEllipseItem(-25, -25, 50, 50, &vertex);
-    if (vertex.color == "white") {
-        vertex.circle->setBrush(QBrush(Qt::white));
-    } else if (vertex.color == "green") {
-        vertex.circle->setBrush(QBrush(Qt::green));
-    } else if (vertex.color == "red") {
-        vertex.circle->setBrush(QBrush(Qt::red));
-    }
+    QColor qc(vertex.color);
+    if (!qc.isValid()) qc = Qt::white;
+    vertex.circle->setBrush(QBrush(qc));
 
     vertex.text = new QGraphicsTextItem(vertex.vertexNumber, &vertex);
     QFont font = vertex.text->font();
