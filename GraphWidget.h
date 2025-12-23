@@ -58,6 +58,7 @@
 #include "DSLFunctionGraph.h"
 #include "NaturalLanguageToDSL.h"
 #include "SpeechInput.h"
+#include "GifRecorder.h"
 
 using namespace std;
 
@@ -402,6 +403,12 @@ public :
         connect(voiceButton, &QPushButton::released, this, &GraphWidget::onVoiceReleased);
 
 
+        // ===== GIF录制：图演示（复用排序的 GifRecorder）=====
+        gifRecorder = new GifRecorder(this);
+        // 录制右侧演示区域：包含 Tab 和画布（更直观）
+        gifRecorder->setTarget(tabWidget);
+
+
     }
     ~GraphWidget() {
         speech.stop();
@@ -729,6 +736,10 @@ public slots:
 
     void clearall() {
 
+        if (gifRecorder && gifRecorder->isRecording()) {
+            gifRecorder->discardTemp();
+        }
+
         //清除结构
         showlist = "";
         showmatrix = "";
@@ -761,7 +772,30 @@ public slots:
     }
 
     void traverseGraph() {
-        emit sendDelay(delayEdit->text().toInt());
+        int stepDelayMs = delayEdit->text().toInt();
+        emit sendDelay(stepDelayMs);
+
+        // 没选算法就不录也不跑
+        if (chooseBox->currentIndex() <= 0) return;
+
+        // 如果上一次还在录（比如用户连点开始），先停掉旧的
+        if (gifRecorder && gifRecorder->isRecording()) {
+            gifRecorder->discardTemp();
+        }
+
+        // ===== 开始录制 =====
+        // 截帧间隔：跟随“演示延时”，但不要太慢/太快
+        // 例如 stepDelay=1000ms -> interval=200ms
+        int intervalMs = stepDelayMs > 0 ? (stepDelayMs / 5) : 120;
+        intervalMs = qBound(50, intervalMs, 250);     // 限制在 50~250ms
+        int maxWidth = 900;                            // 输出最大宽度，可按你喜好调
+
+        if (gifRecorder) {
+            // 录制右侧演示区（你在构造里 setTarget(tabWidget) 了，这里不必再设）
+            gifRecorder->start(intervalMs, maxWidth);
+        }
+
+
         if (chooseBox->currentText() == "深度优先遍历") {emit sendDFT(startEdit->toPlainText());}
         else if (chooseBox->currentText() == "广度优先遍历"){emit sendBFT(startEdit->toPlainText());}
         else if (chooseBox->currentText() == "Kruskal") {emit sendKruskal(startEdit->toPlainText());}
@@ -940,7 +974,41 @@ public slots:
 
     void showResult(QString result) {
         resultEdit->setText(result);
+
+        // ===== 演示结束：停止录制并询问保存 =====
+        if (!gifRecorder || !gifRecorder->isRecording()) return;
+
+        gifRecorder->stop();
+
+        auto ret = QMessageBox::question(
+            this,
+            "保存动画",
+            "演示已结束，是否保存为 GIF 动画？",
+            QMessageBox::Yes | QMessageBox::No,
+            QMessageBox::Yes
+        );
+
+        if (ret == QMessageBox::Yes) {
+            QString path = QFileDialog::getSaveFileName(
+                this,
+                "保存 GIF",
+                "",
+                "GIF (*.gif)"
+            );
+
+            if (!path.isEmpty()) {
+                if (gifRecorder->saveAs(path)) {
+                    QMessageBox::information(this, "成功", "GIF 已保存。");
+                } else {
+                    QMessageBox::warning(this, "失败", "GIF 保存失败。");
+                }
+            }
+        }
+
+        // 不管保存与否，都清掉临时文件，避免堆积
+        gifRecorder->discardTemp();
     }
+
 
     void resetColor() {
         for (int i = 0; i < vertexList.size(); ++i) {
@@ -1413,6 +1481,9 @@ private:
 
     QPushButton *voiceButton;
     SpeechInput speech;
+
+    GifRecorder* gifRecorder = nullptr;
+
 
 
 };
