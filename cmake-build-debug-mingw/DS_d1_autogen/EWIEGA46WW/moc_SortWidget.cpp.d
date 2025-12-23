@@ -13,6 +13,8 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Tool.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Vertex.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/gif.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QBuffer \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QByteArray \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QChar \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDataStream \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDateTime \
@@ -20,6 +22,8 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDir \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QEventLoop \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QFile \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QJsonDocument \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QJsonObject \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QList \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QMetaObject \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QObject \
@@ -27,10 +31,12 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QPropertyAnimation \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QRandomGenerator \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QRect \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QRegularExpression \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QSize \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QSizeF \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QString \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QTimer \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QUuid \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QVector \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QtGlobal \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/q20memory.h \
@@ -48,11 +54,14 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbasicatomic.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbasictimer.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbindingstorage.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbuffer.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbytearray.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbytearrayalgorithms.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbytearraylist.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbytearrayview.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcalendar.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcborcommon.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcborvalue.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qchar.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcompare.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcompare_impl.h \
@@ -91,6 +100,9 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qitemselectionmodel.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qiterable.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qiterator.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qjsondocument.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qjsonobject.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qjsonvalue.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qline.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qlist.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qlocale.h \
@@ -161,6 +173,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtypes.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qurl.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qutf8stringview.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/quuid.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qvariant.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qvariantanimation.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qvarlengtharray.h \
@@ -222,6 +235,18 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qvectornd.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qwindowdefs.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qwindowdefs_win.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/QAudioDevice \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/QAudioFormat \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/QAudioSource \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/QMediaDevices \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/qaudio.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/qaudiodevice.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/qaudioformat.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/qaudiosource.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/qmediadevices.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/qtmultimedia-config.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/qtmultimediaglobal.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QApplication \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QButtonGroup \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QComboBox \
@@ -624,7 +649,6 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/xsaveoptintrin.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/xsavesintrin.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/xtestintrin.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/_bsd_types.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/_mingw.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/_mingw_mac.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/_mingw_off_t.h \
@@ -636,12 +660,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/apisetcconv.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/assert.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/basetsd.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/bcrypt.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/bemapiset.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/cderr.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/cguid.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/combaseapi.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/commdlg.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/concurrencysal.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/corecrt.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/corecrt_startup.h \
@@ -650,11 +669,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/crtdefs.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/ctype.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/datetimeapi.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/dde.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/ddeml.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/debugapi.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/dlgs.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/dpapi.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/driverspecs.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/errhandlingapi.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/errno.h \
@@ -666,47 +681,24 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/handleapi.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/heapapi.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/imm.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/inaddr.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/interlockedapi.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/ioapiset.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/jobapi.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/ktmtypes.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/libloaderapi.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/locale.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/lzexpand.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/mcx.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/memoryapi.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/minwinbase.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/minwindef.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/mmsystem.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/msxml.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/namedpipeapi.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/namespaceapi.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/nb30.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/ncrypt.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/oaidl.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/objbase.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/objidl.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/objidlbase.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/ocidl.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/ole2.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/oleauto.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/oleidl.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/poppack.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/process.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/processenv.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/processthreadsapi.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/processtopologyapi.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/profileapi.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/propidl.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/prsht.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/psdk_inc/_fd_types.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/psdk_inc/_ip_mreq1.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/psdk_inc/_ip_types.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/psdk_inc/_socket_types.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/psdk_inc/_wsa_errnos.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/psdk_inc/_wsadata.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/psdk_inc/_xmitfile.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/psdk_inc/intrin-impl.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/pshpack1.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/pshpack2.h \
@@ -723,14 +715,9 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/rpcasync.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/rpcdce.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/rpcdcep.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/rpcndr.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/rpcnsi.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/rpcnsip.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/rpcnterr.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/rpcsal.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/sal.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/sapi.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/sapi54.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/sdkddkver.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
@@ -741,8 +728,6 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/securityappcontainer.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/securitybaseapi.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/semaphore.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/servprov.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/shellapi.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/signal.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/specstrings.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/stdio.h \
@@ -760,9 +745,6 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/time.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/timezoneapi.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/tvout.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/unknwn.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/unknwnbase.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/urlmon.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/utilapiset.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/vadefs.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/virtdisk.h \
@@ -771,27 +753,17 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winapifamily.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winbase.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wincon.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wincrypt.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/windef.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/windows.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winefs.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winerror.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wingdi.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winhttp.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winioctl.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winnetwk.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winnls.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winnt.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winperf.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winreg.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winscard.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winsmcrd.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winsock.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winspool.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winsvc.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winuser.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/winver.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wnnc.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wow64apiset.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wtypes.h \
-  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wtypesbase.h
+  D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wow64apiset.h

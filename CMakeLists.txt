@@ -12,7 +12,10 @@ find_package(Qt6 COMPONENTS
   Core
   Gui
   Widgets
-  REQUIRED)
+  REQUIRED
+  Network
+  Multimedia
+)
 
 add_executable(DS_d1 main.cpp
         Sort.h
@@ -36,11 +39,9 @@ target_link_libraries(DS_d1
   Qt::Core
   Qt::Gui
   Qt::Widgets
+  Qt::Multimedia
   winhttp
   ws2_32
-  ole32
-  uuid
-  sapi
 )
 
 

@@ -312,9 +312,6 @@ public slots:
         gifRecorder->discardTemp();
     }
 
-
-
-
     //语音输入
     void onVoicePressed() {
         voiceButton->setText("松开结束");
@@ -334,11 +331,15 @@ public slots:
         );
     }
 
-
     void onVoiceReleased() {
         voiceButton->setText("按住说话");
         speech.stop(true); // 停止并输出最终文本
     }
+
+    void setSpeechCred(QString appid, QString token) {
+        speech.setCredential(appid, token);
+    }
+
 
 
 

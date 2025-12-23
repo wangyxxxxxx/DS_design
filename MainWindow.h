@@ -42,14 +42,30 @@ public:
         QWidget *centralWidget = new QWidget(this);
         setCentralWidget(centralWidget);
 
-        QLabel *apilabel = new QLabel("设置 API :");
+        QLabel *apilabel = new QLabel("Deepseek API :");
         apiEdit = new QTextEdit("sk-c9e63545f5f7482bb0c2683f692b2a73");
         apiEdit->setFixedHeight(30);
-        sendapiButton = new QPushButton("设置");
         QHBoxLayout *apilayout = new QHBoxLayout();
         apilayout->addWidget(apilabel);
         apilayout->addWidget(apiEdit);
-        apilayout->addWidget(sendapiButton);
+
+        //语音
+        QLabel *speechLabel1 = new QLabel("豆包 AppID :");
+        speechAppIdEdit = new QLineEdit("2281231201");
+        speechAppIdEdit->setFixedHeight(30);
+
+        QLabel *speechLabel2 = new QLabel("豆包 Token :");
+        speechTokenEdit = new QLineEdit("ShIvWC6TZIBEZ9yYW5FEp_pzztYe0cpp");
+        speechTokenEdit->setFixedHeight(30);
+
+        QHBoxLayout *speechLayout = new QHBoxLayout();
+        speechLayout->addWidget(speechLabel1);
+        speechLayout->addWidget(speechAppIdEdit);
+        speechLayout->addWidget(speechLabel2);
+        speechLayout->addWidget(speechTokenEdit);
+
+        sendapiButton = new QPushButton("设置");
+
 
         // 创建选项卡控件
         tabWidget = new QTabWidget(centralWidget);
@@ -65,24 +81,32 @@ public:
         tabWidget->addTab(tab1, "排序算法演示");
         tabWidget->addTab(tab2, "图形结构演示");
 
+
+
         // 设置中央部件的布局
         QVBoxLayout *mainLayout = new QVBoxLayout(centralWidget);
         mainLayout->addWidget(tabWidget);
         mainLayout->addLayout(apilayout);
+        mainLayout->addLayout(speechLayout);
+        mainLayout->addWidget(sendapiButton);
         centralWidget->setLayout(mainLayout);
 
         connect(sendapiButton, QPushButton::clicked, this, &MainWindow::sendAPI);
         connect(this, &MainWindow::sendapi, tab1, &SortWidget::setAPI);
         connect(this, &MainWindow::sendapi, tab2, &GraphWidget::setAPI);
+        connect(this, &MainWindow::sendSpeech, tab1, &SortWidget::setSpeechCred);
+        connect(this, &MainWindow::sendSpeech, tab2, &GraphWidget::setSpeechCred);
     }
 
 public slots:
     void sendAPI() {
         emit sendapi(apiEdit->toPlainText());
+        emit sendSpeech(speechAppIdEdit->text(), speechTokenEdit->text());
     }
 
 signals:
     void sendapi(QString);
+    void sendSpeech(QString,QString);
 
 
 private:
@@ -92,6 +116,9 @@ private:
 
     QTextEdit *apiEdit;
     QPushButton *sendapiButton;
+
+    QLineEdit *speechTokenEdit;
+    QLineEdit *speechAppIdEdit;
 
 };
 

@@ -437,6 +437,11 @@ signals :
 public slots:
 
     //语音
+    void setSpeechCred(QString appid, QString token) {
+        speech.setCredential(appid, token);
+    }
+
+
     void onVoicePressed() {
         voiceButton->setText("松开结束");
 

@@ -59,6 +59,8 @@ DS_d1_autogen/timestamp: \
 	D:/softwaredownload/CLion\ 2024.3.4/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-windres.cmake \
 	D:/softwaredownload/CLion\ 2024.3.4/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows.cmake \
 	D:/softwaredownload/CLion\ 2024.3.4/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/WindowsPaths.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QBuffer \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QByteArray \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QChar \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDataStream \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDateTime \
@@ -66,6 +68,8 @@ DS_d1_autogen/timestamp: \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDir \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QEventLoop \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QFile \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QJsonDocument \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QJsonObject \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QList \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QMetaObject \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QObject \
@@ -73,10 +77,12 @@ DS_d1_autogen/timestamp: \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QPropertyAnimation \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QRandomGenerator \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QRect \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QRegularExpression \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QSize \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QSizeF \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QString \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QTimer \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QUuid \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QVector \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QtGlobal \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/q20memory.h \
@@ -94,11 +100,14 @@ DS_d1_autogen/timestamp: \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbasicatomic.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbasictimer.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbindingstorage.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbuffer.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbytearray.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbytearrayalgorithms.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbytearraylist.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qbytearrayview.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcalendar.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcborcommon.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcborvalue.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qchar.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcompare.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcompare_impl.h \
@@ -137,6 +146,9 @@ DS_d1_autogen/timestamp: \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qitemselectionmodel.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qiterable.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qiterator.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qjsondocument.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qjsonobject.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qjsonvalue.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qline.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qlist.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qlocale.h \
@@ -207,6 +219,7 @@ DS_d1_autogen/timestamp: \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qtypes.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qurl.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qutf8stringview.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/quuid.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qvariant.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qvariantanimation.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qvarlengtharray.h \
@@ -268,6 +281,18 @@ DS_d1_autogen/timestamp: \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qvectornd.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qwindowdefs.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtGui/qwindowdefs_win.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/QAudioDevice \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/QAudioFormat \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/QAudioSource \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/QMediaDevices \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/qaudio.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/qaudiodevice.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/qaudioformat.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/qaudiosource.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/qmediadevices.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/qtmultimedia-config.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtMultimedia/qtmultimediaglobal.h \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QApplication \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QButtonGroup \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QComboBox \
@@ -449,6 +474,48 @@ DS_d1_autogen/timestamp: \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6GuiTools/Qt6GuiToolsTargets-relwithdebinfo.cmake \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6GuiTools/Qt6GuiToolsTargets.cmake \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6GuiTools/Qt6GuiToolsVersionlessTargets.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6MultimediaAdditionalTargetInfo.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6MultimediaConfig.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6MultimediaConfigVersion.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6MultimediaConfigVersionImpl.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6MultimediaDependencies.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6MultimediaPlugins.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6MultimediaTargets-relwithdebinfo.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6MultimediaTargets.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6MultimediaVersionlessTargets.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6QFFmpegMediaPluginAdditionalTargetInfo.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6QFFmpegMediaPluginConfig.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6QFFmpegMediaPluginTargets-relwithdebinfo.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6QFFmpegMediaPluginTargets.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6QWindowsMediaPluginAdditionalTargetInfo.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6QWindowsMediaPluginConfig.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6QWindowsMediaPluginTargets-relwithdebinfo.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Multimedia/Qt6QWindowsMediaPluginTargets.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6NetworkAdditionalTargetInfo.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6NetworkConfig.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6NetworkConfigVersion.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6NetworkConfigVersionImpl.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6NetworkDependencies.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6NetworkPlugins.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6NetworkTargets-relwithdebinfo.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6NetworkTargets.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6NetworkVersionlessTargets.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6QNLMNIPluginAdditionalTargetInfo.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6QNLMNIPluginConfig.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6QNLMNIPluginTargets-relwithdebinfo.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6QNLMNIPluginTargets.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginAdditionalTargetInfo.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginConfig.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginTargets-relwithdebinfo.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginTargets.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginAdditionalTargetInfo.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginConfig.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginTargets-relwithdebinfo.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginTargets.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginAdditionalTargetInfo.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginConfig.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginTargets-relwithdebinfo.cmake \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginTargets.cmake \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Widgets/Qt6QWindowsVistaStylePluginAdditionalTargetInfo.cmake \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Widgets/Qt6QWindowsVistaStylePluginConfig.cmake \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/lib/cmake/Qt6Widgets/Qt6QWindowsVistaStylePluginTargets-relwithdebinfo.cmake \
@@ -868,7 +935,6 @@ DS_d1_autogen/timestamp: \
 	D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/objbase.h \
 	D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/objidl.h \
 	D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/objidlbase.h \
-	D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/ocidl.h \
 	D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/ole2.h \
 	D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/oleauto.h \
 	D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/oleidl.h \
@@ -909,8 +975,6 @@ DS_d1_autogen/timestamp: \
 	D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/rpcnterr.h \
 	D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/rpcsal.h \
 	D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/sal.h \
-	D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/sapi.h \
-	D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/sapi54.h \
 	D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/sdkddkver.h \
 	D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
 	D:/softwaredownload/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
