@@ -58,7 +58,9 @@
 #include <QLabel>
 #include <QEvent>
 #include <QSet>
-
+#include <QFileDialog>
+#include <QMessageBox>
+#include "ImageToDSL.h"
 #include "GraphStruct.h"
 #include "DSLFunctionGraph.h"
 #include "NaturalLanguageToDSL.h"
@@ -199,6 +201,10 @@ public :
         fileLayout->addWidget(savefileButton);
         fileLayout->addWidget(readfileButton);
 
+        //打开图片（图片转DSL）
+        imageToDSLButton = new QPushButton("图片转DSL");
+        fileLayout->addWidget(imageToDSLButton);
+
         //DSL组件
         QLabel *DSLLabel = new QLabel("DSL:");
         DSLEdit = new QTextEdit();
@@ -210,6 +216,7 @@ public :
         QVBoxLayout *DSLLayout = new QVBoxLayout();
         DSLLayout->addLayout(DSLInputLayout);
         DSLLayout->addWidget(DSLButton);
+
 
         //语音
         voiceButton = new QPushButton("按住说话");
@@ -411,6 +418,9 @@ public :
         connect(voiceButton, &QPushButton::pressed,  this, &GraphWidget::onVoicePressed);
         connect(voiceButton, &QPushButton::released, this, &GraphWidget::onVoiceReleased);
 
+        //图片转DSL
+        imgToDsl = new QwenImageToDSL(this);
+        connect(imageToDSLButton, &QPushButton::clicked, this, &GraphWidget::executeImageToDSL);
 
 
 
@@ -476,6 +486,39 @@ signals :
 
 
 public slots:
+
+    //图片转DSL
+    void setQwenAPI(QString key) {
+        QwenAPIkey = key.trimmed();
+        if (imgToDsl) imgToDsl->setApiKey(QwenAPIkey);
+    }
+
+    void executeImageToDSL() {
+        if (QwenAPIkey.trimmed().isEmpty()) {
+            QMessageBox::warning(this, "未设置千问API",
+                                 "请在主窗口底部“设置 千问API”输入框中填写Key并点击设置。");
+            return;
+        }
+
+        const QString imgPath = QFileDialog::getOpenFileName(
+            this, "选择图片", "", "Images (*.png *.jpg *.jpeg *.bmp)"
+        );
+        if (imgPath.isEmpty()) return;
+
+        // 可选：给一点上下文，提高识别准确率
+        QString ctx;
+        ctx += QString("当前图类型：%1\n").arg(isdirect ? "有向图" : "无向图");
+        if (!vertexList.isEmpty()) {
+            ctx += "当前已有顶点：";
+            for (auto* v : vertexList) ctx += v->getNumber() + " ";
+            ctx += "\n";
+        }
+
+        const QString dsl = imgToDsl->translateImageToDSL(imgPath, ctx);
+        DSLEdit->setText(dsl); // 只写入DSL框
+    }
+
+
 
     //悬停
     void onVertexHovered(Vertex* v) {
@@ -1646,6 +1689,12 @@ private:
     //悬停
     QLabel* hoverInfoLabel = nullptr;
     Vertex* hoveredVertex = nullptr;
+
+    //图片识别
+    QPushButton* imageToDSLButton = nullptr;
+    QwenImageToDSL* imgToDsl = nullptr;
+    QString QwenAPIkey;
+
 
 
 

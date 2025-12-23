@@ -34,6 +34,7 @@ add_executable(DS_d1 main.cpp
         SpeechInput.h
         gif.h
         GifRecorder.h
+        ImageToDSL.h
 )
 target_link_libraries(DS_d1
   Qt::Core

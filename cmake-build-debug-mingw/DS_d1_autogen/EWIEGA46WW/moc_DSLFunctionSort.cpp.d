@@ -6,6 +6,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Graph.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/GraphStruct.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/GraphWidget.h \
+  D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/ImageToDSL.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/NaturalLanguageToDSL.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Sort.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/SpeechInput.h \
@@ -23,8 +24,11 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QEvent \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QEventLoop \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QFile \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QFileInfo \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QJsonArray \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QJsonDocument \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QJsonObject \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QJsonValue \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QList \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QMetaObject \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QObject \
@@ -102,6 +106,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qitemselectionmodel.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qiterable.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qiterator.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qjsonarray.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qjsondocument.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qjsonobject.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qjsonvalue.h \
@@ -477,11 +482,13 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_list.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_map.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_multimap.h \
+  D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_multiset.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_numeric.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_pair.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_queue.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_raw_storage_iter.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_relops.h \
+  D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_set.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_stack.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_tempbuf.h \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_tree.h \
@@ -556,6 +563,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ratio \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/regex \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/semaphore \
+  D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/set \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/sstream \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/stack \
   D:/softwaredownload/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/stdexcept \

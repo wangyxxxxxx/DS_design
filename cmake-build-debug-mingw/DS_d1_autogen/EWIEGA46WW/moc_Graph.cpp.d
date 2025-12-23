@@ -1,8 +1,10 @@
 D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EWIEGA46WW/moc_Graph.cpp: D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/Graph.h \
   D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/moc_predefs.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QChar \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QCoreApplication \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDataStream \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QDebug \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QEventLoop \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QObject \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QString \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QTimer \
@@ -33,9 +35,13 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcontainerinfo.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcontainertools_impl.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcontiguouscache.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcoreapplication.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcoreapplication_platform.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qcoreevent.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qdarwinhelpers.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qdatastream.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qdebug.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qeventloop.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qexceptionhandling.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qflags.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qfloat16.h \
@@ -58,6 +64,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qmetatype.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qminmax.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qnamespace.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qnativeinterface.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qnumeric.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qobject.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/qobject_impl.h \

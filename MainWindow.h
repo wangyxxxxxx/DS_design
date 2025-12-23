@@ -64,6 +64,13 @@ public:
         apilayout->addWidget(speechAppIdEdit);
         apilayout->addWidget(speechLabel2);
         apilayout->addWidget(speechTokenEdit);
+
+        //图像识别
+        QLabel *qwenLabel = new QLabel("千问API :");
+        qwenApiEdit = new QTextEdit("sk-4d61327e7b854942a1e3e89a8e9dbff0");
+        qwenApiEdit->setFixedHeight(30);
+        apilayout->addWidget(qwenLabel);
+        apilayout->addWidget(qwenApiEdit);
         apilayout->addWidget(sendapiButton);
 
 
@@ -94,17 +101,21 @@ public:
         connect(this, &MainWindow::sendapi, tab2, &GraphWidget::setAPI);
         connect(this, &MainWindow::sendSpeech, tab1, &SortWidget::setSpeechCred);
         connect(this, &MainWindow::sendSpeech, tab2, &GraphWidget::setSpeechCred);
+        connect(this, &MainWindow::sendqwenapi, tab2, &GraphWidget::setQwenAPI);
     }
 
 public slots:
     void sendAPI() {
         emit sendapi(apiEdit->toPlainText());
         emit sendSpeech(speechAppIdEdit->text(), speechTokenEdit->text());
+        emit sendqwenapi(qwenApiEdit->toPlainText());
     }
 
 signals:
     void sendapi(QString);
     void sendSpeech(QString,QString);
+    void sendqwenapi(QString);
+
 
 
 private:
@@ -117,6 +128,10 @@ private:
 
     QLineEdit *speechTokenEdit;
     QLineEdit *speechAppIdEdit;
+
+    QTextEdit *qwenApiEdit;
+    QPushButton *sendQwenButton;
+
 
 };
 
