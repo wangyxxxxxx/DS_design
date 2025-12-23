@@ -79,6 +79,7 @@ DS_d1_autogen/timestamp: \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QRandomGenerator \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QRect \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QRegularExpression \
+	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QSet \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QSize \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QSizeF \
 	D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QString \

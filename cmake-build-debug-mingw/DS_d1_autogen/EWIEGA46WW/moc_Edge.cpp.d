@@ -161,6 +161,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsItemGroup \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsLineItem \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsScene \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsSceneHoverEvent \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsTextItem \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QGraphicsView \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/QHBoxLayout \
@@ -175,6 +176,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qframe.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgraphicsitem.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgraphicsscene.h \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgraphicssceneevent.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgraphicsview.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qgridlayout.h \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtWidgets/qlayout.h \

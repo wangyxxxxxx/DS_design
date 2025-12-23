@@ -31,6 +31,7 @@ D:/Clion_SaveFile/DS_design/DS_d1/DS_d1/cmake-build-debug-mingw/DS_d1_autogen/EW
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QRandomGenerator \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QRect \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QRegularExpression \
+  D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QSet \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QSize \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QSizeF \
   D:/softwaredownload/Qt/6.5.3/mingw_64/include/QtCore/QString \

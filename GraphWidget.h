@@ -57,6 +57,7 @@
 #include <QCursor>
 #include <QLabel>
 #include <QEvent>
+#include <QSet>
 
 #include "GraphStruct.h"
 #include "DSLFunctionGraph.h"
@@ -514,38 +515,51 @@ public slots:
         connect(v, &Vertex::unhovered, this, &GraphWidget::onVertexUnhovered);
     }
 
+
     QString buildVertexInfo(Vertex* v) const {
         if (!v) return {};
 
         int outDeg = 0, inDeg = 0, deg = 0;
         QStringList outNeighbors, inNeighbors, neighbors;
 
+        // ★ 用于无向图去重：同一对端点（+权重）只算一次
+        QSet<QString> seenUndirected;
+
         for (Edge* e : edgeList) {
             if (!e || !e->getStartVertex() || !e->getEndVertex()) continue;
 
-            const QString s = e->getStartVertex()->getNumber();
-            const QString t = e->getEndVertex()->getNumber();
+            Vertex* sv = e->getStartVertex();
+            Vertex* tv = e->getEndVertex();
+
+            const QString s = sv->getNumber();
+            const QString t = tv->getNumber();
+            const int w = e->getWeight();
 
             if (isdirect == 1) {
-                if (e->getStartVertex() == v) {
-                    outDeg++;
-                    outNeighbors << QString("%1(w=%2)").arg(t).arg(e->getWeight());
-                }
-                if (e->getEndVertex() == v) {
-                    inDeg++;
-                    inNeighbors << QString("%1(w=%2)").arg(s).arg(e->getWeight());
-                }
+                if (sv == v) { outDeg++; outNeighbors << QString("%1(w=%2)").arg(t).arg(w); }
+                if (tv == v) { inDeg++;  inNeighbors  << QString("%1(w=%2)").arg(s).arg(w); }
             } else {
-                // 无向图：边只存一条，自环按常规定义算2
-                if (e->getStartVertex() == v && e->getEndVertex() == v) {
+                // 无向图：只关心与 v 相连的边
+                if (sv != v && tv != v) continue;
+
+                // ★ 生成“无向边 key”（端点排序后 + 权重）
+                QString a = s, b = t;
+                if (a > b) std::swap(a, b);
+                const QString key = QString("%1-%2-%3").arg(a).arg(b).arg(w);
+
+                // ★ 如果这条无向边已经处理过，就跳过（避免显示两次、度数翻倍）
+                if (seenUndirected.contains(key)) continue;
+                seenUndirected.insert(key);
+
+                // 计算度与邻接显示
+                if (sv == v && tv == v) {
+                    // 自环：按常规定义度+2（若你希望自环度+1，把 2 改 1）
                     deg += 2;
-                    neighbors << QString("%1(w=%2)").arg(t).arg(e->getWeight());
-                } else if (e->getStartVertex() == v) {
+                    neighbors << QString("%1(w=%2)").arg(t).arg(w);
+                } else {
                     deg += 1;
-                    neighbors << QString("%1(w=%2)").arg(t).arg(e->getWeight());
-                } else if (e->getEndVertex() == v) {
-                    deg += 1;
-                    neighbors << QString("%1(w=%2)").arg(s).arg(e->getWeight());
+                    const QString other = (sv == v) ? t : s;
+                    neighbors << QString("%1(w=%2)").arg(other).arg(w);
                 }
             }
         }
@@ -565,6 +579,7 @@ public slots:
 
         return info;
     }
+
 
 
 
